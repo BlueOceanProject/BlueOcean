@@ -1,0 +1,14 @@
+.feed-list-item-wrapper {
+  display: flex;
+  justify-content: space-between;
+  width: 60%;
+  border: 5px solid papayawhip;
+  padding: 50px;
+  margin: 20px;
+}
+
+.user-image {
+  border-radius: 50%;
+  width: 64px;
+  height: 64px;
+}
