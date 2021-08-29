@@ -16,6 +16,6 @@ const Feeds = [
     published: '2021-08-02',
     createdAt: '2021-08-02',
     profileImg: 's3-url-address'
-  }
+  },
 ];
 module.exports = Feeds;

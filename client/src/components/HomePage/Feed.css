@@ -12,3 +12,7 @@
   width: 64px;
   height: 64px;
 }
+
+.search-bar {
+  border-radius: 30%;
+}
