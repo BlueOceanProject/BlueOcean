@@ -9,7 +9,7 @@ const userSchema = mongoose.Schema({
   email: String,
   phoneNumber: String,
   profileImg: String,
-  songs: {
+  songs: [{
     _id: { type: String, default: uuidv4() },
     userName: String,
     songName: String,
@@ -17,7 +17,7 @@ const userSchema = mongoose.Schema({
     published: Boolean,
     publishedDate: Date,
     createdAt: Date,
-  }
+  }]
 });
 
 const Users = mongoose.model('Users', userSchema);
