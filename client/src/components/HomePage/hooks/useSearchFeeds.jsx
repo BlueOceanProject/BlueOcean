@@ -26,7 +26,7 @@ function useSearchFeeds(query, pageNum) {
       .then((res) => {
         setFeeds((prev) => {
           // TODO: change map res.data.docs
-          return [...new Set([...prev, ...res.data.docs.map((d) => d.title)])];
+          return [...new Set([...prev, ...res.data.docs])];
         });
         setHasMore(res.data.docs.length > 0);
         setIsLoading(false);
