@@ -4,7 +4,7 @@ import Feeds from './sampleData.js';
 import useSearchFeed from './hooks/useSearchFeeds.jsx';
 
 const Feed = () => {
-  const [query, setQuery] = useState('blue ocean');
+  const [query, setQuery] = useState('');
   const [pageNum, setPageNum] = useState(1);
   const { isLoading, error, feeds, hasMore } = useSearchFeed(query, pageNum);
 
@@ -34,22 +34,21 @@ const Feed = () => {
         <input type="text" placeholder="Search users..." onChange={handleSearchChange} value={query} />
       </div>
 
-      {
-        feeds.map((feed, i) => {
-          if (feeds.length === i + 1) {
-            return (
-              <div key={i} ref={lastFeedElementRef}>
-                <FeedListItem key={i} feed={feed} />
-              </div>
-            );
-          } else {
-            return <div key={i}>
+      {feeds.map((feed, i) => {
+        if (feeds.length === i + 1) {
+          return (
+            <div key={i} ref={lastFeedElementRef}>
               <FeedListItem key={i} feed={feed} />
-            </div>;
-          }
+            </div>
+          );
+        } else {
+          return <div key={i}>
+            <FeedListItem key={i} feed={feed} />
+          </div>;
         }
+      }
 
-        )}
+      )}
       <div>{isLoading && "Loading..."}</div>
       <div>{error && "Error..."}</div>
     </>

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/blue_ocean', { useUnifiedTopology: true, useNewUrlParser: true });
+mongoose.connect('mongodb://localhost:27017/blue_ocean', { useUnifiedTopology: true, useNewUrlParser: true });
 
 const db = mongoose.connection;
 

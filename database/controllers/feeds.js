@@ -1,18 +1,25 @@
 const Feeds = require('../models/feeds');
 
-const getLatestFeedsByUser = (userName, pageNum, callback) => {
+const getLatestFeedsByUser = (params, callback) => {
   const perPage = 5;
-  const regex = new RegExp(userNames);
-  var query = Feeds.find({ "userName": { "$regex": regex } })
-    .skip(pageNum * perPage).limit(perPage).sort({ published: -1 });
-
-  query.exec((err, docs) => {
-    if (err) {
-      callback(err);
-    } else {
-      callback(null, docs);
-    }
+  const { pageNum, userName } = params;
+  console.log({ pageNum, userName });
+  const offset = (pageNum - 1) * perPage;
+  // console.log(offset);
+  const re = userName ? new RegExp(userName, 'i') : /.*.*/;
+  // console.log(re);
+  Feeds.find({
+    "userName": re
   })
+    .skip(offset).limit(perPage).sort({ published: -1 }).exec((err, docs) => {
+      if (err) {
+        callback(err);
+      } else {
+        // console.log('docs', docs);
+        callback(null, docs);
+      }
+    })
+
 };
 
 module.exports = { getLatestFeedsByUser };

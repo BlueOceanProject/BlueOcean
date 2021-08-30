@@ -14,7 +14,6 @@ app.get('/feeds', (req, res) => {
     if (err) {
       res.sendStatus(404);
     } else {
-      // console.log(docs);
       res.status(200).send(docs);
     }
   });
