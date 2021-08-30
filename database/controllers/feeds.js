@@ -8,7 +8,7 @@ const getLatestFeedsByUser = (params, callback) => {
   Feeds.find({
     "userName": re
   })
-    .skip(offset).limit(perPage).sort({ published: -1 }).exec((err, docs) => {
+    .skip(offset).limit(perPage).sort({ publishedDate: -1 }).exec((err, docs) => {
       if (err) {
         callback(err);
       } else {
