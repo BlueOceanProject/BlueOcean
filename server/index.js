@@ -1,8 +1,55 @@
 const express = require('express');
+const multer = require('multer');
+const multerS3 = require('multer-s3');
+const AWS = require('aws-sdk');
+const bodyParser = require('body-parser');
+const { ACCESS_KEY, SECRET_KEY } = require('../key.js')
+
 let app = express();
 
 app.use(express.static(__dirname + '/../client/dist'));
 app.use(express.json());
+app.use(bodyParser.json());
+
+var accessKeyId =  process.env.AWS_ACCESS_KEY || ACCESS_KEY;
+var secretAccessKey = process.env.AWS_SECRET_KEY || SECRET_KEY;
+AWS.config.update({
+  accessKeyId: accessKeyId,
+  secretAccessKey: secretAccessKey,
+  region: 'us-west-2'
+});
+
+var s3 = new AWS.S3();
+
+var upload = multer({
+  // storage: multerS3({
+  //     s3: s3,
+  //     bucket: 'harmony7',
+  //     key: function (req, file, cb) {
+  //       const split = file.originalname.split('.')
+  //       cb(null, `${req.body.name}.${split[split.length - 1]}`);
+  //     }
+  // })
+
+  storage: multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'uploads');
+    },
+    filename: (req, file, cb) => {
+      console.log(req)
+      console.log(file)
+      const split = file.originalname.split('.')
+      cb(null, `${req.body.name}.${split[split.length - 1]}`);
+    }
+  })
+});
+
+app.post('/upload', upload.array('file', 1), function (req, res, next) {
+  console.log("===req", req);
+  console.log("res", res);
+  res.send("Uploaded!");
+});
+
 
 let port = 3000;
 
