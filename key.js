@@ -1,4 +1,0 @@
-ACCESS_KEY = "AKIATRGXXGCMEPJJGNMK";
-SECRET_KEY = "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";
-
-module.exports= { ACCESS_KEY, SECRET_KEY };
