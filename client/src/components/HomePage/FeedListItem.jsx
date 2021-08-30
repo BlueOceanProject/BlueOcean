@@ -5,7 +5,7 @@ const FeedListItem = ({ feed }) => {
 
   return (
     <div className="feed-list-item-wrapper">
-      <img className="user-image" src="img_avatar.jpeg" alt="Avatar"></img>
+      <img className="user-image" src={feed.profileImg} alt="Avatar"></img>
       <span className="feed-username">
         {feed.userName}
       </span>
