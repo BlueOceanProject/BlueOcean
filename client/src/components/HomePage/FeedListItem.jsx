@@ -1,5 +1,5 @@
 import React from 'react';
-// import './Feed.css';
+import './Feed.css';
 
 const FeedListItem = ({ feed }) => {
   // TODO: refactor feed userName, songName, audio s3 url
