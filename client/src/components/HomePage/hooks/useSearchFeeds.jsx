@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-const url = '';
+
 function useSearchFeeds(query, pageNum) {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
