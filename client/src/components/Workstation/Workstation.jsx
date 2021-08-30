@@ -26,7 +26,7 @@ const Workstation = (props) => {
       <audio controls src={audioData} />
       <button onClick={start}>Start</button>
       <button onClick={stop}>Stop</button>
-    <Import />
+      <Import />
     </div>
   )
 }
