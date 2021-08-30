@@ -41,7 +41,7 @@ var upload = multer({
       const split = file.originalname.split('.')
       cb(null, `${req.body.name}.${split[split.length - 1]}`);
     }
-})
+  })
 });
 
 app.post('/upload', upload.array('file', 1), function (req, res, next) {
