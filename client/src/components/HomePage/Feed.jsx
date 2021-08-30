@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import FeedListItem from './FeedListItem.jsx';
-import Feeds from './sampleData.js';
 import useSearchFeed from './hooks/useSearchFeeds.jsx';
 
 const Feed = () => {
