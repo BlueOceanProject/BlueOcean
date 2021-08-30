@@ -17,7 +17,6 @@ const Uploader = (props) => {
   return (
     <div className="file-uploader">
       <input type="file" onChange={handleFileInput} />
-      {/* <button onClick={e => fileInput.current && fileInput.current.click()} className="btn btn-primary" /> */}
     </div>
   );
 }

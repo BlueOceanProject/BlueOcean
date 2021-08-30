@@ -9,16 +9,16 @@ const Viewer = () => {
   const submitForm = (e) => {
     e.preventDefault();
 
-    // const formData = new FormData();
-    // formData.append("name", name + Date.now());
-    // formData.append("file", selectedFile);
+    const formData = new FormData();
+    formData.append("name", name + Date.now());
+    formData.append("file", selectedFile);
 
-    // axios
-    //   .post('http://localhost:3000/upload', formData)
-    //   .then((res) => {
-    //     alert("File Upload success");
-    //   })
-    //   .catch((err) => alert("File Upload Error"));
+    axios
+      .post('http://localhost:3000/upload', formData)
+      .then((res) => {
+        alert("File Upload success");
+      })
+      .catch((err) => alert("File Upload Error"));
   };
 
   return (
