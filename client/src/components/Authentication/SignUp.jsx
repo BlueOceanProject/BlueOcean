@@ -1,5 +1,6 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useContext } from 'react';
 import { Card, Form, Button, Container, Row, Col, Alert } from 'react-bootstrap';
+import { Link, useHistory } from 'react-router-dom';
 import { useAuth } from './AuthContext';
 
 const SignUp = () => {
@@ -10,6 +11,7 @@ const SignUp = () => {
   const firstNameRef = useRef();
   const lastNameRef = useRef();
   const phoneNumberRef = useRef();
+  const history = useHistory();
 
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
@@ -28,6 +30,9 @@ const SignUp = () => {
     setLoading(true);
 
     signUp(emailRef.current.value, passwordRef.current.value)
+      .then(() => {
+        history.push('/');
+      })
       .catch((error) => {
         setErrorMessage(error.message);
       })
@@ -85,7 +90,7 @@ const SignUp = () => {
             </Form>
           </Card.Body>
         </Card>
-        <div className="w-100 text-center mt-2 text-info"> Have an account? Log in</div>
+        <div className="w-100 text-center mt-2"> Have an account? <Link to="/signin">Sign in</Link></div>
       </div>
     </Container>
   );
