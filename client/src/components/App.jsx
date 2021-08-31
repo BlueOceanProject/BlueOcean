@@ -5,6 +5,7 @@ import Viewer from './Viewer.jsx';
 import Toolbar from './Toolbar.jsx';
 import {BrowserRouter as Router , Route, Switch } from 'react-router-dom';
 import UserProfile from './UserProfile/UserProfile.jsx'
+import Import from './Workstation/Import.jsx';
 
 const App = () => {
 
