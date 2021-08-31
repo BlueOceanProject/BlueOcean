@@ -4,6 +4,7 @@ import Workstation from './Workstation/Workstation.jsx';
 import Viewer from './Viewer.jsx';
 import Toolbar from './Toolbar.jsx';
 import {BrowserRouter as Router , Route, Switch } from 'react-router-dom';
+import UserProfile from './UserProfile/UserProfile.jsx'
 
 const App = () => {
 
@@ -14,6 +15,7 @@ const App = () => {
         <Switch>
           <Route path="/">
             <h1>Blue Ocean</h1>
+            <Feed />
           </Route>
         </Switch>
       </div>
