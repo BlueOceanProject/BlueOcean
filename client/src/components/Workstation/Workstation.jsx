@@ -77,13 +77,22 @@ const Workstation = (props) => {
     }
   }, [isMasterPlaying]);
 
+  useEffect(() => {
+    if (isThereAudio && seekTime >= maxDuration) {
+      masterPause();
+      clearInterval(seekTimer);
+      setSeekTime(maxDuration);
+    }
+  }, [seekTime])
+
   const setDurations = () => {
     let importTrackTime = master.importTrack ? master.importTrack.duration() : 0;
     let recordingTime = master.recording ? master.recording.duration() : 0;
-    console.log(importTrackTime);
-    setMaxDuration(Math.max(importTrackTime, recordingTime));
+    let maxTime = Math.max(importTrackTime, recordingTime);
+    setMaxDuration(maxTime);
     setImportTrackDuration(importTrackTime);
     setRecordingDuration(recordingTime);
+    return maxTime;
   }
 
   const masterPlay = () => {
@@ -93,6 +102,7 @@ const Workstation = (props) => {
     if (recordAudio) {
       master.recording.play();
     }
+    setDurations();
   }
 
   const masterPause = () => {
@@ -129,7 +139,7 @@ const Workstation = (props) => {
   }
 
   const ffClick = (event) => {
-    setSeekTime(maxDuration);
+    setSeekTime(setDurations());
   }
 
   const onSave = (event) => {
