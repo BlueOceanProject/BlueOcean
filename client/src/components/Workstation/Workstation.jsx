@@ -11,7 +11,7 @@ import css from './workstation.css';
 
 
 
-const crunker = new Crunker({sampleRate: 48000});
+// const crunker = new Crunker({sampleRate: 48000});
 
 const Workstation = (props) => {
   const [recordState, setRecordState] = useState(null);
