@@ -22,22 +22,6 @@ module.exports = {
         test: /\.css$/i,
         use: ['style-loader', 'css-loader'],
       },
-      {
-        test: /\.js$/,
-        enforce: "pre",
-        use: [
-          {
-            loader: "source-map-loader",
-            options: {
-              filterSourceMappingUrl: (url, resourcePath) => {
-                if (/'blue-ocean/node_modules/audio-react-recorder/dist/index.modern.js.map'\.js$/i.test(url)) {
-                  return false;
-                }
-              }
-            }
-          }
-        ],
-      },
     ],
   },
 };

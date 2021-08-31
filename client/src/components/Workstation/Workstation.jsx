@@ -148,15 +148,6 @@ const Workstation = (props) => {
     setSeekTime(setDurations());
   }
 
-  const onSave = (event) => {
-    event.preventDefault();
-    crunker.fetchAudio(recordData, audioFile)
-      .then(buffers => crunker.mergeAudio(buffers))
-      .then(merged => crunker.export(merged, 'audio/mp3'))
-      .then(console.log)
-      .catch(console.log);
-  }
-
   const onRecordingPause = (event) => {
     uploadAudio.pause();
   }
@@ -171,7 +162,7 @@ const Workstation = (props) => {
 
   const onSave = (event) => {
     event.preventDefault();
-    crunker.fetchAudio(recordData, uploadFile)
+    crunker.fetchAudio(recordData, audioFile)
       .then(buffers => crunker.mergeAudio(buffers))
       .then(merged => crunker.export(merged, 'audio/mp3'))
       .then(console.log)
@@ -181,7 +172,9 @@ const Workstation = (props) => {
   return (
     <div>
       <AudioReactRecorder state={recordState} onStop={onStop} />
-      <button onClick={toggle}>Start / Stop</button>
+      <button onClick={toggle}>Record / Stop</button>
+      <audio controls src={recordData} onPause={onRecordingPause} onPlay={onRecordingPlay} onEnded={onRecordingEnd} />
+      <Import setUploadAudio={setUploadAudio}  setAudioFile={setAudioFile} audioFile={audioFile} />
       <div className="master-player-ctr">
         <button className="master-rewind" onClick={rewindClick}>&#9194;</button>
         {isMasterPlaying ?
@@ -192,12 +185,8 @@ const Workstation = (props) => {
         {!audioFile || !recordAudio ?
         <div className="no-audio-msg">No audio available. Import a file or make a recording.</div>
         : <></>}
-    </div>
+      </div>
       <div className="seekTime">{seekTime}</div>
-      <Import setUploadAudio={setUploadAudio}  setAudioFile={setAudioFile} audioFile={audioFile} />
-      <button onClick={onSave}>Save</button>
-      <audio controls src={recordData} onPause={onRecordingPause} onPlay={onRecordingPlay} onEnded={onRecordingEnd} />
-      <button onClick={toggle}>Record / Stop</button>
       <button type="submit" onClick={onSave}>Save</button>
       <Export uploadAudio={uploadAudio} />
     </div>
