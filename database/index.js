@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 const { USER, PASSWORD, IP_ADDRESS } = require('./config.js');
 
-// mongoose.connect('mongodb://localhost:27017/blue_ocean', { useUnifiedTopology: true, useNewUrlParser: true });
-mongoose.connect(`mongodb://${USER}:${PASSWORD}@${IP_ADDRESS}/blue_ocean`, { useUnifiedTopology: true, useNewUrlParser: true });
+mongoose.connect('mongodb://localhost:27017/blue_ocean', { useUnifiedTopology: true, useNewUrlParser: true });
+// mongoose.connect(`mongodb://${USER}:${PASSWORD}@${IP_ADDRESS}/blue_ocean`, { useUnifiedTopology: true, useNewUrlParser: true });
 
 const db = mongoose.connection;
 
