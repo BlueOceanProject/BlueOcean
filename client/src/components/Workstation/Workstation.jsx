@@ -101,12 +101,23 @@ const Workstation = (props) => {
       if (isThereAudio) {
         setMasterPlaying(true);
         masterPlay();
-
       }
     } else {
       setMasterPlaying(false);
       masterPause();
     }
+  }
+
+  const rewindClick = (event) => {
+    if (audioFile) {
+      master.importTrack.stop();
+    }
+    if (recordAudio) {
+      master.recording.stop();
+    }
+    setSeekTime(0);
+    clearInterval(seekTimer);
+    setMasterPlaying(false);
   }
 
   const onSave = (event) => {
@@ -123,13 +134,13 @@ const Workstation = (props) => {
       <AudioReactRecorder state={recordState} onStop={onStop} />
       <button onClick={toggle}>Start / Stop</button>
       <div className="master-player-ctr">
-        <button className="master-rewind">&#9194;</button>
+        <button className="master-rewind" onClick={rewindClick}>&#9194;</button>
         {isMasterPlaying ?
         <button className="master-pause" onClick={masterPlayClick}>&#9613;&#9613;</button>
         : <button className="master-play" onClick={masterPlayClick}>&#9658;</button>
         }
         <button className="master-ff">&#9193;</button>
-        {!isThereAudio ?
+        {!audioFile || !recordAudio ?
         <div className="no-audio-msg">No audio available. Import a file or make a recording.</div>
         : <></>}
     </div>
