@@ -17,24 +17,25 @@ const url = 'https://www.google.com';
 const FeedListItem = ({ feed }) => {
 
   return (
-    <div className="feed-list-item-wrapper">
-      <img className="user-image" src={feed.profileImg} alt="Avatar"></img>
-      <span className="feed-username">
-        {feed.userName}
-      </span>
-      <span className="feed-songname">
-        {feed.songName}
-      </span>
-      <audio
-        controls
-        // controlsList="nodownload"
-        src={feed.url}
-      >
-        Your browser does not support the
-        <code>audio</code> element.
-      </audio>
+    <div className="feed-list">
+      <div className="feed-list-item-wrapper">
+        <img className="user-image" src={feed.profileImg} alt="Avatar"></img>
+        <span className="feed-username">
+          {feed.userName}
+        </span>
+        <span className="feed-songname">
+          {feed.songName}
+        </span>
+        <audio
+          controls
+          // controlsList="nodownload"
+          src={feed.url}
+        >
+          Your browser does not support the
+          <code>audio</code> element.
+        </audio>
+      </div>
       <div className="social-media-share">
-
         <FacebookShareButton
           url={url}
           quote={feed.url}
@@ -64,7 +65,8 @@ const FeedListItem = ({ feed }) => {
           <TumblrIcon size={36} round />
         </TumblrShareButton>
       </div>
-    </div>
+
+    </div >
   );
 };
 

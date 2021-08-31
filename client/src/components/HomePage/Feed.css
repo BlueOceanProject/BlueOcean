@@ -1,10 +1,13 @@
-.feed-list-item-wrapper {
-  display: flex;
-  justify-content: space-between;
+.feed-list {
   width: 80%;
   border: 5px solid papayawhip;
   padding: 50px;
   margin: 20px;
+}
+
+.feed-list-item-wrapper {
+  display: flex;
+  justify-content: space-between;
 }
 
 .user-image {
@@ -17,6 +20,7 @@
   border-radius: 30%;
 }
 
-/* .social-media-share {
+.social-media-share {
   display: flex;
-} */
+  justify-content: center
+}
