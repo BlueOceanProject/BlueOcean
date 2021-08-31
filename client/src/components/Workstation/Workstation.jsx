@@ -17,7 +17,7 @@ const Workstation = (props) => {
   const [isMasterPlaying, setMasterPlaying] = useState(false);
   const [seekTime, setSeekTime] = useState(0);
   const [seekTimer, setSeekTimer] = useState('');
-  const [isThereAudio, setIsThereAudio] = useState('');
+  const [isThereAudio, setIsThereAudio] = useState(false);
 
   const toggle = () => {
     if (recordState === null || recordState === RecordState.STOP) {
@@ -73,12 +73,10 @@ const Workstation = (props) => {
 
   const masterPlay = (event) => {
     if (!isMasterPlaying) {
-      if (master.importTrack._sounds.length > 0 || master.recording) {
+      if (isThereAudio) {
         setMasterPlaying(true);
         master.importTrack.play();
         master.recording.play();
-      } else {
-        setIsThereAudio(false);
       }
     } else {
       setMasterPlaying(false);
