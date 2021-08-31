@@ -4,6 +4,7 @@ import { Howl, Howler } from 'howler';
 import Crunker from 'crunker';
 import Import from './Import.jsx';
 import Export from './Export.jsx';
+import css from './workstation.css';
 
 const crunker = new Crunker({sampleRate: 48000});
 
@@ -18,6 +19,7 @@ const Workstation = (props) => {
   const [seekTime, setSeekTime] = useState(0);
   const [seekTimer, setSeekTimer] = useState('');
   const [isThereAudio, setIsThereAudio] = useState(false);
+  const [maxTime, setMaxTime] = useState(0);
 
   const toggle = () => {
     if (recordState === null || recordState === RecordState.STOP) {
@@ -27,6 +29,7 @@ const Workstation = (props) => {
       setRecordState(RecordState.STOP);
       uploadAudio.pause();
       uploadAudio.load();
+      console.log(recordData)
     }
   }
 
@@ -53,7 +56,6 @@ const Workstation = (props) => {
     });
     setMaster({ ...master, importTrack });
     setIsThereAudio(true);
-    console.log(importTrack)
   }, [audioFile])
 
 
@@ -68,6 +70,9 @@ const Workstation = (props) => {
       }, 10));
     } else {
       clearInterval(seekTimer);
+      if (isThereAudio) {
+        setSeekTime(master.importTrack._sounds[0]._seek)
+      }
     }
   }, [isMasterPlaying]);
 
