@@ -10,8 +10,8 @@ const Import = ({ setUploadAudio, setAudioFile, audioFile }) => {
     event.target.files[0].arrayBuffer().then((data) => {
       const blob = new Blob([data], { type: 'audio/wav'});
       const url = window.URL.createObjectURL(blob);
-      setFile(url);
-      props.setUploadAudio(new Audio(url))
+      setAudioFile(url);
+      setUploadAudio(new Audio(url))
     });
 
   }
