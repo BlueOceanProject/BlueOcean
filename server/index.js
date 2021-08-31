@@ -11,7 +11,7 @@ app.use(express.static(__dirname + '/../client/dist'));
 app.use(express.json());
 app.use(bodyParser.json());
 
-var accessKeyId =  process.env.AWS_ACCESS_KEY || ACCESS_KEY;
+var accessKeyId = process.env.AWS_ACCESS_KEY || ACCESS_KEY;
 var secretAccessKey = process.env.AWS_SECRET_KEY || SECRET_KEY;
 AWS.config.update({
   accessKeyId: accessKeyId,
@@ -33,7 +33,7 @@ var upload = multer({
 
   storage: multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, 'uploads');
+      cb(null, 'uploads');
     },
     filename: (req, file, cb) => {
       console.log(req)

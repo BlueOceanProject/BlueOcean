@@ -1,5 +1,18 @@
 import React from 'react';
+import {
+  FacebookIcon,
+  FacebookShareButton,
+  TwitterShareButton,
+  TwitterIcon,
+  RedditIcon,
+  RedditShareButton,
+  TumblrShareButton,
+  TumblrIcon
+} from "react-share";
+
 import './Feed.css';
+
+const url = 'https://www.google.com';
 
 const FeedListItem = ({ feed }) => {
 
@@ -20,6 +33,37 @@ const FeedListItem = ({ feed }) => {
         Your browser does not support the
         <code>audio</code> element.
       </audio>
+      <div className="social-media-share">
+
+        <FacebookShareButton
+          url={url}
+          quote={feed.url}
+          hashtag="#Harmony">
+          <FacebookIcon size={36} round />
+        </FacebookShareButton>
+        <TwitterShareButton
+          url={url}
+          quote={feed.url}
+          title={feed.songName}
+          hashtag="#Harmony">
+          <TwitterIcon size={36} round />
+        </TwitterShareButton>
+        <RedditShareButton
+          title={feed.songName}
+          url={url}
+          quote={feed.url}
+        >
+          <RedditIcon size={36} round />
+        </RedditShareButton>
+        <TumblrShareButton
+          title={feed.songName}
+          url={url}
+          caption={feed.url}
+          tags={["#Harmony"]}
+        >
+          <TumblrIcon size={36} round />
+        </TumblrShareButton>
+      </div>
     </div>
   );
 };
