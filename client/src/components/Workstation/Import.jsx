@@ -9,14 +9,15 @@ const Import = (props) => {
   const uploadChange = (event) => {
     event.target.files[0].arrayBuffer().then((data) => {
       const blob = new Blob([data], { type: 'audio/wav'});
-      setFile(window.URL.createObjectURL(blob));
-      props.setUploadAudio(new Audio(window.URL.createObjectURL(blob)))
+      const url = window.URL.createObjectURL(blob);
+      setFile(url);
+      props.setUploadAudio(new Audio(url))
     });
+
   }
 
   return (
     <div className="import">
-
         <input id="fileItem" type="file" title="Upload" onChange={(e) => (uploadChange(e))}/>
         <audio controls src={file} />
     </div>
