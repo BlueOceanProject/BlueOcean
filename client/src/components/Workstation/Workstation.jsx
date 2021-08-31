@@ -19,7 +19,9 @@ const Workstation = (props) => {
   const [seekTime, setSeekTime] = useState(0);
   const [seekTimer, setSeekTimer] = useState('');
   const [isThereAudio, setIsThereAudio] = useState(false);
-  const [maxTime, setMaxTime] = useState(0);
+  const [importTrackDuration, setImportTrackDuration] = useState(0);
+  const [recordingDuration, setRecordingDuration] = useState(0);
+  const [maxDuration, setMaxDuration] = useState(0);
 
   const toggle = () => {
     if (recordState === null || recordState === RecordState.STOP) {
@@ -29,7 +31,6 @@ const Workstation = (props) => {
       setRecordState(RecordState.STOP);
       uploadAudio.pause();
       uploadAudio.load();
-      console.log(recordData)
     }
   }
 
@@ -60,8 +61,6 @@ const Workstation = (props) => {
     }
   }, [audioFile])
 
-
-
   useEffect(() => {
     if (isMasterPlaying) {
       let start = Date.now()
@@ -77,6 +76,15 @@ const Workstation = (props) => {
       }
     }
   }, [isMasterPlaying]);
+
+  const setDurations = () => {
+    let importTrackTime = master.importTrack ? master.importTrack.duration() : 0;
+    let recordingTime = master.recording ? master.recording.duration() : 0;
+    console.log(importTrackTime);
+    setMaxDuration(Math.max(importTrackTime, recordingTime));
+    setImportTrackDuration(importTrackTime);
+    setRecordingDuration(recordingTime);
+  }
 
   const masterPlay = () => {
     if (audioFile) {
@@ -120,6 +128,10 @@ const Workstation = (props) => {
     setMasterPlaying(false);
   }
 
+  const ffClick = (event) => {
+    setSeekTime(maxDuration);
+  }
+
   const onSave = (event) => {
     event.preventDefault();
     crunker.fetchAudio(recordData, audioFile)
@@ -139,7 +151,7 @@ const Workstation = (props) => {
         <button className="master-pause" onClick={masterPlayClick}>&#9613;&#9613;</button>
         : <button className="master-play" onClick={masterPlayClick}>&#9658;</button>
         }
-        <button className="master-ff">&#9193;</button>
+        <button className="master-ff" onClick={ffClick}>&#9193;</button>
         {!audioFile || !recordAudio ?
         <div className="no-audio-msg">No audio available. Import a file or make a recording.</div>
         : <></>}
