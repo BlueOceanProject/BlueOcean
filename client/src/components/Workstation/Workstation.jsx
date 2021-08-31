@@ -16,6 +16,7 @@ const Workstation = (props) => {
   const [isMasterPlaying, setMasterPlaying] = useState(false);
   const [seekTime, setSeekTime] = useState(0);
   const [seekTimer, setSeekTimer] = useState('');
+  const [isThereAudio, setIsThereAudio] = useState('');
 
   const toggle = () => {
     if (recordState === null || recordState === RecordState.STOP) {
@@ -49,8 +50,9 @@ const Workstation = (props) => {
       src: [audioFile],
       format: ['mp3']
     });
-    console.log(importTrack)
     setMaster({ ...master, importTrack });
+    setIsThereAudio(true);
+    console.log(importTrack)
   }, [audioFile])
 
 
@@ -70,9 +72,13 @@ const Workstation = (props) => {
 
   const masterPlay = (event) => {
     if (!isMasterPlaying) {
-      setMasterPlaying(true);
-      master.importTrack.play();
-      master.recording.play();
+      if (master.importTrack._sounds.length > 0 || master.recording) {
+        setMasterPlaying(true);
+        master.importTrack.play();
+        master.recording.play();
+      } else {
+        setIsThereAudio(false);
+      }
     } else {
       setMasterPlaying(false);
       master.importTrack.pause();
@@ -93,10 +99,17 @@ const Workstation = (props) => {
     <div>
       <AudioReactRecorder state={recordState} onStop={onStop} />
       <button onClick={toggle}>Start / Stop</button>
-      {isMasterPlaying ?
-      <button onClick={masterPlay}>&#9613;&#9613;</button>
-      : <button onClick={masterPlay}>&#9658;</button>
-      }
+      <div className="master-player-ctr">
+        <button className="master-rewind">&#9194;</button>
+        {isMasterPlaying ?
+        <button className="master-pause" onClick={masterPlay}>&#9613;&#9613;</button>
+        : <button className="master-play" onClick={masterPlay}>&#9658;</button>
+        }
+        <button className="master-ff">&#9193;</button>
+        {!isThereAudio ?
+        <div className="no-audio-msg">No audio available. Import a file or make a recording.</div>
+        : <></>}
+    </div>
       <div className="seekTime">{seekTime}</div>
       <Import setUploadAudio={setUploadAudio}  setAudioFile={setAudioFile} audioFile={audioFile} />
       <button onClick={onSave}>Save</button>
