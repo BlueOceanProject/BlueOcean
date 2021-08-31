@@ -11,7 +11,7 @@ app.use(express.static(__dirname + '/../client/dist'));
 app.use(express.json());
 app.use(bodyParser.json());
 
-var accessKeyId =  process.env.AWS_ACCESS_KEY || ACCESS_KEY;
+var accessKeyId = process.env.AWS_ACCESS_KEY || ACCESS_KEY;
 var secretAccessKey = process.env.AWS_SECRET_KEY || SECRET_KEY;
 AWS.config.update({
   accessKeyId: accessKeyId,
@@ -23,13 +23,13 @@ var s3 = new AWS.S3();
 
 var upload = multer({
   storage: multerS3({
-      s3: s3,
-      bucket: 'harmony7',
-      key: function (req, file, cb) {
-        // console.log(file)
-        const split = file.originalname.split('.')
-        cb(null, `${req.body.name}.${split[split.length - 1]}`);
-      }
+    s3: s3,
+    bucket: 'harmony7',
+    key: function (req, file, cb) {
+      // console.log(file)
+      const split = file.originalname.split('.')
+      cb(null, `${req.body.name}.${split[split.length - 1]}`);
+    }
   }),
   limits: { fieldSize: 2 * 1024 * 1024 }
 
