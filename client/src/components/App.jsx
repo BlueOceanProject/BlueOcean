@@ -24,20 +24,6 @@ const App = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
-<<<<<<< HEAD
-    <Router>
-      <div>
-        <Workstation />
-        <Toolbar />
-        <Switch>
-          <Route path="/">
-            <h1>Blue Ocean</h1>
-            <Feed />
-          </Route>
-        </Switch>
-      </div>
-    </Router>
-=======
     <div>
       <GlobalContext.Provider value={{ state, dispatch }}>
         <AuthProvider>
@@ -51,7 +37,6 @@ const App = () => {
         </AuthProvider>
       </GlobalContext.Provider>
     </div>
->>>>>>> main
   );
 }
 
