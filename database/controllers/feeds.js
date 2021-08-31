@@ -36,4 +36,4 @@ const addToFeed = (params, cb) => {
   });
 }
 
-module.exports = { getLatestFeedsByUser };
+module.exports = { getLatestFeedsByUser, addToFeed };

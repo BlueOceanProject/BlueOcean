@@ -4,18 +4,20 @@ import './profile.css';
 import SongListItem from './SongListItem.jsx'
 
 const UserProfile  = () => {
-  const [myProfile, setMyProfile] = useState(false);
+  const [myProfile, setMyProfile] = useState(true);
   const [currentUser, setCurrentUser] = useState('');
   const [userInfo, setUserInfo] = useState('');
+  const [userSongs, setUserSongs] = useState([]);
 
-  const defaultUser = 'preston'
+  const defaultUser = 'camila1994'
 
   const getUser = (username) => {
     axios.get(`/user?userName=${username}`)
     .then((res) => {
-      console.log(res, 'did we get back to profile');
+      console.log(res.data[0].songs, 'did we get back to profile');
       setCurrentUser(username);
-      setUserInfo(res);
+      setUserInfo(res.data[0]);
+      setUserSongs(res.data[0].songs);
     })
     .catch((err) => {
       console.error(err.stack)
@@ -30,15 +32,19 @@ const UserProfile  = () => {
       <div className="profile-songs">
         <div>
       <div className="profile">
-        <h2>Profile Page</h2>
-        <img className="profileImg" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/FullMoon2010.jpg/1200px-FullMoon2010.jpg" />
+        <h2>{myProfile ? 'My Profile' : `${currentUser}'s Profile`}</h2>
+        <img className="profileImg" src={userInfo.profileImg} />
         </div>
         <div className="profileTxt">
-          <span className="username">username goes here</span>
+          <span className="username">{userInfo.userName}</span>
           <span>description goes here skdjfnskdjfblkajdhflks adjh flksdjhflksdjh flksjn dfhlksdjhfksdjfhksdjhf lskedjfhlskdjfh as dksjdfhlas alskdjfh lasksdjfh laksdjfh lkasjdhf lskadjfh lskadj hlsakdjfh alskdjfh lsakdjfh aslkdjfh salkdjfh alskdjfh kasldjhflaksdj hsalkdjh laskdjfh laksdjfh lksajdhf lksadjfh laskdjfh laskdjfh laksjdfh lkasjdfh alskdjfh lsakjdfh lsakdjfh laskdjfh lasdkjfh lskajdfh lsakdjfh lsakdjfh laskdjfh laskdjf hlaskdjfh laskdjfh </span>
         </div>
         </div>
-        <SongListItem myProfile={myProfile}/>
+        <div className="songItem">
+        {userSongs.map((song) => {
+          return <SongListItem key={song.songName} myProfile={myProfile} song={song} userImg={userInfo.profileImg}/>
+        })}
+        </div>
       </div>
     )
 }

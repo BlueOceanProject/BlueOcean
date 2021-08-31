@@ -67,10 +67,22 @@ app.get('/feeds', (req, res) => {
   });
 });
 
+const { addToFeed } = require('../database/controllers/feeds');
+
+app.post('/feeds', (req, res) => {
+  console.log('got to server index', req.body)
+  addToFeed(req.body, (err, docs) => {
+    if (err) {
+      res.sendStatus(404);
+    } else {
+      res.sendStatus(200);
+    }
+  });
+});
+
 const { getUserByUserName } = require('../database/controllers/users');
 
 app.get('/user', (req, res) => {
-  console.log('in server query', req.query);
   getUserByUserName(req.query, (err, docs) => {
     if(err) {
       res.sendStatus(404);
@@ -79,6 +91,18 @@ app.get('/user', (req, res) => {
     }
   });
 });
+
+const { makePublished } = require('../database/controllers/users');
+
+app.put('/users', (req, res) => {
+  makePublished(req.body, (err, docs) => {
+    if(err) {
+      res.sendStatus(404);
+    } else {
+      res.status(200).send('updated');
+    }
+  })
+})
 
 app.listen(port, function () {
   console.log(`listening on port ${port}`);

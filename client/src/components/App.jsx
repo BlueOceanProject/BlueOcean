@@ -16,6 +16,7 @@ const App = () => {
         <Switch>
           <Route path="/">
             <h1>Blue Ocean</h1>
+            <UserProfile />
             <Feed />
           </Route>
         </Switch>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import './profile.css';
 import Button from 'react-bootstrap/Button';
 import {
@@ -13,19 +14,29 @@ import {
 } from "react-share";
 
 
-const SongListItem = ({ myProfile }) => (
+const SongListItem = ({ myProfile, song, userImg}) => {
+  const handleAddToFeed = () => {
+    song.profileImg = userImg
+    axios.post('/feeds', song)
+    .then(() => {
+      axios.put('/users', song).then(() => {}).catch((err) => {console.error(err.stack)})
+    })
+    .catch((err) => {
+      console.error(err.stack)
+    })
+  }
+  return (
   <div>
-  <div className="songItem">
-    <span>Song title goes here</span>
+  <div className="eachSong">
+    <span>{song.songName}</span>
     <audio
         controls
-        src="http://cd.textfiles.com/10000gp2/500SNDS/8_38.WAV"
-      // src={feed.url}
+        src={song.url}
       >
         Your browser does not support the
         <code>audio</code> element.
       </audio>
-      {myProfile ? <Button variant="outline-dark">Publish</Button> : null}
+      {myProfile && !song.published ? <Button variant="outline-dark" onClick={handleAddToFeed}>Publish</Button> : null}
   </div>
   <FacebookShareButton
   url="https://www.google.com"
@@ -55,7 +66,6 @@ const SongListItem = ({ myProfile }) => (
     <TumblrIcon size={36} round/>
   </TumblrShareButton>
   </div>
-
-)
-
+  )
+}
 export default SongListItem;
