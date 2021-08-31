@@ -11,7 +11,7 @@ const App = () => {
     <div>
       <h1>Blue Ocean</h1>
       <Feed />
-      <Workstation />
+      {/* <Workstation /> */}
     </div>
   );
 }
