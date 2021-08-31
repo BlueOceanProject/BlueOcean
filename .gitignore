@@ -4,3 +4,4 @@ config.js
 key.js
 *.jpg
 *.mp3
+.DS_Store

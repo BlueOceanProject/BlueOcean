@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import AudioReactRecorder, { RecordState } from 'audio-react-recorder';
 import Import from './Import.jsx';
+import Export from './Export.jsx';
 
 const Workstation = (props) => {
   const [recordState, setRecordState] = useState(null);
@@ -39,6 +40,7 @@ const Workstation = (props) => {
       <audio controls src={recordData} />
       <button onClick={toggle}>Start / Stop</button>
       <Import setUploadAudio={setUploadAudio} />
+      <Export uploadAudio={uploadAudio} />
     </div>
   )
 }
