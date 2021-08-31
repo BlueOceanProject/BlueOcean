@@ -13,7 +13,7 @@ import {
 } from "react-share";
 
 
-const SongListItem = () => (
+const SongListItem = ({ myProfile }) => (
   <div>
   <div className="songItem">
     <span>Song title goes here</span>
@@ -25,7 +25,7 @@ const SongListItem = () => (
         Your browser does not support the
         <code>audio</code> element.
       </audio>
-      <Button variant="outline-dark">Publish</Button>
+      {myProfile ? <Button variant="outline-dark">Publish</Button> : null}
   </div>
   <FacebookShareButton
   url="https://www.google.com"

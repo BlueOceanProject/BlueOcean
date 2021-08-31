@@ -18,4 +18,22 @@ const getLatestFeedsByUser = (params, callback) => {
 
 };
 
+const addToFeed = (params, cb) => {
+  const publish = new Feeds({
+    userName: params.userName,
+    songName: params.songName,
+    url: params.url,
+    publishedDate: new Date,
+    createdAt: params.createdAt,
+    profileImg: params.profileImg
+  });
+  publish.save((err, published) => {
+    if (err) {
+      cb(err);
+    } else {
+      cb(null, `${published.songName} by ${published.userName} published to feed`);
+    }
+  });
+}
+
 module.exports = { getLatestFeedsByUser };

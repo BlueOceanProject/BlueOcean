@@ -66,6 +66,19 @@ app.get('/feeds', (req, res) => {
   });
 });
 
+const { getUserByUserName } = require('../database/controllers/users');
+
+app.get('/user', (req, res) => {
+  console.log('in server query', req.query);
+  getUserByUserName(req.query, (err, docs) => {
+    if(err) {
+      res.sendStatus(404);
+    } else {
+      res.status(200).send(docs);
+    }
+  });
+});
+
 app.listen(port, function () {
   console.log(`listening on port ${port}`);
 });

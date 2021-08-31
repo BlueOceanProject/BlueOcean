@@ -2,12 +2,12 @@ const Users = require('../models/users');
 
 
 module.exports = {
-  getUserByUsername: (username, cb) => {
-    Users.find({ userName: username }).exec((err, docs) => {
+  getUserByUserName: (username, cb) => {
+    Users.find({ userName: username.userName }).exec((err, docs) => {
       if (err) {
-        callback(err);
+        cb(err);
       } else {
-        callback(null, docs);
+        cb(null, docs);
       }
     })
   }
