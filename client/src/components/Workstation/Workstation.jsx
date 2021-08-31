@@ -172,7 +172,7 @@ const Workstation = (props) => {
   }
 
   return (
-    <div>
+    <div className="workstation-ctr">
       <AudioReactRecorder state={recordState} onStop={onStop} />
       <button onClick={toggle}>Record / Stop</button>
       <audio controls src={recordData} onPause={onRecordingPause} onPlay={onRecordingPlay} onEnded={onRecordingEnd} />
