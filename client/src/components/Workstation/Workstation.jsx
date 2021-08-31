@@ -85,6 +85,10 @@ const Workstation = (props) => {
     }
   }, [seekTime])
 
+  const secondsToTimeCode = (seconds) => {
+    return `${new Date(seconds * 1000).toISOString().substr(11, 8)}.${Math.round((seekTime % 1) * 100)}`
+  }
+
   const setDurations = () => {
     let importTrackTime = master.importTrack ? master.importTrack.duration() : 0;
     let recordingTime = master.recording ? master.recording.duration() : 0;
@@ -184,7 +188,7 @@ const Workstation = (props) => {
         <div className="no-audio-msg">No audio available. Import a file or make a recording.</div>
         : <></>}
       </div>
-      <div className="seekTime">{seekTime}</div>
+      <div className="seekTime">{secondsToTimeCode(seekTime)}</div>
       <button type="submit" onClick={onSave}>Save</button>
       <Export uploadAudio={uploadAudio} />
     </div>
