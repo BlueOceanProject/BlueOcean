@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import {
   FacebookIcon,
   FacebookShareButton,
@@ -21,7 +22,9 @@ const FeedListItem = ({ feed }) => {
       <div className="feed-list-item-wrapper">
         <img className="user-image" src={feed.profileImg} alt="Avatar"></img>
         <span className="feed-username">
-          {feed.userName}
+          <Link to={{ pathname: '/users', state: { userName: `${feed.userName}` } }}>
+            {feed.userName}
+          </Link>
         </span>
         <span className="feed-songname">
           {feed.songName}
