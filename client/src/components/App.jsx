@@ -1,26 +1,42 @@
-import React, { useState, useEffect } from 'react';
-import {BrowserRouter as Router , Route, Switch } from 'react-router-dom';
-import Feed from './HomePage/Feed.jsx'
-import Workstation from './Workstation/Workstation.jsx';
-import Toolbar from './Toolbar.jsx';
-import UserProfile from './UserProfile/UserProfile.jsx'
-import Uploader from './Uploader.jsx';
-import Viewer from './Viewer.jsx';
+import React, { useState, useEffect, useReducer } from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { AuthProvider } from './Authentication/AuthContext.js';
+import SignUp from './Authentication/SignUp.jsx';
+import SignIn from './Authentication/SignIn.jsx';
+import Home from './Home.jsx';
+
+const initialState = {
+  userId: '',
+};
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'updateUserId':
+      return { ...state, userId: action.data}
+    default:
+      return state;
+  }
+};
+
+export const GlobalContext = React.createContext();
 
 const App = () => {
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
-    <React.StrictMode>
-      <Router>
-          <Toolbar />
-          <Switch>
-            <Route exact path="/" component={Feed} />
-            <Route path="/users" component={UserProfile} />
-            <Route path="/create" component={Workstation} />
-
-          </Switch>
-      </Router>
-    </React.StrictMode>
+    <div>
+      <GlobalContext.Provider value={{ state, dispatch }}>
+        <AuthProvider>
+          <Router>
+            <Switch>
+              <Route path="/signup" component={SignUp} />
+              <Route path="/signin" component={SignIn} />
+              <Route path="/" component={Home} />
+            </Switch>
+          </Router>
+        </AuthProvider>
+      </GlobalContext.Provider>
+    </div>
   );
 }
 

@@ -15,6 +15,10 @@ const styles ={
   }
 }
 
+const clickHandler = () => {
+  console.log('log out');
+};
+
 const Toolbar = () => {
 
   return (
@@ -38,6 +42,13 @@ const Toolbar = () => {
             <Nav.Link> Workstation  </Nav.Link>
           </LinkContainer>
 
+          <LinkContainer to="/signin">
+            <Nav.Link> Sign in  </Nav.Link>
+          </LinkContainer>
+
+          <LinkContainer to="/signup">
+            <Nav.Link> Sign up  </Nav.Link>
+          </LinkContainer>
         </Nav>
       </Navbar>
     </div>
