@@ -1,5 +1,6 @@
-import React, { useRef } from 'react';
-import { Card, Form, Button, Container, Row, Col } from 'react-bootstrap';
+import React, { useRef, useState } from 'react';
+import { Card, Form, Button, Container, Row, Col, Alert } from 'react-bootstrap';
+import { useAuth } from './AuthContext';
 
 const SignUp = () => {
   const emailRef = useRef();
@@ -10,12 +11,38 @@ const SignUp = () => {
   const lastNameRef = useRef();
   const phoneNumberRef = useRef();
 
+  const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const { signUp } = useAuth();
+
+  const signUpHandler = (event) => {
+    event.preventDefault();
+
+    setErrorMessage('');
+
+    if(passwordRef.current.value !== passwordConfirmRef.current.value) {
+      return setErrorMessage('passwords do not match!');
+    }
+
+    setLoading(true);
+
+    signUp(emailRef.current.value, passwordRef.current.value)
+      .catch((error) => {
+        setErrorMessage(error.message);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
   return (
     <Container className="d-flex justify-content-center align-items-center" style={{ minHeight: "100vh" }}>
       <div className="w-100" style={{ maxWidth:"600px" }}>
         <Card>
           <Card.Body>
             <h2 className="text-center mb-3">Sign Up</h2>
+            {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
             <Form>
               <Form.Group className="mb-2" controlId="username">
                 <Form.Label>Username <strong style={{ color: "red" }}>*</strong></Form.Label>
@@ -54,7 +81,7 @@ const SignUp = () => {
                 <Form.Label>Confirm password <strong style={{ color: "red" }}>*</strong></Form.Label>
                 <Form.Control type="password" placeholder="Enter password again" ref={passwordConfirmRef} required/>
               </Form.Group>
-              <Button variant="primary" className="w-100">Sign Up</Button>
+              <Button variant="primary" className="w-100" onClick={signUpHandler} disabled={loading}>Sign Up</Button>
             </Form>
           </Card.Body>
         </Card>
