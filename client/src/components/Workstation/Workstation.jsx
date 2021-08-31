@@ -5,13 +5,8 @@ import Crunker from 'crunker';
 import Import from './Import.jsx';
 import Export from './Export.jsx';
 import css from './workstation.css';
-// import Crunker from 'crunker';
 
-// const crunker = new Crunker({sampleRate: 48000});
-
-
-
-// const crunker = new Crunker({sampleRate: 48000});
+const crunker = new Crunker({sampleRate: 48000});
 
 const Workstation = (props) => {
   const [recordState, setRecordState] = useState(null);
@@ -77,17 +72,30 @@ const Workstation = (props) => {
       }, 10));
     } else {
       clearInterval(seekTimer);
-      if (isThereAudio) {
-        setSeekTime(master.importTrack._sounds[0]._seek)
-      }
     }
   }, [isMasterPlaying]);
 
   useEffect(() => {
-    if (isThereAudio && seekTime >= maxDuration) {
-      masterPause();
-      clearInterval(seekTimer);
-      setSeekTime(maxDuration);
+    if (isThereAudio) {
+      if (seekTime >= maxDuration) {
+        masterPause();
+        clearInterval(seekTimer);
+        setSeekTime(maxDuration);
+      }
+      if (recordData) {
+        if (seekTime >= recordingDuration) {
+          master.recording.unload();
+        } else {
+          master.recording.load();
+        }
+      }
+      if (audioFile) {
+        if (seekTime >= importTrackDuration) {
+          master.importTrack.unload();
+        } else {
+          master.importTrack.load();
+        }
+      }
     }
   }, [seekTime])
 
@@ -134,9 +142,11 @@ const Workstation = (props) => {
 
   const rewindClick = (event) => {
     if (audioFile) {
+      master.importTrack.load();
       master.importTrack.stop();
     }
-    if (recordAudio) {
+    if (recordData) {
+      master.recording.load();
       master.recording.stop();
     }
     setSeekTime(0);
