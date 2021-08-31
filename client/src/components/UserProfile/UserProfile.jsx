@@ -46,7 +46,9 @@ const UserProfile  = () => {
         })}
         </div>
       </div>
-    )
+      <SongListItem />
+    </div>
+  )
 }
 
 export default UserProfile;
