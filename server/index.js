@@ -23,29 +23,16 @@ var s3 = new AWS.S3();
 
 var upload = multer({
   storage: multerS3({
-      s3: s3,
-      bucket: 'harmony7',
-      key: function (req, file, cb) {
-        // console.log(file)
-        const split = file.originalname.split('.')
-        cb(null, `${req.body.name}.${split[split.length - 1]}`);
-      }
-  }),
-  limits: { fieldSize: 2 * 1024 * 1024 }
-
-<<<<<<< HEAD
-  storage: multer.diskStorage({
-    destination: (req, file, cb) => {
-      cb(null, 'uploads');
-    },
-    filename: (req, file, cb) => {
-      console.log(req)
-      console.log(file)
+    s3: s3,
+    bucket: 'harmony7',
+    key: function (req, file, cb) {
+      // console.log(file)
       const split = file.originalname.split('.')
       cb(null, `${req.body.name}.${split[split.length - 1]}`);
     }
-  })
-=======
+  }),
+  limits: { fieldSize: 2 * 1024 * 1024 }
+
 
   // storage: multer.diskStorage({
   //   destination: (req, file, cb) => {
@@ -58,7 +45,6 @@ var upload = multer({
   //     cb(null, `${req.body.name}.${split[split.length - 1]}`);
   //   }
   // })
->>>>>>> main
 });
 
 app.post('/upload', upload.any(), function (req, res, next) {
