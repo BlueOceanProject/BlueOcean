@@ -5,13 +5,6 @@ import SignUp from './Authentication/SignUp.jsx';
 import SignIn from './Authentication/SignIn.jsx';
 import Home from './Home.jsx';
 
-import Feed from './HomePage/Feed.jsx'
-import Workstation from './Workstation/Workstation.jsx';
-import Toolbar from './Toolbar.jsx';
-import UserProfile from './UserProfile/UserProfile.jsx'
-import Uploader from './Uploader.jsx';
-import Viewer from './Viewer.jsx';
-
 const initialState = {
   userId: '',
 };
@@ -34,28 +27,16 @@ const App = () => {
     <div>
       <GlobalContext.Provider value={{ state, dispatch }}>
         <AuthProvider>
-          {/* <h1>Blue Ocean</h1> */}
           <Router>
             <Switch>
-              <Route exact path="/" component={Home} />
               <Route path="/signup" component={SignUp} />
               <Route path="/signin" component={SignIn} />
+              <Route path="/" component={Home} />
             </Switch>
           </Router>
         </AuthProvider>
       </GlobalContext.Provider>
     </div>
-    // <React.StrictMode>
-    //   <Router>
-    //       <Toolbar />
-    //       <Switch>
-    //         <Route exact path="/" component={Feed} />
-    //         <Route path="/users" component={UserProfile} />
-    //         <Route path="/create" component={Workstation} />
-
-    //       </Switch>
-    //   </Router>
-    // </React.StrictMode>
   );
 }
 
