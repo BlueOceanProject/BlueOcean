@@ -5,6 +5,11 @@ import Crunker from 'crunker';
 import Import from './Import.jsx';
 import Export from './Export.jsx';
 import css from './workstation.css';
+// import Crunker from 'crunker';
+
+// const crunker = new Crunker({sampleRate: 48000});
+
+
 
 const crunker = new Crunker({sampleRate: 48000});
 
@@ -26,6 +31,7 @@ const Workstation = (props) => {
   const toggle = () => {
     if (recordState === null || recordState === RecordState.STOP) {
       setRecordState(RecordState.START);
+      uploadAudio.load();
       uploadAudio.play();
     } else {
       setRecordState(RecordState.STOP);
@@ -151,6 +157,27 @@ const Workstation = (props) => {
       .catch(console.log);
   }
 
+  const onRecordingPause = (event) => {
+    uploadAudio.pause();
+  }
+
+  const onRecordingPlay = (event) => {
+    uploadAudio.play();
+  }
+
+  const onRecordingEnd = (event) => {
+    uploadAudio.load();
+  }
+
+  const onSave = (event) => {
+    event.preventDefault();
+    crunker.fetchAudio(recordData, uploadFile)
+      .then(buffers => crunker.mergeAudio(buffers))
+      .then(merged => crunker.export(merged, 'audio/mp3'))
+      .then(console.log)
+      .catch(console.log);
+  }
+
   return (
     <div>
       <AudioReactRecorder state={recordState} onStop={onStop} />
@@ -169,6 +196,10 @@ const Workstation = (props) => {
       <div className="seekTime">{seekTime}</div>
       <Import setUploadAudio={setUploadAudio}  setAudioFile={setAudioFile} audioFile={audioFile} />
       <button onClick={onSave}>Save</button>
+      <audio controls src={recordData} onPause={onRecordingPause} onPlay={onRecordingPlay} onEnded={onRecordingEnd} />
+      <button onClick={toggle}>Record / Stop</button>
+      <button type="submit" onClick={onSave}>Save</button>
+      <Export uploadAudio={uploadAudio} />
     </div>
   )
 }
