@@ -12,7 +12,6 @@ const App = () => {
   return (
     <Router>
       <div>
-      <Workstation />
         <Toolbar />
         <Switch>
           <Route path="/">
