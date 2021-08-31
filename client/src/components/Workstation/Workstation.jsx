@@ -3,6 +3,7 @@ import AudioReactRecorder, { RecordState } from 'audio-react-recorder';
 import { Howl, Howler } from 'howler';
 import Crunker from 'crunker';
 import Import from './Import.jsx';
+import Export from './Export.jsx';
 
 const crunker = new Crunker({sampleRate: 48000});
 

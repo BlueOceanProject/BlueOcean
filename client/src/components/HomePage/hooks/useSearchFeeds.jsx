@@ -6,7 +6,6 @@ function useSearchFeeds(query, pageNum) {
   const [error, setError] = useState(false);
   const [feeds, setFeeds] = useState([]);
   const [hasMore, setHasMore] = useState(false);
-
   useEffect(() => {
     setFeeds([]);
   }, [query]);
@@ -18,17 +17,15 @@ function useSearchFeeds(query, pageNum) {
     setIsLoading(true);
     setError(false);
 
-    // TODO: change the get url
     axios
-      .get(`https://openlibrary.org/search.json?q=${query}&page=${pageNum}`, {
+      .get(`/feeds?userName=${query}&pageNum=${pageNum}`, {
         cancelToken: new CancelToken((c) => (cancel = c))
       })
       .then((res) => {
         setFeeds((prev) => {
-          // TODO: change map res.data.docs
-          return [...new Set([...prev, ...res.data.docs])];
+          return [...new Set([...prev, ...res.data])];
         });
-        setHasMore(res.data.docs.length > 0);
+        setHasMore(res.data.length > 0);
         setIsLoading(false);
       })
       .catch((err) => {

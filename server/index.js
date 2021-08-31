@@ -22,31 +22,32 @@ AWS.config.update({
 var s3 = new AWS.S3();
 
 var upload = multer({
-  // storage: multerS3({
-  //     s3: s3,
-  //     bucket: 'harmony7',
-  //     key: function (req, file, cb) {
-  //       const split = file.originalname.split('.')
-  //       cb(null, `${req.body.name}.${split[split.length - 1]}`);
-  //     }
-  // })
+  storage: multerS3({
+      s3: s3,
+      bucket: 'harmony7',
+      key: function (req, file, cb) {
+        // console.log(file)
+        const split = file.originalname.split('.')
+        cb(null, `${req.body.name}.${split[split.length - 1]}`);
+      }
+  }),
+  limits: { fieldSize: 2 * 1024 * 1024 }
 
-  storage: multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, 'uploads');
-    },
-    filename: (req, file, cb) => {
-      console.log(req)
-      console.log(file)
-      const split = file.originalname.split('.')
-      cb(null, `${req.body.name}.${split[split.length - 1]}`);
-    }
-  })
+
+  // storage: multer.diskStorage({
+  //   destination: (req, file, cb) => {
+  //       cb(null, 'uploads');
+  //   },
+  //   filename: (req, file, cb) => {
+  //     console.log(req)
+  //     console.log(file)
+  //     const split = file.originalname.split('.')
+  //     cb(null, `${req.body.name}.${split[split.length - 1]}`);
+  //   }
+  // })
 });
 
-app.post('/upload', upload.array('file', 1), function (req, res, next) {
-  console.log("===req", req);
-  console.log("res", res);
+app.post('/upload', upload.any(), function (req, res, next) {
   res.send("Uploaded!");
 });
 
@@ -61,7 +62,6 @@ app.get('/feeds', (req, res) => {
     if (err) {
       res.sendStatus(404);
     } else {
-      // console.log(docs);
       res.status(200).send(docs);
     }
   });

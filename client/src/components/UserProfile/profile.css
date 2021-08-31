@@ -1,0 +1,31 @@
+.profile-songs {
+  display: flex;
+  justify-content: space-between;
+}
+
+img.profileImg {
+  height: 50%;
+  width: 50%;
+  border-radius: 50%;
+}
+.profile {
+  padding-left: 100px;
+}
+.profileTxt {
+  display: flex;
+  flex-direction: column;
+  max-width: 50%;
+  padding-left: 130px;
+}
+
+.songItem {
+  display: flex;
+  max-height:30%;
+  justify-content: center;
+  align-items: center;
+  padding-right: 500px;
+}
+.username {
+  font-weight: bolder;
+  font-size: large;
+}

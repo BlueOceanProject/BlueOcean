@@ -6,7 +6,7 @@ const feedSchema = mongoose.Schema({
   userName: String,
   songName: String,
   url: String,
-  published: Date,
+  publishedDate: Date,
   createdAt: Date,
   profileImg: String
 });
