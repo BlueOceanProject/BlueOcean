@@ -12,10 +12,15 @@ const styles ={
     display: 'flex',
     flex: 1,
     flexDirection: 'row',
+
+  },
+  right: {
+    marginLeft: 'auto',
+    marginRight: '0',
   }
 }
 
-const Toolbar = () => {
+const Toolbar = (props) => {
 
   return (
     <div>
@@ -25,7 +30,7 @@ const Toolbar = () => {
           Harmony
         </Navbar.Brand>
 
-        <Nav>
+        <Nav className="justify-content-center">
           <LinkContainer to="/">
             <Nav.Link> Feed </Nav.Link>
           </LinkContainer>
@@ -34,9 +39,35 @@ const Toolbar = () => {
             <Nav.Link> Profiles  </Nav.Link>
           </LinkContainer>
 
-          <LinkContainer to="/create">
-            <Nav.Link> Workstation  </Nav.Link>
-          </LinkContainer>
+            <LinkContainer to="/create" >
+              <Nav.Link className="border-left pl-2 ml-auto"> Workstation  </Nav.Link>
+            </LinkContainer>
+
+
+          {/* {props.username === ''
+          ?
+          <div style={styles.row}>
+            <LinkContainer to="/login">
+                <Nav.Link> Login  </Nav.Link>
+            </LinkContainer>
+
+            <LinkContainer to="/signup">
+              <Nav.Link> Signup  </Nav.Link>
+            </LinkContainer>
+          </div>
+          :
+            <div style={styles.row} className="ml-auto">
+              <LinkContainer to="/username">
+                <Nav.Link> {props.username}  </Nav.Link>
+              </LinkContainer>
+
+              <LinkContainer to="/Logout">
+                <Nav.Link> Logout  </Nav.Link>
+              </LinkContainer>
+            </div>
+          } */}
+
+
 
         </Nav>
       </Navbar>

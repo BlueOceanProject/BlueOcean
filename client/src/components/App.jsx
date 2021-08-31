@@ -10,9 +10,8 @@ import Viewer from './Viewer.jsx';
 const App = () => {
 
   return (
-    <React.StrictMode>
       <Router>
-          <Toolbar />
+          <Toolbar username={"preston"} />
           <Switch>
             <Route exact path="/" component={Feed} />
             <Route path="/users" component={UserProfile} />
@@ -20,7 +19,6 @@ const App = () => {
 
           </Switch>
       </Router>
-    </React.StrictMode>
   );
 }
 
