@@ -4,3 +4,5 @@ config.js
 key.js
 *.jpg
 *.mp3
+authKey.js
+.env.local
