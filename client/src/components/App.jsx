@@ -9,6 +9,7 @@ const App = () => {
   return (
     <div>
       <h1>Blue Ocean</h1>
+      <Feed />
     </div>
   );
 }
