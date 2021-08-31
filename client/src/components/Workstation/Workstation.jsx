@@ -50,12 +50,14 @@ const Workstation = (props) => {
   }
 
   useEffect(() => {
-    let importTrack = new Howl({
-      src: [audioFile],
-      format: ['mp3']
-    });
-    setMaster({ ...master, importTrack });
-    setIsThereAudio(true);
+    if (audioFile) {
+      let importTrack = new Howl({
+        src: [audioFile],
+        format: ['mp3']
+      });
+      setMaster({ ...master, importTrack });
+      setIsThereAudio(true);
+    }
   }, [audioFile])
 
 
@@ -76,17 +78,34 @@ const Workstation = (props) => {
     }
   }, [isMasterPlaying]);
 
-  const masterPlay = (event) => {
+  const masterPlay = () => {
+    if (audioFile) {
+      master.importTrack.play();
+    }
+    if (recordAudio) {
+      master.recording.play();
+    }
+  }
+
+  const masterPause = () => {
+    if (audioFile) {
+      master.importTrack.pause();
+    }
+    if (recordAudio) {
+      master.recording.pause();
+    }
+  }
+
+  const masterPlayClick = (event) => {
     if (!isMasterPlaying) {
       if (isThereAudio) {
         setMasterPlaying(true);
-        master.importTrack.play();
-        master.recording.play();
+        masterPlay();
+
       }
     } else {
       setMasterPlaying(false);
-      master.importTrack.pause();
-      master.recording.pause();
+      masterPause();
     }
   }
 
@@ -106,8 +125,8 @@ const Workstation = (props) => {
       <div className="master-player-ctr">
         <button className="master-rewind">&#9194;</button>
         {isMasterPlaying ?
-        <button className="master-pause" onClick={masterPlay}>&#9613;&#9613;</button>
-        : <button className="master-play" onClick={masterPlay}>&#9658;</button>
+        <button className="master-pause" onClick={masterPlayClick}>&#9613;&#9613;</button>
+        : <button className="master-play" onClick={masterPlayClick}>&#9658;</button>
         }
         <button className="master-ff">&#9193;</button>
         {!isThereAudio ?
