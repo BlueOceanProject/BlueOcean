@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import AudioReactRecorder, { RecordState } from 'audio-react-recorder';
 import Import from './Import.jsx';
 import Export from './Export.jsx';
-import Crunker from 'crunker';
+// import Crunker from 'crunker';
 
-const crunker = new Crunker({sampleRate: 48000});
+// const crunker = new Crunker({sampleRate: 48000});
 
 
 
