@@ -1,25 +1,26 @@
 import React, { useState, useEffect } from 'react';
+import {BrowserRouter as Router , Route, Switch } from 'react-router-dom';
 import Feed from './HomePage/Feed.jsx'
 import Workstation from './Workstation/Workstation.jsx';
-import Viewer from './Viewer.jsx';
 import Toolbar from './Toolbar.jsx';
-import {BrowserRouter as Router , Route, Switch } from 'react-router-dom';
 import UserProfile from './UserProfile/UserProfile.jsx'
+import Uploader from './Uploader.jsx';
+import Viewer from './Viewer.jsx';
 
 const App = () => {
 
   return (
-    <Router>
-      <div>
-        <Toolbar />
-        <Switch>
-          <Route path="/">
-            <h1>Blue Ocean</h1>
-            <Feed />
-          </Route>
-        </Switch>
-      </div>
-    </Router>
+    <React.StrictMode>
+      <Router>
+          <Toolbar />
+          <Switch>
+            <Route exact path="/" component={Feed} />
+            <Route path="/users" component={UserProfile} />
+            <Route path="/create" component={Workstation} />
+
+          </Switch>
+      </Router>
+    </React.StrictMode>
   );
 }
 
