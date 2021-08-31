@@ -82,20 +82,6 @@ const Workstation = (props) => {
         clearInterval(seekTimer);
         setSeekTime(maxDuration);
       }
-      if (recordData) {
-        if (seekTime >= recordingDuration) {
-          master.recording.unload();
-        } else {
-          master.recording.load();
-        }
-      }
-      if (audioFile) {
-        if (seekTime >= importTrackDuration) {
-          master.importTrack.unload();
-        } else {
-          master.importTrack.load();
-        }
-      }
     }
   }, [seekTime])
 
@@ -136,18 +122,20 @@ const Workstation = (props) => {
       }
     } else {
       setMasterPlaying(false);
+      if (audioFile) { master.importTrack.seek(seekTime) }
+      if (recordData) { master.recording.seek(seekTime) }
       masterPause();
     }
   }
 
   const rewindClick = (event) => {
     if (audioFile) {
-      master.importTrack.load();
       master.importTrack.stop();
+      master.importTrack.load();
     }
     if (recordData) {
-      master.recording.load();
       master.recording.stop();
+      master.recording.load();
     }
     setSeekTime(0);
     clearInterval(seekTimer);
