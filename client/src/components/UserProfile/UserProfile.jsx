@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './profile.css';
 import SongListItem from './SongListItem.jsx'
 
 const UserProfile  = () => {
   const [myProfile, setMyProfile] = useState(false);
+  const [currentUser, setCurrentUser] = useState('');
 
+  useEffect(() => {
+    // axios()
+  })
 
     return (
       <div className="profile-songs">
