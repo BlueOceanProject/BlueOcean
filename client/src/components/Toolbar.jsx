@@ -49,7 +49,6 @@ const Toolbar = (props) => {
     if (userId) {
       axios.get(`/username/${userId}`)
         .then((res) => {
-          console.log(res);
           setUsername(res.data);
         })
         .catch((err) => {
