@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
+import { GlobalContext } from '../App.jsx';
 import {
   FacebookIcon,
   FacebookShareButton,
@@ -15,20 +17,24 @@ import './Feed.css';
 const url = 'https://www.google.com';
 
 const FeedListItem = ({ feed }) => {
-
+  const globalData = useContext(GlobalContext);
+  const { userId } = globalData.state;
+  // const userId = "test";
   return (
     <div className="feed-list">
       <div className="feed-list-item-wrapper">
         <img className="user-image" src={feed.profileImg} alt="Avatar"></img>
         <span className="feed-username">
-          {feed.userName}
+          <Link to={{ pathname: '/users', state: { userId: `${feed.userId}` } }}>
+            {feed.userName}
+          </Link>
         </span>
         <span className="feed-songname">
           {feed.songName}
         </span>
         <audio
           controls
-          // controlsList="nodownload"
+          controlsList={userId ? "" : "nodownload"}
           src={feed.url}
         >
           Your browser does not support the
