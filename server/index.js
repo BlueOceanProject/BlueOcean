@@ -56,8 +56,8 @@ app.post('/upload', upload.any(), function (req, res, next) {
 let port = 3000;
 
 require('../database/index');
-const { getLatestFeedsByUser } = require('../database/controllers/feeds');
-const { postSignUpUser } = require('../database/controllers/users');
+const { getLatestFeedsByUser, addToFeed } = require('../database/controllers/feeds');
+const { postSignUpUser, getUserByUserId , makePublished } = require('../database/controllers/users');
 
 app.get('/feeds', (req, res) => {
   getLatestFeedsByUser(req.query, (err, docs) => {
@@ -69,7 +69,6 @@ app.get('/feeds', (req, res) => {
   });
 });
 
-const { addToFeed } = require('../database/controllers/feeds');
 
 app.post('/feeds', (req, res) => {
   console.log('got to server index', req.body)
@@ -82,7 +81,7 @@ app.post('/feeds', (req, res) => {
   });
 });
 
-const { getUserByUserId } = require('../database/controllers/users');
+
 
 app.get('/user', (req, res) => {
   getUserByUserId(req.query, (err, docs) => {
@@ -94,9 +93,9 @@ app.get('/user', (req, res) => {
   });
 });
 
-const { makePublished } = require('../database/controllers/users');
 
 app.put('/users', (req, res) => {
+//console.log('index req.body', req.body);
   makePublished(req.body, (err, docs) => {
     if(err) {
       res.sendStatus(404);
