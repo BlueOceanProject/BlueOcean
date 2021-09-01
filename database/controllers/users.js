@@ -3,7 +3,8 @@ const Users = require('../models/users');
 
 module.exports = {
   getUserByUserId: (username, cb) => {
-    Users.find({ _id: username.userId }).exec((err, docs) => {
+    console.log('at controller', username._id)
+    Users.find({ _id: username._id }).exec((err, docs) => {
       if (err) {
         cb(err);
       } else {
