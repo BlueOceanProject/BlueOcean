@@ -25,10 +25,12 @@ const Toolbar = (props) => {
 
   const globalData = useContext(GlobalContext);
   const { query } = globalData.state;
+  const { userId } = globalData.state;
+  const tempUsername = userId;
+
 
   const handleSearchChange = (e) => {
     globalData.dispatch({type: 'updateQuery', data: e.target.value});
-    globalData.dispatch({type: 'updatePageNum', data: 1});
   };
 
   return (
@@ -47,7 +49,7 @@ const Toolbar = (props) => {
             <Nav.Link> Feed </Nav.Link>
           </LinkContainer>
 
-          {props.username !== ''
+          {tempUsername !== ''
           ?
           <>
             <LinkContainer to="/user">
@@ -62,7 +64,7 @@ const Toolbar = (props) => {
           }
 
         <Nav className="ms-auto">
-          {props.username === ''
+          {tempUsername === ''
           ?
           <>
             <LinkContainer to="/signin">
@@ -76,7 +78,7 @@ const Toolbar = (props) => {
           :
           <>
             <LinkContainer to="/user">
-              <Nav.Link> {props.username}  </Nav.Link>
+              <Nav.Link> {tempUsername}  </Nav.Link>
             </LinkContainer>
 
             <LinkContainer to="/feed">

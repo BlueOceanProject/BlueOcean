@@ -10,12 +10,9 @@ import { GlobalContext } from './App.jsx';
 
 const Home = () => {
 
-  const globalData = useContext(GlobalContext);
-  const { userId } = globalData.state;
-
   return (
   <>
-    <Toolbar username={userId} />
+    <Toolbar />
     <Switch>
       <Route path="/feed" component={Feed} />
       <Route path="/user" component={UserProfile} />

@@ -7,10 +7,7 @@ const Feed = () => {
 
   const globalData = useContext(GlobalContext);
   const { query } = globalData.state;
-  const { pageNum } = globalData.state;
-
-  // const [query, setQuery] = useState('');
-  // const [pageNum, setPageNum] = useState(1);
+  const [pageNum, setPageNum] = useState(1);
   const { isLoading, error, feeds, hasMore } = useSearchFeed(query, pageNum);
 
   const observer = useRef();
@@ -20,8 +17,7 @@ const Feed = () => {
       if (observer.current) observer.current.disconnect();
       observer.current = new IntersectionObserver((entries) => {
         if (entries[0].isIntersecting && hasMore) {
-          globalData.dispatch({type: 'updatePageNum', data: pageNum + 1});
-          // setPageNum((prev) => prev + 1);
+          setPageNum((prev) => prev + 1);
         }
       });
       if (node) observer.current.observe(node);
@@ -29,16 +25,12 @@ const Feed = () => {
     [isLoading, hasMore]
   );
 
-  // const handleSearchChange = (e) => {
-  //   setQuery(e.target.value);
-  //   setPageNum(1);
-  // };
+  useEffect(() => {
+    setPageNum(1);
+  },[query]);
 
   return (
     <>
-      {/* <div className="search-bar">
-        <input type="text" placeholder="Search users..." onChange={handleSearchChange} value={query} />
-      </div> */}
 
       {feeds.map((feed, i) => {
         if (feeds.length === i + 1) {

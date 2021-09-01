@@ -18,9 +18,7 @@ const url = 'https://www.google.com';
 
 const FeedListItem = ({ feed }) => {
   const globalData = useContext(GlobalContext);
-  //const userId = "test";
-  // const { userId } = globalData.state;
-  // globalData.  dispatch({type: 'updateUserId', data: 'test'});
+  const { userId } = globalData.state;
 
   return (
     <div className="feed-list">
