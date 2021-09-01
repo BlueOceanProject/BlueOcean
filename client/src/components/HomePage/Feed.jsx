@@ -1,12 +1,16 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef, useCallback, useContext } from 'react';
 import FeedListItem from './FeedListItem.jsx';
 import useSearchFeed from './hooks/useSearchFeeds.jsx';
 import { GlobalContext } from '../App.jsx';
 
 const Feed = () => {
 
-  const [query, setQuery] = useState('');
-  const [pageNum, setPageNum] = useState(1);
+  const globalData = useContext(GlobalContext);
+  const { query } = globalData.state;
+  const { pageNum } = globalData.state;
+
+  // const [query, setQuery] = useState('');
+  // const [pageNum, setPageNum] = useState(1);
   const { isLoading, error, feeds, hasMore } = useSearchFeed(query, pageNum);
 
   const observer = useRef();
@@ -16,7 +20,8 @@ const Feed = () => {
       if (observer.current) observer.current.disconnect();
       observer.current = new IntersectionObserver((entries) => {
         if (entries[0].isIntersecting && hasMore) {
-          setPageNum((prev) => prev + 1);
+          globalData.dispatch({type: 'updatePageNum', data: pageNum + 1});
+          // setPageNum((prev) => prev + 1);
         }
       });
       if (node) observer.current.observe(node);
@@ -24,16 +29,16 @@ const Feed = () => {
     [isLoading, hasMore]
   );
 
-  const handleSearchChange = (e) => {
-    setQuery(e.target.value);
-    setPageNum(1);
-  };
+  // const handleSearchChange = (e) => {
+  //   setQuery(e.target.value);
+  //   setPageNum(1);
+  // };
 
   return (
     <>
-      <div className="search-bar">
+      {/* <div className="search-bar">
         <input type="text" placeholder="Search users..." onChange={handleSearchChange} value={query} />
-      </div>
+      </div> */}
 
       {feeds.map((feed, i) => {
         if (feeds.length === i + 1) {

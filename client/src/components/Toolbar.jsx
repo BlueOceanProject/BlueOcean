@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Feed from './HomePage/Feed.jsx'
 import Workstation from './Workstation/Workstation.jsx';
 import Viewer from './Viewer.jsx';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Nav, Navbar } from 'react-bootstrap';
-import {LinkContainer} from 'react-router-bootstrap'
+import {LinkContainer} from 'react-router-bootstrap';
+import { GlobalContext } from './App.jsx';
 
 
 const styles ={
@@ -14,23 +15,21 @@ const styles ={
     flexDirection: 'row',
     marginTop: 18
   },
-  right: {
-    margin: 0,
-    top: 0,
-    right: 60,
-    bottom:20,
-    left: 'auto',
-    position: 'fixed',
-  }
 }
 
-const clickHandler = () => {
+const logoutHandler = () => {
   console.log('log out');
 };
 
-
-
 const Toolbar = (props) => {
+
+  const globalData = useContext(GlobalContext);
+  const { query } = globalData.state;
+
+  const handleSearchChange = (e) => {
+    globalData.dispatch({type: 'updateQuery', data: e.target.value});
+    globalData.dispatch({type: 'updatePageNum', data: 1});
+  };
 
   return (
     <div>
@@ -41,20 +40,26 @@ const Toolbar = (props) => {
         </Navbar.Brand>
 
           <div className="mx-auto">
-            <input type="text" placeholder="Search users..." />
+            <input type="text" placeholder="Search users..." onChange={handleSearchChange} value={query} />
           </div>
 
            <LinkContainer to="/">
             <Nav.Link> Feed </Nav.Link>
           </LinkContainer>
 
-          <LinkContainer to="/user">
-            <Nav.Link> Profiles  </Nav.Link>
-          </LinkContainer>
+          {props.username !== ''
+          ?
+          <>
+            <LinkContainer to="/user">
+              <Nav.Link> Profiles  </Nav.Link>
+            </LinkContainer>
 
-          <LinkContainer to="/create" >
-            <Nav.Link className="border-left pl-2 ml-auto"> Workstation  </Nav.Link>
-          </LinkContainer>
+            <LinkContainer to="/create" >
+              <Nav.Link className="border-left pl-2 ml-auto"> Workstation  </Nav.Link>
+            </LinkContainer>
+          </>
+          : ''
+          }
 
         <Nav className="ms-auto">
           {props.username === ''
@@ -75,7 +80,7 @@ const Toolbar = (props) => {
             </LinkContainer>
 
             <LinkContainer to="/feed">
-              <Nav.Link> Logout  </Nav.Link>
+              <Nav.Link onClick={logoutHandler}> Logout  </Nav.Link>
             </LinkContainer>
             </>
           }
