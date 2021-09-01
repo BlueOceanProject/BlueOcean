@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
+import { GlobalContext } from '../App.jsx';
 
 const Export = (props) => {
   // console.log(props.uploadAudio && props.uploadAudio.src);
   const [songName, setSongName] = useState('');
+  const userContext = useContext(GlobalContext);
+  const id = userContext.state.userId;
 
   const exportSong = () => {
     fetch(props.uploadAudio.src)
@@ -16,7 +19,8 @@ const Export = (props) => {
         const formData = new FormData();
         var file = new File([blob], "dummy.mp3")
         formData.append("name", songName);
-        formData.append("file", file)
+        formData.append("file", file);
+        formData.append('id', id);
         return axios.post('http://localhost:3000/upload', formData)
       })
       .then((res) => {

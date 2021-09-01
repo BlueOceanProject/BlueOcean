@@ -5,11 +5,11 @@ const postSignUpUser = (userInfo) => {
   return user.save();
 };
 
-const insertSongForUser = (userName, url, songName) => {
+const insertSongForUser = (id, url, songName) => {
   // console.log('insertSongForUser');
   const now = new Date()
   const song = {
-    userName: userName,
+    userId: id,
     songName: songName,
     url: url,
     published: false,
@@ -17,7 +17,7 @@ const insertSongForUser = (userName, url, songName) => {
   }
 
   Users.update(
-    { userName: userName }, { $push: { songs: song } }, (error, success) => {
+    { userId: id }, { $push: { songs: song } }, (error, success) => {
       if (error) {
         console.log(error);
       } else {
