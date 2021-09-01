@@ -189,6 +189,7 @@ const Workstation = (props) => {
         .then(merged => crunker.export(merged, 'audio/mp3'))
         .then((res) => {
           alert('successfully combined audio!');
+          // console.log(res);
           setCombinedAudio(res.url);
         })
         .catch((err) => {
