@@ -14,9 +14,15 @@ import {
 } from "react-share";
 
 
-const SongListItem = ({ myProfile, song, userImg, signedOut}) => {
+const SongListItem = ({ myProfile, song, userImg, signedOut, userId, userName}) => {
+  const [published, setPublished] = useState(false);
+
   const handleAddToFeed = () => {
-    song.profileImg = userImg
+    song.profileImg = userImg;
+    song.userId = userId;
+    song.userName = userName;
+    setPublished(true);
+    song.published = true;
     axios.post('/feeds', song)
     .then(() => {
       axios.put('/users', song).then(() => {}).catch((err) => {console.error(err.stack)})

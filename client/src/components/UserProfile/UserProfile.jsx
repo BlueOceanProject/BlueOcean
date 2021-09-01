@@ -35,6 +35,9 @@ const UserProfile  = (props) => {
     } else if (props.location.state) {
       getUser(props.location.state.userId);
       setMyProfile(false);
+      if (props.location.state.userId === userId) {
+        setMyProfile(true);
+      }
     } else {
       getUser(userId);
       setMyProfile(true);
@@ -75,6 +78,8 @@ C/O https://placeholder.com/text/lorem-ipsum/#Copy_and_Paste_Lorem_Ipsum </span>
           song={song}
           userImg={userInfo.profileImg}
           signedOut={signedOut}
+          userId={userInfo._id}
+          userName={userInfo.userName}
           />
         })}
         </div>

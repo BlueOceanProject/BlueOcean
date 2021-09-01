@@ -25,7 +25,7 @@ const FeedListItem = ({ feed }) => {
       <div className="feed-list-item-wrapper">
         <img className="user-image" src={feed.profileImg} alt="Avatar"></img>
         <span className="feed-username">
-          <Link to={{ pathname: '/users', state: { userId: `${feed.userId}` } }}>
+          <Link to={{ pathname: '/user', state: { userId: `${feed.userId}` } }}>
             {feed.userName}
           </Link>
         </span>
