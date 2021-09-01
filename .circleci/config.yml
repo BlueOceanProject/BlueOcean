@@ -20,6 +20,9 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Install latest node
+          command: nvm install node --reinstall-packages-from=node
+      - run:
           name: Install dependencies
           command: npm install
       - run:
