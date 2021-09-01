@@ -71,7 +71,7 @@ app.get('/feeds', (req, res) => {
 
 
 app.post('/feeds', (req, res) => {
-  console.log('got to server index', req.body)
+  //console.log('got to server index', req.body)
   addToFeed(req.body, (err, docs) => {
     if (err) {
       res.sendStatus(404);
