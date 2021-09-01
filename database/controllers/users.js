@@ -1,10 +1,33 @@
 const Users = require('../models/users');
 
-const postSignUpUser = (userInfo) => {
-  const user = new Users(userInfo);
-  return user.save();
-};
-
 module.exports = {
-  postSignUpUser,
+  getUserByUserId: (username, cb) => {
+    console.log('at controller', username._id)
+    Users.find({ _id: username._id }).exec((err, docs) => {
+      if (err) {
+        cb(err);
+      } else {
+        cb(null, docs);
+      }
+    })
+  },
+
+  makePublished: (song, cb) => {
+    Users.findOneAndUpdate({
+      userName: song.userName,
+      songName: song.songName,
+      createdAt: song.createdAt,
+    }, {published: true}, null, (err, docs) => {
+      if (err) {
+        cb(err);
+      } else {
+        cb(null, docs);
+      }
+    })
+  },
+  
+  postSignUpUser: (userInfo) => {
+    const user = new Users(userInfo);
+    return user.save();
+  }
 };

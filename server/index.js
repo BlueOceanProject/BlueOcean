@@ -68,6 +68,43 @@ app.get('/feeds', (req, res) => {
   });
 });
 
+const { addToFeed } = require('../database/controllers/feeds');
+
+app.post('/feeds', (req, res) => {
+  console.log('got to server index', req.body)
+  addToFeed(req.body, (err, docs) => {
+    if (err) {
+      res.sendStatus(404);
+    } else {
+      res.sendStatus(200);
+    }
+  });
+});
+
+const { getUserByUserId } = require('../database/controllers/users');
+
+app.get('/user', (req, res) => {
+  getUserByUserId(req.query, (err, docs) => {
+    if(err) {
+      res.sendStatus(404);
+    } else {
+      res.status(200).send(docs);
+    }
+  });
+});
+
+const { makePublished } = require('../database/controllers/users');
+
+app.put('/users', (req, res) => {
+  makePublished(req.body, (err, docs) => {
+    if(err) {
+      res.sendStatus(404);
+    } else {
+      res.status(200).send('updated');
+    }
+  })
+})
+
 app.post('/users', (req, res) => {
   postSignUpUser(req.body)
     .then(() => {
