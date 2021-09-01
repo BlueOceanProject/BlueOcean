@@ -1,4 +1,4 @@
-import React, { useRef, useState, useContext } from 'react';
+import React, { useRef, useState, useContext, useEffect } from 'react';
 import { Card, Form, Button, Container, Row, Col, Alert } from 'react-bootstrap';
 import { Link, useHistory } from 'react-router-dom';
 import { useAuth } from './AuthContext';
@@ -30,6 +30,13 @@ const SignIn = () => {
         setLoading(false);
       });
   };
+
+  useEffect(() => {
+    let isSubscribed = true;
+    return () => {
+      isSubscribed = false;
+    };
+  }, []);
 
   return (
     <Container className="d-flex justify-content-center align-items-center" style={{ minHeight: "100vh" }}>
