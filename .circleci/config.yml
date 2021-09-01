@@ -23,5 +23,22 @@ jobs:
           name: Install dependencies
           command: npm install
       - run:
+          name: Update PATH and Define Environment Variable at Runtime
+          command: |
+            echo 'const REACT_APP_FIREBASE_API_KEY="${REACT_APP_FIREBASE_API_KEY}";' >> authKey.js
+            echo 'const REACT_APP_FIREBASE_AUTH_DOMAIN="${REACT_APP_FIREBASE_AUTH_DOMAIN}";' >> authKey.js
+            echo 'const REACT_APP_FIREBASE_PROJECT_ID="${REACT_APP_FIREBASE_PROJECT_ID}";' >> authKey.js
+            echo 'const REACT_APP_FIREBASE_STORAGE_BUCKET="${REACT_APP_FIREBASE_STORAGE_BUCKET}";' >> authKey.js
+            echo 'const REACT_APP_FIREBASE_MESSAGING_SENDER_ID="${REACT_APP_FIREBASE_MESSAGING_SENDER_ID}";' >> authKey.js
+            echo 'const REACT_APP_FIREBASE_APP_ID="${REACT_APP_FIREBASE_APP_ID}";' >> authKey.js
+            echo 'module.exports = {' >> authKey.js
+            echo '  REACT_APP_FIREBASE_API_KEY,' >> authKey.js
+            echo '  REACT_APP_FIREBASE_AUTH_DOMAIN,' >> authKey.js
+            echo '  REACT_APP_FIREBASE_PROJECT_ID,' >> authKey.js
+            echo '  REACT_APP_FIREBASE_STORAGE_BUCKET,' >> authKey.js
+            echo '  REACT_APP_FIREBASE_MESSAGING_SENDER_ID,' >> authKey.js
+            echo '  REACT_APP_FIREBASE_APP_ID' >> authKey.js
+            echo '}' >> authKey.js
+      - run:
           name: Run Tests
           command: npm run test

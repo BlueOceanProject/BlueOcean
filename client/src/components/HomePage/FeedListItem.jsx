@@ -40,6 +40,9 @@ const FeedListItem = ({ feed }) => {
           Your browser does not support the
           <code>audio</code> element.
         </audio>
+        <Link to={{ pathname: '/create', state: { url: `${feed.url}` } }}>
+          <button>Import</button>
+        </Link>
       </div>
       <div className="social-media-share">
         <FacebookShareButton

@@ -22,6 +22,7 @@ const Workstation = (props) => {
   const [importTrackDuration, setImportTrackDuration] = useState(0);
   const [recordingDuration, setRecordingDuration] = useState(0);
   const [maxDuration, setMaxDuration] = useState(0);
+  const [combinedAudio, setCombinedAudio] = useState(null);
 
   const toggle = () => {
     if (recordState === null || recordState === RecordState.STOP) {
@@ -175,11 +176,26 @@ const Workstation = (props) => {
 
   const onSave = (event) => {
     event.preventDefault();
-    crunker.fetchAudio(recordData, audioFile)
-      .then(buffers => crunker.mergeAudio(buffers))
-      .then(merged => crunker.export(merged, 'audio/mp3'))
-      .then(console.log)
-      .catch(console.log);
+    if (recordData === null && audioFile === '') {
+      alert('must select file or record audio');
+    }
+    else if (recordData === null) {
+      setCombinedAudio(audioFile);
+    } else if (audioFile === '') {
+      setCombinedAudio(recordData);
+    } else {
+      crunker.fetchAudio(recordData, audioFile)
+        .then(buffers => crunker.mergeAudio(buffers))
+        .then(merged => crunker.export(merged, 'audio/mp3'))
+        .then((res) => {
+          alert('successfully combined audio!');
+          // console.log(res);
+          setCombinedAudio(res.url);
+        })
+        .catch((err) => {
+          alert('error in combining audio');
+        });
+    }
   }
 
   return (
@@ -200,8 +216,8 @@ const Workstation = (props) => {
         : <></>}
       </div>
       <div className="seekTime">{secondsToTimeCode(seekTime)}</div>
-      <button type="submit" onClick={onSave}>Save</button>
-      <Export uploadAudio={uploadAudio} />
+      <button type="submit" onClick={onSave}>Combine</button>
+      <Export uploadAudio={combinedAudio} />
     </div>
   )
 }
