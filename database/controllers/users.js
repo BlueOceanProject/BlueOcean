@@ -1,6 +1,5 @@
 const Users = require('../models/users');
 
-
 module.exports = {
   getUserByUserId: (username, cb) => {
     console.log('at controller', username._id)
@@ -25,5 +24,10 @@ module.exports = {
         cb(null, docs);
       }
     })
+  },
+  
+  postSignUpUser: (userInfo) => {
+    const user = new Users(userInfo);
+    return user.save();
   }
 };

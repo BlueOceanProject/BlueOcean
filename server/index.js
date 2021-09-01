@@ -56,6 +56,7 @@ let port = 3000;
 
 require('../database/index');
 const { getLatestFeedsByUser } = require('../database/controllers/feeds');
+const { postSignUpUser } = require('../database/controllers/users');
 
 app.get('/feeds', (req, res) => {
   getLatestFeedsByUser(req.query, (err, docs) => {
@@ -103,6 +104,16 @@ app.put('/users', (req, res) => {
     }
   })
 })
+
+app.post('/users', (req, res) => {
+  postSignUpUser(req.body)
+    .then(() => {
+      res.sendStatus(201);
+    })
+    .catch((err) => {
+      res.status(400).send(err);
+    });
+});
 
 app.listen(port, function () {
   console.log(`listening on port ${port}`);
