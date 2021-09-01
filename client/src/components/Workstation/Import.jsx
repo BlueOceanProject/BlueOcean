@@ -8,7 +8,7 @@ const Import = ({ setUploadAudio, setAudioFile, audioFile }) => {
       const blob = new Blob([data], { type: 'audio/wav'});
       const url = window.URL.createObjectURL(blob);
       setAudioFile(url);
-      setUploadAudio(new Audio(url))
+      setUploadAudio(new Audio(url));
     });
   }
 

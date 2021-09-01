@@ -9,7 +9,7 @@ const Export = (props) => {
   const id = userContext.state.userId;
 
   const exportSong = () => {
-    fetch(props.uploadAudio.src)
+    fetch(props.uploadAudio)
       .then(response => {
         // console.log(response);
         return response.blob();
