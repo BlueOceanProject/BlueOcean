@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import FeedListItem from './FeedListItem.jsx';
 import useSearchFeed from './hooks/useSearchFeeds.jsx';
+import { GlobalContext } from '../App.jsx';
 
 const Feed = () => {
+
   const [query, setQuery] = useState('');
   const [pageNum, setPageNum] = useState(1);
   const { isLoading, error, feeds, hasMore } = useSearchFeed(query, pageNum);
