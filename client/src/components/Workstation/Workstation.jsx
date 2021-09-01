@@ -5,13 +5,8 @@ import Crunker from 'crunker';
 import Import from './Import.jsx';
 import Export from './Export.jsx';
 import css from './workstation.css';
-// import Crunker from 'crunker';
 
-// const crunker = new Crunker({sampleRate: 48000});
-
-
-
-// const crunker = new Crunker({sampleRate: 48000});
+const crunker = new Crunker({sampleRate: 48000});
 
 const Workstation = (props) => {
   const [recordState, setRecordState] = useState(null);
@@ -31,12 +26,19 @@ const Workstation = (props) => {
   const toggle = () => {
     if (recordState === null || recordState === RecordState.STOP) {
       setRecordState(RecordState.START);
-      uploadAudio.load();
-      uploadAudio.play();
+      if (uploadAudio) {
+        uploadAudio.load();
+        uploadAudio.play();
+      }
+      setTimer();
     } else {
       setRecordState(RecordState.STOP);
-      uploadAudio.pause();
-      uploadAudio.load();
+      if (uploadAudio) {
+        uploadAudio.pause();
+        uploadAudio.load();
+      }
+      clearInterval(seekTimer);
+      setSeekTime(0);
     }
   }
 
@@ -56,6 +58,15 @@ const Workstation = (props) => {
     }
   }
 
+  const setTimer = () => {
+    let start = Date.now()
+    setSeekTimer(setInterval(() => {
+      let difference = Date.now() - start;
+      let newSeekTime = seekTime
+      setSeekTime(newSeekTime += (Math.round(difference)) / 1000);
+    }, 10));
+  }
+
   useEffect(() => {
     if (audioFile) {
       let importTrack = new Howl({
@@ -69,27 +80,25 @@ const Workstation = (props) => {
 
   useEffect(() => {
     if (isMasterPlaying) {
-      let start = Date.now()
-      setSeekTimer(setInterval(() => {
-        let difference = Date.now() - start;
-        let newSeekTime = seekTime
-        setSeekTime(newSeekTime += (Math.round(difference)) / 1000);
-      }, 10));
+      setTimer();
     } else {
       clearInterval(seekTimer);
-      if (isThereAudio) {
-        setSeekTime(master.importTrack._sounds[0]._seek)
-      }
     }
   }, [isMasterPlaying]);
 
   useEffect(() => {
-    if (isThereAudio && seekTime >= maxDuration) {
-      masterPause();
-      clearInterval(seekTimer);
-      setSeekTime(maxDuration);
+    if (isThereAudio) {
+      if (seekTime >= maxDuration && recordState !== RecordState.START) {
+        masterPause();
+        clearInterval(seekTimer);
+        setSeekTime(maxDuration);
+      }
     }
   }, [seekTime])
+
+  const secondsToTimeCode = (seconds) => {
+    return `${new Date(seconds * 1000).toISOString().substr(11, 8)}.${Math.round((seekTime % 1) * 100)}`
+  }
 
   const setDurations = () => {
     let importTrackTime = master.importTrack ? master.importTrack.duration() : 0;
@@ -128,6 +137,8 @@ const Workstation = (props) => {
       }
     } else {
       setMasterPlaying(false);
+      if (audioFile) { master.importTrack.seek(seekTime) }
+      if (recordData) { master.recording.seek(seekTime) }
       masterPause();
     }
   }
@@ -135,9 +146,11 @@ const Workstation = (props) => {
   const rewindClick = (event) => {
     if (audioFile) {
       master.importTrack.stop();
+      master.importTrack.load();
     }
-    if (recordAudio) {
+    if (recordData) {
       master.recording.stop();
+      master.recording.load();
     }
     setSeekTime(0);
     clearInterval(seekTimer);
@@ -170,7 +183,7 @@ const Workstation = (props) => {
   }
 
   return (
-    <div>
+    <div className="workstation-ctr">
       <AudioReactRecorder state={recordState} onStop={onStop} />
       <button onClick={toggle}>Record / Stop</button>
       <audio controls src={recordData} onPause={onRecordingPause} onPlay={onRecordingPlay} onEnded={onRecordingEnd} />
@@ -186,7 +199,7 @@ const Workstation = (props) => {
         <div className="no-audio-msg">No audio available. Import a file or make a recording.</div>
         : <></>}
       </div>
-      <div className="seekTime">{seekTime}</div>
+      <div className="seekTime">{secondsToTimeCode(seekTime)}</div>
       <button type="submit" onClick={onSave}>Save</button>
       <Export uploadAudio={uploadAudio} />
     </div>

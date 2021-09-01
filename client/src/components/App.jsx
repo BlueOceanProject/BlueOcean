@@ -7,12 +7,15 @@ import Home from './Home.jsx';
 
 const initialState = {
   userId: '',
+  query: '',
 };
 
 const reducer = (state, action) => {
   switch (action.type) {
     case 'updateUserId':
       return { ...state, userId: action.data}
+    case 'updateQuery':
+      return { ...state, query: action.data}
     default:
       return state;
   }
