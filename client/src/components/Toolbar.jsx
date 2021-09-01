@@ -44,6 +44,18 @@ const Toolbar = (props) => {
             <input type="text" placeholder="Search users..." />
           </div>
 
+           <LinkContainer to="/">
+            <Nav.Link> Feed </Nav.Link>
+          </LinkContainer>
+
+          <LinkContainer to="/user">
+            <Nav.Link> Profiles  </Nav.Link>
+          </LinkContainer>
+
+          <LinkContainer to="/create" >
+            <Nav.Link className="border-left pl-2 ml-auto"> Workstation  </Nav.Link>
+          </LinkContainer>
+
         <Nav className="ms-auto">
           {props.username === ''
           ?
@@ -76,14 +88,3 @@ const Toolbar = (props) => {
 
 export default Toolbar;
 
-/* <LinkContainer to="/">
-  <Nav.Link> Feed </Nav.Link>
-</LinkContainer>
-
-<LinkContainer to="/user">
-  <Nav.Link> Profiles  </Nav.Link>
-</LinkContainer>
-
-  <LinkContainer to="/create" >
-    <Nav.Link className="border-left pl-2 ml-auto"> Workstation  </Nav.Link>
-  </LinkContainer> */
