@@ -80,10 +80,10 @@ app.post('/feeds', (req, res) => {
   });
 });
 
-const { getUserByUserName } = require('../database/controllers/users');
+const { getUserByUserId } = require('../database/controllers/users');
 
 app.get('/user', (req, res) => {
-  getUserByUserName(req.query, (err, docs) => {
+  getUserByUserId(req.query, (err, docs) => {
     if(err) {
       res.sendStatus(404);
     } else {

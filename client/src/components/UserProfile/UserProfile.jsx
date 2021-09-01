@@ -3,16 +3,15 @@ import axios from 'axios';
 import './profile.css';
 import SongListItem from './SongListItem.jsx'
 
-const UserProfile  = () => {
+const UserProfile  = (props) => {
+  //console.log(props.location.state.userName);
   const [myProfile, setMyProfile] = useState(true);
-  const [currentUser, setCurrentUser] = useState('');
+  const [currentUser, setCurrentUser] = useState(props.location.state.userId);
   const [userInfo, setUserInfo] = useState('');
   const [userSongs, setUserSongs] = useState([]);
 
-  const defaultUser = 'camila1994'
-
   const getUser = (username) => {
-    axios.get(`/user?userName=${username}`)
+    axios.get(`/user?_id=${username}`)
     .then((res) => {
       console.log(res.data[0].songs, 'did we get back to profile');
       setCurrentUser(username);
@@ -25,7 +24,7 @@ const UserProfile  = () => {
   }
 
   useEffect(() => {
-    getUser(defaultUser);
+    getUser(currentUser);
   }, [currentUser])
 
     return (
@@ -46,8 +45,6 @@ const UserProfile  = () => {
         })}
         </div>
       </div>
-      <SongListItem />
-    </div>
   )
 }
 

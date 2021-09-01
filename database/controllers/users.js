@@ -2,8 +2,8 @@ const Users = require('../models/users');
 
 
 module.exports = {
-  getUserByUserName: (username, cb) => {
-    Users.find({ userName: username.userName }).exec((err, docs) => {
+  getUserByUserId: (username, cb) => {
+    Users.find({ _id: username.userId }).exec((err, docs) => {
       if (err) {
         cb(err);
       } else {
