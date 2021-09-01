@@ -1,4 +1,5 @@
 import React, { useRef, useState, useContext } from 'react';
+import axios from 'axios';
 import { Card, Form, Button, Container, Row, Col, Alert } from 'react-bootstrap';
 import { Link, useHistory } from 'react-router-dom';
 import { useAuth } from './AuthContext';
@@ -30,6 +31,17 @@ const SignUp = () => {
     setLoading(true);
 
     signUp(emailRef.current.value, passwordRef.current.value)
+      .then((userObj) => {
+        const data = {
+          _id: userObj.user.uid,
+          userName: usernameRef.current.value,
+          firstName: firstNameRef.current.value,
+          lastName: lastNameRef.current.value,
+          email: emailRef.current.value,
+          phoneNumber: phoneNumberRef.current.value
+        };
+        return axios.post('http://localhost:3000/users', data)
+      })
       .then(() => {
         history.push('/');
       })

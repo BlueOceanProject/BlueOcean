@@ -56,6 +56,7 @@ let port = 3000;
 
 require('../database/index');
 const { getLatestFeedsByUser } = require('../database/controllers/feeds');
+const { postSignUpUser } = require('../database/controllers/users');
 
 app.get('/feeds', (req, res) => {
   getLatestFeedsByUser(req.query, (err, docs) => {
@@ -65,6 +66,53 @@ app.get('/feeds', (req, res) => {
       res.status(200).send(docs);
     }
   });
+});
+
+const { addToFeed } = require('../database/controllers/feeds');
+
+app.post('/feeds', (req, res) => {
+  console.log('got to server index', req.body)
+  addToFeed(req.body, (err, docs) => {
+    if (err) {
+      res.sendStatus(404);
+    } else {
+      res.sendStatus(200);
+    }
+  });
+});
+
+const { getUserByUserId } = require('../database/controllers/users');
+
+app.get('/user', (req, res) => {
+  getUserByUserId(req.query, (err, docs) => {
+    if(err) {
+      res.sendStatus(404);
+    } else {
+      res.status(200).send(docs);
+    }
+  });
+});
+
+const { makePublished } = require('../database/controllers/users');
+
+app.put('/users', (req, res) => {
+  makePublished(req.body, (err, docs) => {
+    if(err) {
+      res.sendStatus(404);
+    } else {
+      res.status(200).send('updated');
+    }
+  })
+})
+
+app.post('/users', (req, res) => {
+  postSignUpUser(req.body)
+    .then(() => {
+      res.sendStatus(201);
+    })
+    .catch((err) => {
+      res.status(400).send(err);
+    });
 });
 
 app.listen(port, function () {
