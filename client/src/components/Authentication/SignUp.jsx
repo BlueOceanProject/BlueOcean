@@ -40,7 +40,7 @@ const SignUp = () => {
           email: emailRef.current.value,
           phoneNumber: phoneNumberRef.current.value
         };
-        return axios.post('http://localhost:3000/users', data)
+        return axios.post('/users', data);
       })
       .then(() => {
         history.push('/');
@@ -88,7 +88,7 @@ const SignUp = () => {
               </Row>
               <Form.Group className="mb-2" controlId="phoneNumber">
                 <Form.Label>Phone number</Form.Label>
-                <Form.Control type="text" placeholder="Enter phone number" ref={phoneNumberRef} />
+                <Form.Control type="text" placeholder="(123)-456-7890" ref={phoneNumberRef} />
               </Form.Group>
               <Form.Group className="mb-2" controlId="email">
                 <Form.Label>Email address <strong style={{ color: "red" }}>*</strong></Form.Label>

@@ -3,9 +3,13 @@ import Feed from './HomePage/Feed.jsx'
 import Workstation from './Workstation/Workstation.jsx';
 import Viewer from './Viewer.jsx';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Nav, Navbar } from 'react-bootstrap';
+import { Nav, Navbar, Button } from 'react-bootstrap';
 import {LinkContainer} from 'react-router-bootstrap';
 import { GlobalContext } from './App.jsx';
+import { useAuth } from './Authentication/AuthContext';
+import { useHistory } from 'react-router-dom';
+
+import axios from 'axios';
 
 
 const styles ={
@@ -17,21 +21,44 @@ const styles ={
   },
 }
 
-const logoutHandler = () => {
-  console.log('log out');
-};
-
 const Toolbar = (props) => {
 
   const globalData = useContext(GlobalContext);
   const { query } = globalData.state;
   const { userId } = globalData.state;
-  const tempUsername = userId;
-
+  const [username, setUsername] = useState('');
+  const { signout } = useAuth();
+  const history = useHistory();
 
   const handleSearchChange = (e) => {
     globalData.dispatch({type: 'updateQuery', data: e.target.value});
   };
+
+  const logoutHandler = (e) => {
+    e.preventDefault();
+    signout()
+      .then(() => {
+        history.push('/');
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
+  useEffect(() => {
+    if (userId) {
+      axios.get(`/username/${userId}`)
+        .then((res) => {
+          console.log(res);
+          setUsername(res.data);
+        })
+        .catch((err) => {
+          console.error(err);
+        })
+    } else {
+      setUsername('');
+    }
+  }, [userId]);
 
   return (
     <div>
@@ -49,7 +76,7 @@ const Toolbar = (props) => {
             <Nav.Link> Feed </Nav.Link>
           </LinkContainer>
 
-          {tempUsername !== ''
+          {userId !== ''
           ?
           <>
             <LinkContainer to="/user">
@@ -64,7 +91,7 @@ const Toolbar = (props) => {
           }
 
         <Nav className="ms-auto">
-          {tempUsername === ''
+          {userId === ''
           ?
           <>
             <LinkContainer to="/signin">
@@ -78,13 +105,11 @@ const Toolbar = (props) => {
           :
           <>
             <LinkContainer to="/user">
-              <Nav.Link> {tempUsername}  </Nav.Link>
+              <Nav.Link> { username }  </Nav.Link>
             </LinkContainer>
 
-            <LinkContainer to="/feed">
-              <Nav.Link onClick={logoutHandler}> Logout  </Nav.Link>
-            </LinkContainer>
-            </>
+            <Button variant="link" onClick={logoutHandler}>Log out</Button>
+          </>
           }
 
         </Nav>
