@@ -20,6 +20,9 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Install nvm
+          command: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+      - run:
           name: Install latest node
           command: nvm install node --reinstall-packages-from=node
       - run:
