@@ -31,6 +31,10 @@ module.exports = {
     return user.save();
   },
 
+  getUsernameById: (userId) => {
+    return Users.findOne({ '_id': userId});
+  },
+
   insertSongForUser: (id, url, songName) => {
     // console.log('insertSongForUser');
     const now = new Date()

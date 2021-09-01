@@ -57,7 +57,6 @@ let port = 3000;
 
 require('../database/index');
 const { getLatestFeedsByUser } = require('../database/controllers/feeds');
-const { postSignUpUser } = require('../database/controllers/users');
 
 app.get('/feeds', (req, res) => {
   getLatestFeedsByUser(req.query, (err, docs) => {
@@ -106,10 +105,22 @@ app.put('/users', (req, res) => {
   })
 })
 
+const { postSignUpUser, getUsernameById } = require('../database/controllers/users');
+
 app.post('/users', (req, res) => {
   postSignUpUser(req.body)
     .then(() => {
       res.sendStatus(201);
+    })
+    .catch((err) => {
+      res.status(400).send(err);
+    });
+});
+
+app.get('/username/:userId', (req, res) => {
+  getUsernameById(req.params.userId)
+    .then((result) => {
+      res.status(200).send(result.userName);
     })
     .catch((err) => {
       res.status(400).send(err);
