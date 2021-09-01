@@ -32,7 +32,7 @@ const Export = (props) => {
   }
 
   return (
-    <div>
+    <div className="export">
         <form>
           <label>Song name:
             <input type="text" name="name" onChange={(e) => setSongName(e.target.value)}/>
