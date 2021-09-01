@@ -95,7 +95,7 @@ app.get('/user', (req, res) => {
 
 
 app.put('/users', (req, res) => {
-console.log('index req.body', req.body);
+//console.log('index req.body', req.body);
   makePublished(req.body, (err, docs) => {
     if(err) {
       res.sendStatus(404);

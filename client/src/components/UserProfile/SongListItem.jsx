@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './profile.css';
 import Button from 'react-bootstrap/Button';
+
 import {
   FacebookIcon,
   FacebookShareButton,
@@ -44,6 +46,10 @@ const SongListItem = ({ myProfile, song, userImg, signedOut, userId, userName}) 
               <code>audio</code> element.
             </audio>
             {myProfile && !song.published ? <Button variant="outline-dark" onClick={handleAddToFeed}>Publish</Button> : null}
+            <Link to={{ pathname: '/create', state: { url: `${song.url}` } }}>
+          <button>Import</button>
+        </Link>
+
         </div>
         <FacebookShareButton
         url="https://www.google.com"
