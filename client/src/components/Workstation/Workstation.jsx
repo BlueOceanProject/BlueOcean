@@ -55,12 +55,6 @@ const Workstation = (props) => {
     setRecordAudio(new Audio(audioData.url));
   }
 
-  const onPlayerChange = (event) => {
-    if (true) {
-
-    }
-  }
-
   const setTimer = () => {
     let start = Date.now()
     setSeekTimer(setInterval(() => {
@@ -69,6 +63,13 @@ const Workstation = (props) => {
       setSeekTime(newSeekTime += (Math.round(difference)) / 1000);
     }, 10));
   }
+
+  useEffect(() => {
+    if (props.location.state) {
+      setAudioFile(props.location.state.url);
+      setUploadAudio(new Audio(props.location.state.url));
+    }
+  }, [])
 
   useEffect(() => {
     if (audioFile) {
