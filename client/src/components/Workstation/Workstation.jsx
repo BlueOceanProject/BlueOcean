@@ -6,7 +6,7 @@ import Import from './Import.jsx';
 import Export from './Export.jsx';
 import css from './workstation.css';
 
-// const crunker = new Crunker({sampleRate: 48000});
+const crunker = new Crunker({sampleRate: 48000});
 
 const Workstation = (props) => {
   const [recordState, setRecordState] = useState(null);
@@ -27,12 +27,19 @@ const Workstation = (props) => {
   const toggle = () => {
     if (recordState === null || recordState === RecordState.STOP) {
       setRecordState(RecordState.START);
-      uploadAudio.load();
-      uploadAudio.play();
+      if (uploadAudio) {
+        uploadAudio.load();
+        uploadAudio.play();
+      }
+      setTimer();
     } else {
       setRecordState(RecordState.STOP);
-      uploadAudio.pause();
-      uploadAudio.load();
+      if (uploadAudio) {
+        uploadAudio.pause();
+        uploadAudio.load();
+      }
+      clearInterval(seekTimer);
+      setSeekTime(0);
     }
   }
 
@@ -52,6 +59,15 @@ const Workstation = (props) => {
     }
   }
 
+  const setTimer = () => {
+    let start = Date.now()
+    setSeekTimer(setInterval(() => {
+      let difference = Date.now() - start;
+      let newSeekTime = seekTime
+      setSeekTime(newSeekTime += (Math.round(difference)) / 1000);
+    }, 10));
+  }
+
   useEffect(() => {
     if (audioFile) {
       let importTrack = new Howl({
@@ -65,12 +81,7 @@ const Workstation = (props) => {
 
   useEffect(() => {
     if (isMasterPlaying) {
-      let start = Date.now()
-      setSeekTimer(setInterval(() => {
-        let difference = Date.now() - start;
-        let newSeekTime = seekTime
-        setSeekTime(newSeekTime += (Math.round(difference)) / 1000);
-      }, 10));
+      setTimer();
     } else {
       clearInterval(seekTimer);
     }
@@ -78,7 +89,7 @@ const Workstation = (props) => {
 
   useEffect(() => {
     if (isThereAudio) {
-      if (seekTime >= maxDuration) {
+      if (seekTime >= maxDuration && recordState !== RecordState.START) {
         masterPause();
         clearInterval(seekTimer);
         setSeekTime(maxDuration);
