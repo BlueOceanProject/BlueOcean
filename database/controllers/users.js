@@ -13,6 +13,7 @@ module.exports = {
   },
 
   makePublished: (song, cb) => {
+    console.log('in user put controller', song);
     Users.findOneAndUpdate({
       userName: song.userName,
       "songs._id": song._id

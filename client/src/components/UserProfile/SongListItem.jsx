@@ -27,11 +27,13 @@ const SongListItem = ({ myProfile, song, userImg, signedOut, userId, userName}) 
     setPublished(true);
     song.published = true;
     axios.post('/feeds', song)
-    .then(() => {
-      axios.put('/users', song).then(() => {}).catch((err) => {console.error(err.stack)})
-    })
+    .then(() => {})
     .catch((err) => {
       console.error(err.stack)
+    })
+    axios.put('/users', song)
+    .then(() => {})
+    .catch((err) => {console.error(err.stack)
     })
   }
   return (
