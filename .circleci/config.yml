@@ -16,18 +16,9 @@ workflows:
 jobs:
   test:
     docker:
-      - image: cimg/node:10.24.1
+      - image: cimg/node:16.8.0
     steps:
       - checkout
-      - run:
-          name: Install nvm
-          command: |
-            curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
-            echo 'export NVM_DIR=$HOME/.nvm' >> $BASH_ENV
-            echo 'source $NVM_DIR/nvm.sh' >> $BASH_ENV
-      - run:
-          name: Install latest node
-          command: nvm install node --reinstall-packages-from=node
       - run:
           name: Install dependencies
           command: npm install
@@ -48,9 +39,6 @@ jobs:
             echo '  REACT_APP_FIREBASE_MESSAGING_SENDER_ID,' >> authKey.js
             echo '  REACT_APP_FIREBASE_APP_ID' >> authKey.js
             echo '}' >> authKey.js
-      - run: 
-         name: check node version
-         command: node -v
       - run:
           name: Run Tests
           command: npm run test
