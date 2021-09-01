@@ -18,8 +18,9 @@ const getLatestFeedsByUser = (params, callback) => {
 };
 
 const addToFeed = (params, cb) => {
+  console.log('in feed post controller', params);
   var date = new Date();
-  const publish = new Feeds({
+  let publish = new Feeds({
     userId: params.userId,
     userName: params.userName,
     songName: params.songName,

@@ -13,10 +13,11 @@ module.exports = {
   },
 
   makePublished: (song, cb) => {
+    console.log('in user put controller', song);
     Users.findOneAndUpdate({
       userName: song.userName,
-      createdAt: song.createdAt,
-    }, {published: true}, null, (err, docs) => {
+      "songs._id": song._id
+  }, {$set: {"songs.$.published": true}}, null, (err, docs) => {
       if (err) {
         cb(err);
       } else {
