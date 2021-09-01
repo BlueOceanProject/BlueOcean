@@ -19,7 +19,7 @@ const url = 'https://www.google.com';
 const FeedListItem = ({ feed }) => {
   const globalData = useContext(GlobalContext);
   const { userId } = globalData.state;
-  // const userId = "test";
+
   return (
     <div className="feed-list">
       <div className="feed-list-item-wrapper">
