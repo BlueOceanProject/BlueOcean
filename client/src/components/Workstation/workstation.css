@@ -1,5 +1,5 @@
 html {
-  background-color: rgba(33,37,41,1);
+  background-color: var(--clr-primary);
 }
 
 .workstation-ctr {
