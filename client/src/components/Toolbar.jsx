@@ -14,10 +14,6 @@ import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
 
-// light green: #d4fce4
-// navy: #2a2b5c
-// dark green rgb(12, 100, 108)
-// more grey green #a9cac2
 
 const styles ={
   row: {
