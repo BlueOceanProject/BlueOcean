@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { GlobalContext } from '../App.jsx';
+import Button from 'react-bootstrap/Button';
 import {
   FacebookIcon,
   FacebookShareButton,
@@ -23,7 +24,7 @@ const FeedListItem = ({ feed }) => {
   return (
     <div className="feed-list">
       <div className="feed-list-item-wrapper">
-        <img className="user-image" src={feed.profileImg} alt="Avatar"></img>
+        <img className="user-image" src={feed.profileImg ? feed.profileImg : "default.png"} alt="Avatar"></img>
         <span className="feed-username">
           <Link to={{ pathname: '/user', state: { userId: `${feed.userId}` } }}>
             {feed.userName}
@@ -40,9 +41,12 @@ const FeedListItem = ({ feed }) => {
           Your browser does not support the
           <code>audio</code> element.
         </audio>
-        <Link to={{ pathname: '/create', state: { url: `${feed.url}` } }}>
-          <button>Import</button>
-        </Link>
+        {
+          userId && <Link to={{ pathname: '/create', state: { url: `${feed.url}` } }}>
+            <Button variant="outline-dark">Import</Button>
+          </Link>
+        }
+
       </div>
       <div className="social-media-share">
         <FacebookShareButton
