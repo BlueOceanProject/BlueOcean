@@ -3,13 +3,11 @@ const multer = require('multer');
 const multerS3 = require('multer-s3');
 const AWS = require('aws-sdk');
 const bodyParser = require('body-parser');
-const cors = require('cors');
 const { ACCESS_KEY, SECRET_KEY } = require('../key.js')
 const { insertSongForUser } = require('../database/controllers/users.js')
 
 let app = express();
 
-app.use(cors());
 app.use(express.static(__dirname + '/../client/dist'));
 app.use(express.json());
 app.use(bodyParser.json());

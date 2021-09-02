@@ -4,7 +4,7 @@ import { Howl, Howler } from 'howler';
 import Crunker from 'crunker';
 import Import from './Import.jsx';
 import Export from './Export.jsx';
-import css from './workstation.css';
+import './workstation.css';
 
 if(typeof AudioContext !== "undefined" ) {
   const crunker = new Crunker({sampleRate: 48000});
@@ -203,22 +203,32 @@ const Workstation = (props) => {
 
   return (
     <div className="workstation-ctr">
-      <AudioReactRecorder state={recordState} onStop={onStop} />
-      <button onClick={toggle}>Record / Stop</button>
-      <audio controls src={recordData} onPause={onRecordingPause} onPlay={onRecordingPlay} onEnded={onRecordingEnd} />
+      <div className="recorder-ctr">
+        <AudioReactRecorder state={recordState} onStop={onStop} />
+        <button onClick={toggle}>Record / Stop</button>
+        <audio controls src={recordData} onPause={onRecordingPause} onPlay={onRecordingPlay} onEnded={onRecordingEnd} />
+      </div>
       <Import setUploadAudio={setUploadAudio}  setAudioFile={setAudioFile} audioFile={audioFile} />
       <div className="master-player-ctr">
-        <button className="master-rewind" onClick={rewindClick}>&#9194;</button>
-        {isMasterPlaying ?
-        <button className="master-pause" onClick={masterPlayClick}>&#9613;&#9613;</button>
-        : <button className="master-play" onClick={masterPlayClick}>&#9658;</button>
-        }
-        <button className="master-ff" onClick={ffClick}>&#9193;</button>
+        <div className="master-player-controls">
+          <button className="master-rewind" onClick={rewindClick}>&#9194;</button>
+          {isMasterPlaying ?
+          <button className="master-pause-btn" onClick={masterPlayClick}>
+            <div className="master-pause-icon"></div>
+          </button>
+          : <button className="master-play-btn" onClick={masterPlayClick}>
+            <div className="master-play-icon"></div>
+          </button>
+          }
+          <button className="master-ff" onClick={ffClick}>&#9193;</button>
+        </div>
         {!audioFile || !recordAudio ?
         <div className="no-audio-msg">No audio available. Import a file or make a recording.</div>
         : <></>}
+        <div className="seekTime-ctr">
+          <div className="seekTime">{secondsToTimeCode(seekTime)}</div>
+        </div>
       </div>
-      <div className="seekTime">{secondsToTimeCode(seekTime)}</div>
       <button type="submit" onClick={onSave}>Combine</button>
       <Export uploadAudio={combinedAudio} />
     </div>

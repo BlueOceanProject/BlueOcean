@@ -13,7 +13,7 @@ const Import = ({ setUploadAudio, setAudioFile, audioFile }) => {
   }
 
   return (
-    <div className="import">
+    <div className="import-ctr">
       <input id="fileItem" type="file" title="Upload" onChange={(e) => (uploadChange(e))}/>
       <audio id="import-audio-el" controls src={audioFile} />
     </div>

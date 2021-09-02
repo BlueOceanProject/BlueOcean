@@ -1,0 +1,45 @@
+html {
+  background-color: #636363;
+}
+
+.workstation-ctr {
+  background-color: #636363;
+  color: #afd2e0;
+}
+
+.recorder-ctr {
+  padding: 25px;
+  width: 80%;
+  display: flex;
+  flex-flow: column;
+}
+
+.master-player-ctr {
+  border: 3px solid #000000;
+  border-radius: 15px;
+  padding: 15px;
+  width: 30%;
+  height: 20%;
+}
+
+.master-player-controls {
+  display: flex;
+  justify-content: center;
+}
+
+.master-play-icon {
+  width: 32px;
+  height: 48px;
+  border-top: 24px solid transparent;
+  border-left: 36px solid #000;
+  border-bottom: 24px solid transparent;
+  margin: 8px 24px;
+}
+
+.master-pause-icon {
+  width: 36px;
+  height: 48px;
+  border-right: 12px solid #000;
+  border-left: 12px solid #000;
+  margin: 8px 24px;
+}
