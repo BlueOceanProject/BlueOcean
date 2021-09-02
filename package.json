@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "react-dev": "webpack --config webpack.config.js --watch",
+    "react-dev": "webpack --config webpack.dev-config.js --watch",
+    "react-prod": "webpack --config webpack.prod-config.js --watch",
     "server-dev": "nodemon server/index.js",
     "test": "jest",
     "start": "nodemon server/index.js"
@@ -21,6 +22,7 @@
     "nodemon": "^2.0.12",
     "source-map-loader": "^3.0.0",
     "webpack": "^5.51.1",
+    "webpack-bundle-analyzer": "^4.4.2",
     "webpack-cli": "^4.8.0"
   },
   "dependencies": {

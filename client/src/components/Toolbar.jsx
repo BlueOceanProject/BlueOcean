@@ -3,7 +3,7 @@ import './toolbar.css';
 import Feed from './HomePage/Feed.jsx'
 import Workstation from './Workstation/Workstation.jsx';
 import Viewer from './Viewer.jsx';
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 import 'font-awesome/css/font-awesome.min.css';
 import {LinkContainer} from 'react-router-bootstrap';
 import "@fontsource/staatliches/index.css"
