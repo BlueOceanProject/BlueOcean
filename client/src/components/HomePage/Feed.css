@@ -4,16 +4,17 @@
   overflow-y: scroll;
 }
 
-.feed-list {
+.feed-list-item {
   width: 80%;
-  border: 5px solid papayawhip;
-  padding: 50px;
+  border-radius: 20px;
+  padding: 40px;
   margin: 20px;
+  background-color: var(--clr-three);
 }
 
 .feed-list-item-wrapper {
   display: flex;
-  justify-content: space-between;
+  align-items: center;
 }
 
 .user-image {
@@ -22,8 +23,19 @@
   height: 64px;
 }
 
-.search-bar {
-  border-radius: 30%;
+.feed-username {
+  display: flex;
+  width: 10%;
+}
+
+.feed-songname {
+  display: flex;
+  width: 20%;
+}
+
+.audio-player {
+  display: flex;
+  width: 30%;
 }
 
 .social-media-share {
