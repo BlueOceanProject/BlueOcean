@@ -10,6 +10,16 @@ const Export = (props) => {
   const id = userContext.state.userId;
 
   const exportSong = () => {
+    // console.log(456)
+    // console.log(props.uploadAudio);
+    if (props.uploadAudio === null) {
+      alert("No file selected");
+      return;
+    }
+    if (!songName.trim()) {
+      alert("Please give the song name");
+      return;
+    }
     fetch(props.uploadAudio)
       .then(response => {
         // console.log(response);

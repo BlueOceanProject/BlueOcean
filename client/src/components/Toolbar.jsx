@@ -20,7 +20,7 @@ const styles ={
     display: 'flex',
     flex: 1,
     flexDirection: 'row',
-    marginTop: 18
+    marginTop: 18,
   },
   logo: {
     fontFamily: "Staatliches",
@@ -31,6 +31,8 @@ const styles ={
   },
   background: {
     backgroundColor: "#2a2b5c",
+    borderBottom: "2px solid var(--clr-border)",
+
   },
   image: {
     height:"80px",

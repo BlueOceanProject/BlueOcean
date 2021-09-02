@@ -5,6 +5,7 @@ const AWS = require('aws-sdk');
 const bodyParser = require('body-parser');
 const { ACCESS_KEY, SECRET_KEY } = require('../key.js')
 const { insertSongForUser } = require('../database/controllers/users.js')
+const path = require('path');
 
 let app = express();
 
@@ -47,7 +48,7 @@ var upload = multer({
 
 app.post('/upload', upload.any(), function (req, res, next) {
   // console.log(req.files[0].location);
-  // console.log(req);
+  console.log(req);
   insertSongForUser(req.body.id, req.files[0].location, req.body.name);
   res.send("Uploaded!");
 });
@@ -149,6 +150,14 @@ app.put('/updateProfileImage', (req, res) => {
       res.status(400).send(err);
     });
 });
+
+app.get('/*', function(req, res) {
+  res.sendFile(path.join(__dirname, '/../client/dist/index.html'), function(err) {
+    if (err) {
+      res.status(500).send(err)
+    }
+  })
+})
 
 app.listen(port, function () {
   console.log(`listening on port ${port}`);

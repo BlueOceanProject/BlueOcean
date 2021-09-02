@@ -14,6 +14,7 @@
 
 .nav {
   background-color: #2a2b5c;
+  border-bottom: 2px solid var(--clr-secondary);
 }
 
 .navbar-brand>img {
