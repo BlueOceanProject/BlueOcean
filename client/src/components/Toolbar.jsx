@@ -1,11 +1,17 @@
 import React, { useState, useEffect, useContext } from 'react';
+import './toolbar.css';
 import Feed from './HomePage/Feed.jsx'
 import Workstation from './Workstation/Workstation.jsx';
 import Viewer from './Viewer.jsx';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'font-awesome/css/font-awesome.min.css';
 import { Nav, Navbar } from 'react-bootstrap';
 import {LinkContainer} from 'react-router-bootstrap';
 import { GlobalContext } from './App.jsx';
+import "@fontsource/staatliches"
+
+//green: #d4fce4
+//navy: #2a2b5c
 
 
 const styles ={
@@ -15,6 +21,14 @@ const styles ={
     flexDirection: 'row',
     marginTop: 18
   },
+  logo: {
+    fontFamily: "Staatliches",
+    color: '#d4fce4',
+    fontSize: '50px'
+  },
+  background: {
+    backgroundColor: "#2a2b5c",
+  }
 }
 
 const logoutHandler = () => {
@@ -29,16 +43,17 @@ const Toolbar = (props) => {
   const tempUsername = userId;
 
 
+
   const handleSearchChange = (e) => {
     globalData.dispatch({type: 'updateQuery', data: e.target.value});
   };
 
   return (
     <div>
-      <Navbar bg="dark" variant="dark">
-        <Navbar.Brand>
-          <img src={"https://i.imgur.com/rRcUk5O.png"} height="50" />{' '}
-          Harmony
+      <Navbar style={styles.background}>
+        <Navbar.Brand style={styles.logo}>
+          <img src={"https://i.imgur.com/B5cQ49u.png"} height="50" />{' '}
+            Harmony
         </Navbar.Brand>
 
           <div className="mx-auto">
@@ -53,7 +68,7 @@ const Toolbar = (props) => {
           ?
           <>
             <LinkContainer to="/user">
-              <Nav.Link> Profiles  </Nav.Link>
+              <Nav.Link> <i class="fa fa-user"></i> Profiles  </Nav.Link>
             </LinkContainer>
 
             <LinkContainer to="/create" >
