@@ -6,9 +6,7 @@ import Import from './Import.jsx';
 import Export from './Export.jsx';
 import './workstation.css';
 
-if(typeof AudioContext !== "undefined" ) {
-  const crunker = new Crunker({sampleRate: 48000});
-}
+var crunker;
 
 const Workstation = (props) => {
   const [recordState, setRecordState] = useState(null);
@@ -69,6 +67,7 @@ const Workstation = (props) => {
       setAudioFile(props.location.state.url);
       setUploadAudio(new Audio(props.location.state.url));
     }
+    crunker = new Crunker({sampleRate: 48000});
   }, [])
 
   useEffect(() => {
@@ -235,7 +234,7 @@ const Workstation = (props) => {
         </div>
       </div>
       <button className="combine-btn" type="submit" onClick={onSave}>Combine</button>
-      <Export uploadAudio={combinedAudio} />
+      <Export uploadAudio={combinedAudio === null ? (uploadAudio ? uploadAudio.src : null) : combinedAudio} />
     </div>
   )
 }
