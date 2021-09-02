@@ -240,7 +240,7 @@ const Workstation = (props) => {
         </div>
       </div>
       <button className="combine-btn" type="submit" onClick={onSave}>Combine</button>
-      <Export uploadAudio={combinedAudio === null ? (uploadAudio ? uploadAudio.src : null) : combinedAudio} />
+      <Export uploadAudio={combinedAudio || (uploadAudio && uploadAudio.src) || null} />
     </div>
   )
 }

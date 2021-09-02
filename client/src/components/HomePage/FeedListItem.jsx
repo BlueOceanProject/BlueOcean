@@ -22,7 +22,7 @@ const FeedListItem = ({ feed }) => {
   const { userId } = globalData.state;
 
   return (
-    <div className="feed-list">
+    <div className="feed-list-item">
       <div className="feed-list-item-wrapper">
         <img className="user-image" src={feed.profileImg ? feed.profileImg : "default.png"} alt="Avatar"></img>
         <span className="feed-username">
@@ -37,13 +37,14 @@ const FeedListItem = ({ feed }) => {
           controls
           controlsList={userId ? "" : "nodownload"}
           src={feed.url}
+          className="audio-player"
         >
           Your browser does not support the
           <code>audio</code> element.
         </audio>
         {
           userId && <Link to={{ pathname: '/create', state: { url: `${feed.url}` } }}>
-            <Button variant="outline-dark">Import</Button>
+            <Button variant="outline-light" className="button-profile">Import</Button>
           </Link>
         }
 
