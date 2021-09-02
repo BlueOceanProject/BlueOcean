@@ -122,8 +122,6 @@ app.put('/users', (req, res) => {
   })
 })
 
-const { getUsernameById } = require('../database/controllers/users');
-
 app.post('/users', (req, res) => {
   postSignUpUser(req.body)
     .then((result) => {

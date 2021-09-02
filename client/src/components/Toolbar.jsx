@@ -6,7 +6,7 @@ import Viewer from './Viewer.jsx';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'font-awesome/css/font-awesome.min.css';
 import {LinkContainer} from 'react-router-bootstrap';
-import "@fontsource/staatliches"
+import "@fontsource/staatliches/index.css"
 import { Nav, Navbar, Button } from 'react-bootstrap';
 import { GlobalContext } from './App.jsx';
 import { useAuth } from './Authentication/AuthContext';
