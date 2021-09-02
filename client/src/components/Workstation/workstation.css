@@ -29,6 +29,7 @@ html {
   flex-flow: column;
   justify-content: center;
   margin: auto;
+  margin-left: 31%;
 }
 
 .record-btn {
@@ -37,7 +38,6 @@ html {
   border: 12px solid #000;
   border-radius: 32px;
   background-color: #c90000;
-  margin: auto;
 }
 
 .record-label {
@@ -53,6 +53,8 @@ html {
   display: flex;
   justify-content: center;
   padding: 25px;
+  margin-left: 6%;
+  font-size: 20px;
 }
 
 #fileItem {
@@ -125,7 +127,11 @@ html {
   margin: auto;
   display: flex;
   flex-flow: column;
-  padding: 25px;
+  padding: 35px;
+}
+.export-form-label {
+  font-size: 20px;
+  padding: 5px;
 }
 
 .export-btn {
