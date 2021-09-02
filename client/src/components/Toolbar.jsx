@@ -72,7 +72,7 @@ const Toolbar = (props) => {
             </LinkContainer>
 
             <LinkContainer to="/create" >
-              <Nav.Link className="border-left pl-2 ml-auto"> Workstation  </Nav.Link>
+              <Nav.Link className="border-left pl-2 ml-auto"> <i class="fa fa-user"></i> Workstation  </Nav.Link>
             </LinkContainer>
           </>
           : ''
@@ -83,21 +83,21 @@ const Toolbar = (props) => {
           ?
           <>
             <LinkContainer to="/signin">
-                <Nav.Link> Log in  </Nav.Link>
+                <Nav.Link> <i class="fa fa-user"></i> Log in  </Nav.Link>
             </LinkContainer>
 
             <LinkContainer to="/signup">
-              <Nav.Link> Sign up  </Nav.Link>
+              <Nav.Link> <i class="fa fa-user"></i> Sign up  </Nav.Link>
             </LinkContainer>
           </>
           :
           <>
             <LinkContainer to="/user">
-              <Nav.Link> {tempUsername}  </Nav.Link>
+              <Nav.Link> <i class="fa fa-user"></i> {tempUsername}  </Nav.Link>
             </LinkContainer>
 
             <LinkContainer to="/feed">
-              <Nav.Link onClick={logoutHandler}> Logout  </Nav.Link>
+              <Nav.Link onClick={logoutHandler}>  <i class="fa fa-user"></i> Logout  </Nav.Link>
             </LinkContainer>
             </>
           }
