@@ -31,7 +31,6 @@ const Feed = () => {
 
   return (
     <div className="feeds-overlay">
-
       {feeds.map((feed, i) => {
         if (feeds.length === i + 1) {
           return (

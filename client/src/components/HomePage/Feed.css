@@ -4,18 +4,17 @@
   overflow-y: scroll;
 }
 
-.feed-list {
+.feed-list-item {
   width: 80%;
   border-radius: 20px;
-  padding: 50px;
+  padding: 40px;
   margin: 20px;
   background-color: var(--clr-three);
-  align-items: center;
 }
 
 .feed-list-item-wrapper {
   display: flex;
-  /* justify-content: space-between; */
+  align-items: center;
 }
 
 .user-image {

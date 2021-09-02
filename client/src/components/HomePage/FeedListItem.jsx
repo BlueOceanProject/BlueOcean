@@ -22,7 +22,7 @@ const FeedListItem = ({ feed }) => {
   const { userId } = globalData.state;
 
   return (
-    <div className="feed-list">
+    <div className="feed-list-item">
       <div className="feed-list-item-wrapper">
         <img className="user-image" src={feed.profileImg ? feed.profileImg : "default.png"} alt="Avatar"></img>
         <span className="feed-username">
