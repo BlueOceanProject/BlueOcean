@@ -48,7 +48,7 @@ var upload = multer({
 
 app.post('/upload', upload.any(), function (req, res, next) {
   // console.log(req.files[0].location);
-  // console.log(req);
+  console.log(req);
   insertSongForUser(req.body.id, req.files[0].location, req.body.name);
   res.send("Uploaded!");
 });
