@@ -28,6 +28,14 @@
   width: 10%;
 }
 
+.username-link {
+  color: #FFFFFF;
+}
+
+.username-link:hover {
+  color: var(--clr-secondary);
+}
+
 .feed-songname {
   display: flex;
   width: 20%;
