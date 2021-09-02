@@ -1,5 +1,6 @@
 .feeds-overlay {
-  height: 1000px;
+  margin-top: 30px;
+  height: 80vh;
   overflow: hidden;
   overflow-y: scroll;
 }
