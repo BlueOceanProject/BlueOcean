@@ -48,7 +48,7 @@ module.exports = {
         if (error) {
           console.log(error);
         } else {
-          console.log(success);
+          // console.log(success);
         }
       });
   },
