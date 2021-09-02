@@ -1,0 +1,21 @@
+.nav-link{
+  font-family: 'Roboto', sans-serif;
+  color: white !important;
+}
+
+.nav-link:hover {
+  filter: brightness(80%);
+  cursor: pointer;
+}
+
+.nav-link:active {
+  transform: scale(0.92)
+}
+
+.nav {
+  background-color: #2a2b5c;
+}
+
+.navbar-brand>img {
+  padding: 7px 14px;
+}
