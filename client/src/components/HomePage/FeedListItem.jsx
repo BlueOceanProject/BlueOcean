@@ -12,7 +12,6 @@ import {
   TumblrShareButton,
   TumblrIcon
 } from "react-share";
-import LazyLoad from 'react-lazyload';
 
 import './Feed.css';
 
@@ -30,8 +29,6 @@ const FeedListItem = ({ feed }) => {
           className="user-image"
           src={feed.profileImg ? feed.profileImg : "default.png"}
           alt="Avatar"
-          srcset="large.jpg 2x,
-                  default.jpg 1x"
           ></img>
         <span className="feed-username">
 
