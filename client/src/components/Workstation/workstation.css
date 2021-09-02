@@ -60,6 +60,7 @@ html {
 
 #fileItem {
   margin: auto;
+  margin-left: 1%;
 }
 
 .master-player-ctr {
@@ -199,7 +200,7 @@ html {
   border-radius: 20px;
 }
 
-.audio-player-right {
-  height: auto;
-
+#import-audio-el {
+  width: 27%;
+  margin-right: 1%;
 }
