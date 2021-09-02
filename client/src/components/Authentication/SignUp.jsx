@@ -1,4 +1,4 @@
-import React, { useRef, useState, useContext } from 'react';
+import React, { useRef, useState, useContext, useEffect } from 'react';
 import axios from 'axios';
 import { Card, Form, Button, Container, Row, Col, Alert } from 'react-bootstrap';
 import { Link, useHistory } from 'react-router-dom';
@@ -16,8 +16,13 @@ const SignUp = () => {
 
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [selectedFile, setSelectedFile] = useState(null);
 
   const { signUp } = useAuth();
+
+  const imageUploadHandler = (event) => {
+    setSelectedFile(event.target.files[0]);
+  };
 
   const signUpHandler = (event) => {
     event.preventDefault();
@@ -40,7 +45,23 @@ const SignUp = () => {
           email: emailRef.current.value,
           phoneNumber: phoneNumberRef.current.value
         };
-        return axios.post('http://localhost:3000/users', data)
+        return axios.post('/users', data);
+      })
+      .then((result) => {
+        const formData = new FormData();
+        formData.append("name", Date.now());
+        formData.append("file", selectedFile);
+        axios.post('/uploadImg', formData)
+          .then((res) => {
+            return res.data;
+          })
+          .then((resUrl) => {
+            const data = {
+              userid: result.data['_id'],
+              url: resUrl
+            };
+            return axios.put('/updateProfileImage', data);
+          })
       })
       .then(() => {
         history.push('/');
@@ -52,6 +73,14 @@ const SignUp = () => {
         setLoading(false);
       });
   };
+
+  useEffect(() => {
+    let isSubscribed = true;
+    return () => {
+      setSelectedFile(null);
+      isSubscribed = false;
+    };
+  }, []);
 
   return (
     <Container className="d-flex justify-content-center align-items-center" style={{ minHeight: "100vh" }}>
@@ -79,9 +108,13 @@ const SignUp = () => {
                   </Form.Group>
                 </Col>
               </Row>
+              <Form.Group controlId="formFile" className="mb-3">
+                <Form.Label>Profile image <strong style={{ color: "red" }}>*</strong></Form.Label>
+                <Form.Control type="file" onChange={imageUploadHandler} />
+              </Form.Group>
               <Form.Group className="mb-2" controlId="phoneNumber">
                 <Form.Label>Phone number</Form.Label>
-                <Form.Control type="text" placeholder="Enter phone number" ref={phoneNumberRef} />
+                <Form.Control type="text" placeholder="(123)-456-7890" ref={phoneNumberRef} />
               </Form.Group>
               <Form.Group className="mb-2" controlId="email">
                 <Form.Label>Email address <strong style={{ color: "red" }}>*</strong></Form.Label>
