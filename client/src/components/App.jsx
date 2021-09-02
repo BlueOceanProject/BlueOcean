@@ -4,6 +4,7 @@ import { AuthProvider } from './Authentication/AuthContext.js';
 import SignUp from './Authentication/SignUp.jsx';
 import SignIn from './Authentication/SignIn.jsx';
 import Home from './Home.jsx';
+import './global.css';
 
 const initialState = {
   userId: '',
@@ -27,7 +28,7 @@ const App = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
-    <div>
+    <div className="global">
       <GlobalContext.Provider value={{ state, dispatch }}>
         <AuthProvider>
           <Router>
