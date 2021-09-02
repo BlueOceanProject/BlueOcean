@@ -1,6 +1,7 @@
 .profile-songs {
   display: flex;
   justify-content: space-between;
+
 }
 
 img.profileImg {
@@ -9,12 +10,12 @@ img.profileImg {
   border-radius: 50%;
 }
 .profile {
-  padding-left: 100px;
+  padding-left: 130px;
 }
 .profileTxt {
   display: flex;
   flex-direction: column;
-  max-width: 50%;
+  max-width: 40%;
   padding-left: 130px;
 }
 .songContainer {
@@ -24,28 +25,47 @@ border-radius: 5px solid var(--clr-border);
 .songItem {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  padding-right: 500px;
+  margin-left: 150px;
+  margin-right: 500px;
 }
 .song-title-controls {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
 }
 .eachSong {
-  width: 80%;
+  min-width: 900px;
+  max-width: 900px;
   border: 5px transparent;
-  padding: 50px;
+  padding: 20px;
   margin: 20px;
   background-color: var(--clr-three);
   border-radius: 20px;
 }
 .username {
   font-weight: bolder;
-  font-size: large;
+  font-size: xx-large;
 }
 .button-profile {
+  border-radius: 10px;
   border-color: var(--clr-primary);
   margin-left: 20px;
+  background-color: var(--clr-primary);
+}
+.button-profile:hover {
+  border-color: var(--clr-secondary);
+  background-color: var(--clr-secondary);
+}
+.songname {
+  margin-right: 20px;
+}
+.audio-player-profile {
+  display: flex;
+  width: 50%;
+}
+.social-media {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
 }
