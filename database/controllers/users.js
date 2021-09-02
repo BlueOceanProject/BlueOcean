@@ -51,5 +51,9 @@ module.exports = {
           console.log(success);
         }
       });
+  },
+
+  updateProfileImage: (url, userid) => {
+    return Users.findOneAndUpdate({"_id": userid}, {$set: {"profileImg": url}});
   }
 };

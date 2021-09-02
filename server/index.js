@@ -69,14 +69,14 @@ var uploadImage = multer({
 
 app.post('/uploadImg', uploadImage.any(), function (req, res, next) {
   // console.log(req.files[0].location);
-  res.send("Uploaded!");
+  res.send(req.files[0].location);
 });
 
 let port = 3000;
 
 require('../database/index');
 const { getLatestFeedsByUser, addToFeed } = require('../database/controllers/feeds');
-const { postSignUpUser, getUserByUserId , makePublished, getUsernameById } = require('../database/controllers/users');
+const { postSignUpUser, getUserByUserId , makePublished, getUsernameById, updateProfileImage } = require('../database/controllers/users');
 
 app.get('/feeds', (req, res) => {
   getLatestFeedsByUser(req.query, (err, docs) => {
@@ -124,8 +124,8 @@ app.put('/users', (req, res) => {
 
 app.post('/users', (req, res) => {
   postSignUpUser(req.body)
-    .then(() => {
-      res.sendStatus(201);
+    .then((result) => {
+      res.status(201).send(result);
     })
     .catch((err) => {
       res.status(400).send(err);
@@ -136,6 +136,16 @@ app.get('/username/:userId', (req, res) => {
   getUsernameById(req.params.userId)
     .then((result) => {
       res.status(200).send(result.userName);
+    })
+    .catch((err) => {
+      res.status(400).send(err);
+    });
+});
+
+app.put('/updateProfileImage', (req, res) => {
+  updateProfileImage(req.body.url, req.body.userid)
+    .then(() => {
+      res.status(200).send('successfully updated profile image');
     })
     .catch((err) => {
       res.status(400).send(err);

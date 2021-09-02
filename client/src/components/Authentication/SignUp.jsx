@@ -22,7 +22,6 @@ const SignUp = () => {
 
   const imageUploadHandler = (event) => {
     setSelectedFile(event.target.files[0]);
-    console.log(event.target.files);
   };
 
   const signUpHandler = (event) => {
@@ -36,28 +35,6 @@ const SignUp = () => {
 
     setLoading(true);
 
-    // signUp(emailRef.current.value, passwordRef.current.value)
-    //   .then((userObj) => {
-    //     const data = {
-    //       _id: userObj.user.uid,
-    //       userName: usernameRef.current.value,
-    //       firstName: firstNameRef.current.value,
-    //       lastName: lastNameRef.current.value,
-    //       email: emailRef.current.value,
-    //       phoneNumber: phoneNumberRef.current.value
-    //     };
-    //     return axios.post('/users', data);
-    //   })
-    //   .then(() => {
-    //     history.push('/');
-    //   })
-    //   .catch((error) => {
-    //     setErrorMessage(error.message);
-    //   })
-    //   .finally(() => {
-    //     setLoading(false);
-    //   });
-
     signUp(emailRef.current.value, passwordRef.current.value)
       .then((userObj) => {
         const data = {
@@ -70,11 +47,21 @@ const SignUp = () => {
         };
         return axios.post('/users', data);
       })
-      .then(() => {
+      .then((result) => {
         const formData = new FormData();
         formData.append("name", Date.now());
         formData.append("file", selectedFile);
-        axios.post('/uploadImg', formData);
+        axios.post('/uploadImg', formData)
+          .then((res) => {
+            return res.data;
+          })
+          .then((resUrl) => {
+            const data = {
+              userid: result.data['_id'],
+              url: resUrl
+            };
+            return axios.put('/updateProfileImage', data);
+          })
       })
       .then(() => {
         history.push('/');
@@ -90,6 +77,7 @@ const SignUp = () => {
   useEffect(() => {
     let isSubscribed = true;
     return () => {
+      setSelectedFile(null);
       isSubscribed = false;
     };
   }, []);
