@@ -204,9 +204,12 @@ const Workstation = (props) => {
   return (
     <div className="workstation-ctr">
       <div className="recorder-ctr">
+        <div className="record-btn-ctr">
+          <button className="record-btn" onClick={toggle}></button>
+          <div className="record-label">Record</div>
+        </div>
         <AudioReactRecorder className="recorder" state={recordState} onStop={onStop} />
-        <button className="record-btn" onClick={toggle}>Record / Stop</button>
-        <audio className="record-player" controls src={recordData} onPause={onRecordingPause} onPlay={onRecordingPlay} onEnded={onRecordingEnd} />
+        <audio className="audio-player record-player" controls src={recordData} onPause={onRecordingPause} onPlay={onRecordingPlay} onEnded={onRecordingEnd} />
       </div>
       <Import setUploadAudio={setUploadAudio}  setAudioFile={setAudioFile} audioFile={audioFile} />
       <div className="master-player-ctr">
@@ -222,14 +225,16 @@ const Workstation = (props) => {
           }
           <button className="master-ff" onClick={ffClick}>&#9193;</button>
         </div>
-        {!audioFile || !recordAudio ?
+        {!audioFile && !recordAudio ?
         <div className="no-audio-msg">No audio available. Import a file or make a recording.</div>
-        : <></>}
+        : <div className="no-audio-msg"></div>}
         <div className="seekTime-ctr">
-          <div className="seekTime">{secondsToTimeCode(seekTime)}</div>
+          <div className="seekTime-box">
+            <div className="seekTime">{secondsToTimeCode(seekTime)}</div>
+          </div>
         </div>
       </div>
-      <button type="submit" onClick={onSave}>Combine</button>
+      <button className="combine-btn" type="submit" onClick={onSave}>Combine</button>
       <Export uploadAudio={combinedAudio} />
     </div>
   )
