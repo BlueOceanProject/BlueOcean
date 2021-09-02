@@ -1,15 +1,18 @@
 import React, { useState, useEffect, useContext } from 'react';
+import './toolbar.css';
 import Feed from './HomePage/Feed.jsx'
 import Workstation from './Workstation/Workstation.jsx';
 import Viewer from './Viewer.jsx';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Nav, Navbar, Button } from 'react-bootstrap';
+import 'font-awesome/css/font-awesome.min.css';
 import {LinkContainer} from 'react-router-bootstrap';
+import "@fontsource/staatliches/index.css"
+import { Nav, Navbar, Button } from 'react-bootstrap';
 import { GlobalContext } from './App.jsx';
 import { useAuth } from './Authentication/AuthContext';
 import { useHistory } from 'react-router-dom';
-
 import axios from 'axios';
+
 
 
 const styles ={
@@ -19,6 +22,21 @@ const styles ={
     flexDirection: 'row',
     marginTop: 18
   },
+  logo: {
+    fontFamily: "Staatliches",
+    color: '#d4fce4',
+    fontSize: '50px',
+    marginTop: "-15px",
+    marginBottom: "-15px",
+  },
+  background: {
+    backgroundColor: "#2a2b5c",
+  },
+  image: {
+    height:"80px",
+    marginTop: "-30px",
+    marginBottom: "-30px",
+  }
 }
 
 const Toolbar = (props) => {
@@ -29,6 +47,7 @@ const Toolbar = (props) => {
   const [username, setUsername] = useState('');
   const { signout } = useAuth();
   const history = useHistory();
+
 
   const handleSearchChange = (e) => {
     globalData.dispatch({type: 'updateQuery', data: e.target.value});
@@ -61,55 +80,66 @@ const Toolbar = (props) => {
 
   return (
     <div>
-      <Navbar bg="dark" variant="dark">
-        <Navbar.Brand>
-          <img src={"https://i.imgur.com/rRcUk5O.png"} height="50" />{' '}
-          Harmony
+      <Navbar style={styles.background} >
+        <Navbar.Brand style={styles.logo}>
+          <img src={"https://i.imgur.com/B5cQ49u.png"} style={styles.image}  />{' '}
+            Harmony
         </Navbar.Brand>
 
-          <div className="mx-auto">
-            <input type="text" placeholder="Search users..." onChange={handleSearchChange} value={query} />
-          </div>
-
-           <LinkContainer to="/">
-            <Nav.Link> Feed </Nav.Link>
+        <LinkContainer to="/">
+            <Nav.Link> <i className="fa fa-home"></i> Feed </Nav.Link>
           </LinkContainer>
 
           {userId !== ''
           ?
           <>
             <LinkContainer to="/user">
-              <Nav.Link> Profiles  </Nav.Link>
+              <Nav.Link> <i className="fa fa-user"></i> Profiles  </Nav.Link>
             </LinkContainer>
 
             <LinkContainer to="/create" >
-              <Nav.Link className="border-left pl-2 ml-auto"> Workstation  </Nav.Link>
+              <Nav.Link className="nav-link" > <i className="fa fa-music"></i> Workstation  </Nav.Link>
             </LinkContainer>
           </>
           : ''
           }
+
+
+          <div className="ms-auto">
+            <i className="fa fa-search" style={{color: '#FFFFFF'}}></i>
+            {' '}
+            <input type="text" placeholder="Search users..." onChange={handleSearchChange} value={query} />
+          </div>
+
+
+
 
         <Nav className="ms-auto">
           {userId === ''
           ?
           <>
             <LinkContainer to="/signin">
-                <Nav.Link> Log in  </Nav.Link>
+                <Nav.Link> <i className="fa fa-sign-in"></i> Log in  </Nav.Link>
             </LinkContainer>
 
             <LinkContainer to="/signup">
-              <Nav.Link> Sign up  </Nav.Link>
+              <Nav.Link> <i className="fa fa-user-plus"></i> Sign up  </Nav.Link>
             </LinkContainer>
           </>
           :
           <>
             <LinkContainer to="/user">
-              <Nav.Link> { username }  </Nav.Link>
+              <Nav.Link> <i className="fa fa-user"></i> { username }  </Nav.Link>
             </LinkContainer>
 
-            <Button variant="link" onClick={logoutHandler}>Log out</Button>
+
+              <Nav.Link onClick={logoutHandler}> <i className="fa fa-sign-out"></i> Log Out </Nav.Link>
+
+
           </>
           }
+
+
 
         </Nav>
       </Navbar>

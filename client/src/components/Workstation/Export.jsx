@@ -34,10 +34,11 @@ const Export = (props) => {
   return (
     <div className="export">
         <form className="export-form-ctr">
-          <label className="export-form-label">Song name:
-            <input className="export-input" type="text" name="name" onChange={(e) => setSongName(e.target.value)}/>
+          <label className="export-form-label">Song name <input className="export-input"
+          type="text" name="name" onChange={(e) => setSongName(e.target.value)}/>
           </label>
         </form>
+        <br/>
         <button className="export-btn" onClick={e => exportSong(e)}>Export Song</button>
     </div>
   )

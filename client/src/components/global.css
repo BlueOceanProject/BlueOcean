@@ -1,0 +1,10 @@
+.global {
+  --clr-primary: #2a2b5c;
+  --clr-secondary: #7ed858;
+  --clr-three: #6a7892;
+  --clr-four: #5e8479;
+  --clr-border: #d4fce4;
+  font-family: 'Roboto', sans-serif;
+  color: #ffffff;
+  background-color: #2a2b5c;
+}
