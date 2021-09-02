@@ -76,7 +76,7 @@ let port = 3000;
 
 require('../database/index');
 const { getLatestFeedsByUser, addToFeed } = require('../database/controllers/feeds');
-const { postSignUpUser, getUserByUserId , makePublished } = require('../database/controllers/users');
+const { postSignUpUser, getUserByUserId , makePublished, getUsernameById } = require('../database/controllers/users');
 
 app.get('/feeds', (req, res) => {
   getLatestFeedsByUser(req.query, (err, docs) => {
@@ -121,8 +121,6 @@ app.put('/users', (req, res) => {
     }
   })
 })
-
-const { postSignUpUser, getUsernameById } = require('../database/controllers/users');
 
 app.post('/users', (req, res) => {
   postSignUpUser(req.body)
