@@ -204,9 +204,9 @@ const Workstation = (props) => {
   return (
     <div className="workstation-ctr">
       <div className="recorder-ctr">
-        <AudioReactRecorder state={recordState} onStop={onStop} />
-        <button onClick={toggle}>Record / Stop</button>
-        <audio controls src={recordData} onPause={onRecordingPause} onPlay={onRecordingPlay} onEnded={onRecordingEnd} />
+        <AudioReactRecorder className="recorder" state={recordState} onStop={onStop} />
+        <button className="record-btn" onClick={toggle}>Record / Stop</button>
+        <audio className="record-player" controls src={recordData} onPause={onRecordingPause} onPlay={onRecordingPlay} onEnded={onRecordingEnd} />
       </div>
       <Import setUploadAudio={setUploadAudio}  setAudioFile={setAudioFile} audioFile={audioFile} />
       <div className="master-player-ctr">

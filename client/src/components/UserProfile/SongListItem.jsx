@@ -20,17 +20,20 @@ const SongListItem = ({ myProfile, song, userImg, signedOut, userId, userName}) 
   const [published, setPublished] = useState(false);
 
   const handleAddToFeed = () => {
+
     song.profileImg = userImg;
     song.userId = userId;
     song.userName = userName;
     setPublished(true);
     song.published = true;
     axios.post('/feeds', song)
-    .then(() => {
-      axios.put('/users', song).then(() => {}).catch((err) => {console.error(err.stack)})
-    })
+    .then(() => {})
     .catch((err) => {
       console.error(err.stack)
+    })
+    axios.put('/users', song)
+    .then(() => {})
+    .catch((err) => {console.error(err.stack)
     })
   }
   return (
@@ -47,7 +50,7 @@ const SongListItem = ({ myProfile, song, userImg, signedOut, userId, userName}) 
             </audio>
             {myProfile && !song.published ? <Button variant="outline-dark" onClick={handleAddToFeed}>Publish</Button> : null}
             <Link to={{ pathname: '/create', state: { url: `${song.url}` } }}>
-          <button>Import</button>
+          <Button variant="outline-dark">Import</Button>
         </Link>
 
         </div>

@@ -43,3 +43,15 @@ html {
   border-left: 12px solid #000;
   margin: 8px 24px;
 }
+
+.recorder {
+  margin-bottom: 2em;
+}
+
+.record-btn {
+  margin-right: 3em;
+}
+
+.record-player {
+  margin-top: 2em;
+}

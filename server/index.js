@@ -71,7 +71,6 @@ app.get('/feeds', (req, res) => {
 
 
 app.post('/feeds', (req, res) => {
-  console.log('got to server index', req.body)
   addToFeed(req.body, (err, docs) => {
     if (err) {
       res.sendStatus(404);
@@ -95,7 +94,6 @@ app.get('/user', (req, res) => {
 
 
 app.put('/users', (req, res) => {
-//console.log('index req.body', req.body);
   makePublished(req.body, (err, docs) => {
     if(err) {
       res.sendStatus(404);

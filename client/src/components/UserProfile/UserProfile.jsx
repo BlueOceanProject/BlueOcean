@@ -18,7 +18,6 @@ const UserProfile  = (props) => {
   const getUser = (id) => {
     axios.get(`/user?_id=${id}`)
     .then((res) => {
-      //console.log(res.data[0].songs, 'did we get back to profile');
       setCurrentUser(res.data._id);
       setUserInfo(res.data[0]);
       setUserSongs(res.data[0].songs);
