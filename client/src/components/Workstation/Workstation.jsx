@@ -213,7 +213,10 @@ const Workstation = (props) => {
       <Import setUploadAudio={setUploadAudio}  setAudioFile={setAudioFile} audioFile={audioFile} />
       <div className="master-player-ctr">
         <div className="master-player-controls">
-          <button className="master-rewind" onClick={rewindClick}>&#9194;</button>
+          <button className="master-rewind-btn" onClick={rewindClick}>
+            <div className="master-rewind-icon"></div>
+            <div className="master-rewind-icon"></div>
+          </button>
           {isMasterPlaying ?
           <button className="master-pause-btn" onClick={masterPlayClick}>
             <div className="master-pause-icon"></div>
@@ -222,7 +225,10 @@ const Workstation = (props) => {
             <div className="master-play-icon"></div>
           </button>
           }
-          <button className="master-ff" onClick={ffClick}>&#9193;</button>
+          <button className="master-ff-btn" onClick={ffClick}>
+            <div className="master-ff-icon"></div>
+            <div className="master-ff-icon"></div>
+          </button>
         </div>
         {!audioFile && !recordAudio ?
         <div className="no-audio-msg">No audio available. Import a file or make a recording.</div>
