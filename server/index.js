@@ -3,11 +3,13 @@ const multer = require('multer');
 const multerS3 = require('multer-s3');
 const AWS = require('aws-sdk');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 const { ACCESS_KEY, SECRET_KEY } = require('../key.js')
 const { insertSongForUser } = require('../database/controllers/users.js')
 
 let app = express();
 
+app.use(cors());
 app.use(express.static(__dirname + '/../client/dist'));
 app.use(express.json());
 app.use(bodyParser.json());
@@ -56,8 +58,8 @@ app.post('/upload', upload.any(), function (req, res, next) {
 let port = 3000;
 
 require('../database/index');
-const { getLatestFeedsByUser } = require('../database/controllers/feeds');
-const { postSignUpUser } = require('../database/controllers/users');
+const { getLatestFeedsByUser, addToFeed } = require('../database/controllers/feeds');
+const { postSignUpUser, getUserByUserId , makePublished } = require('../database/controllers/users');
 
 app.get('/feeds', (req, res) => {
   getLatestFeedsByUser(req.query, (err, docs) => {
@@ -69,10 +71,8 @@ app.get('/feeds', (req, res) => {
   });
 });
 
-const { addToFeed } = require('../database/controllers/feeds');
 
 app.post('/feeds', (req, res) => {
-  console.log('got to server index', req.body)
   addToFeed(req.body, (err, docs) => {
     if (err) {
       res.sendStatus(404);
@@ -82,7 +82,7 @@ app.post('/feeds', (req, res) => {
   });
 });
 
-const { getUserByUserId } = require('../database/controllers/users');
+
 
 app.get('/user', (req, res) => {
   getUserByUserId(req.query, (err, docs) => {
@@ -94,7 +94,6 @@ app.get('/user', (req, res) => {
   });
 });
 
-const { makePublished } = require('../database/controllers/users');
 
 app.put('/users', (req, res) => {
   makePublished(req.body, (err, docs) => {
