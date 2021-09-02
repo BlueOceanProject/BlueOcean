@@ -22,7 +22,6 @@
     "nodemon": "^2.0.12",
     "source-map-loader": "^3.0.0",
     "webpack": "^5.51.1",
-    "webpack-bundle-analyzer": "^4.4.2",
     "webpack-cli": "^4.8.0"
   },
   "dependencies": {
