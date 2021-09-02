@@ -39,17 +39,18 @@ const SongListItem = ({ myProfile, song, userImg, signedOut, userId, userName}) 
   return (
         <div className="eachSong">
         <div className="song-title-controls">
-          <span>{song.songName}</span>
+          <span className="songname">{song.songName}</span>
           <audio
               controls
               controlsList={signedOut ? "nodownload" : ""}
               src={song.url}
+              className="audio-player-profile"
             >
               Your browser does not support the
               <code>audio</code> element.
             </audio>
             <div>
-            {myProfile && !song.published ? <Button variant="outline-light" onClick={handleAddToFeed}>Publish</Button> : null}
+            {myProfile && !song.published ? <Button className="button-profile" variant="outline-light" onClick={handleAddToFeed}>Publish</Button> : null}
             </div>
             <Link to={{ pathname: '/create', state: { url: `${song.url}` } }}>
             { signedOut ? null :
@@ -57,6 +58,7 @@ const SongListItem = ({ myProfile, song, userImg, signedOut, userId, userName}) 
         </Link>
 
         </div>
+        <div className="social-media">
         <FacebookShareButton
         url="https://www.google.com"
         quote={song.url}
@@ -84,6 +86,7 @@ const SongListItem = ({ myProfile, song, userImg, signedOut, userId, userName}) 
         >
           <TumblrIcon size={36} round/>
         </TumblrShareButton>
+        </div>
         </div>
   );
 };
