@@ -4,7 +4,7 @@ import { Howl, Howler } from 'howler';
 import Crunker from 'crunker';
 import Import from './Import.jsx';
 import Export from './Export.jsx';
-import css from './workstation.css';
+import './workstation.css';
 
 if(typeof AudioContext !== "undefined" ) {
   const crunker = new Crunker({sampleRate: 48000});
@@ -203,23 +203,38 @@ const Workstation = (props) => {
 
   return (
     <div className="workstation-ctr">
-      <AudioReactRecorder className="recorder" state={recordState} onStop={onStop} />
-      <button className="record-btn" onClick={toggle}>Record / Stop</button>
-      <audio className="record-player" controls src={recordData} onPause={onRecordingPause} onPlay={onRecordingPlay} onEnded={onRecordingEnd} />
-      <Import className="" setUploadAudio={setUploadAudio}  setAudioFile={setAudioFile} audioFile={audioFile} />
-      <div className="master-player-ctr">
-        <button className="master-rewind" onClick={rewindClick}>&#9194;</button>
-        {isMasterPlaying ?
-        <button className="master-pause" onClick={masterPlayClick}>&#9613;&#9613;</button>
-        : <button className="master-play" onClick={masterPlayClick}>&#9658;</button>
-        }
-        <button className="master-ff" onClick={ffClick}>&#9193;</button>
-        {!audioFile || !recordAudio ?
-        <div className="no-audio-msg">No audio available. Import a file or make a recording.</div>
-        : <></>}
+      <div className="recorder-ctr">
+        <div className="record-btn-ctr">
+          <button className="record-btn" onClick={toggle}></button>
+          <div className="record-label">Record</div>
+        </div>
+        <AudioReactRecorder className="recorder" state={recordState} onStop={onStop} />
+        <audio className="audio-player record-player" controls src={recordData} onPause={onRecordingPause} onPlay={onRecordingPlay} onEnded={onRecordingEnd} />
       </div>
-      <div className="seekTime">{secondsToTimeCode(seekTime)}</div>
-      <button type="submit" onClick={onSave}>Combine</button>
+      <Import setUploadAudio={setUploadAudio}  setAudioFile={setAudioFile} audioFile={audioFile} />
+      <div className="master-player-ctr">
+        <div className="master-player-controls">
+          <button className="master-rewind" onClick={rewindClick}>&#9194;</button>
+          {isMasterPlaying ?
+          <button className="master-pause-btn" onClick={masterPlayClick}>
+            <div className="master-pause-icon"></div>
+          </button>
+          : <button className="master-play-btn" onClick={masterPlayClick}>
+            <div className="master-play-icon"></div>
+          </button>
+          }
+          <button className="master-ff" onClick={ffClick}>&#9193;</button>
+        </div>
+        {!audioFile && !recordAudio ?
+        <div className="no-audio-msg">No audio available. Import a file or make a recording.</div>
+        : <div className="no-audio-msg"></div>}
+        <div className="seekTime-ctr">
+          <div className="seekTime-box">
+            <div className="seekTime">{secondsToTimeCode(seekTime)}</div>
+          </div>
+        </div>
+      </div>
+      <button className="combine-btn" type="submit" onClick={onSave}>Combine</button>
       <Export uploadAudio={combinedAudio} />
     </div>
   )
