@@ -116,6 +116,9 @@ html {
 
 .combine-btn {
   margin: auto;
+  height: 30px;
+  width: 100px;
+  border-radius: 20px;
 }
 
 .export {
@@ -127,4 +130,7 @@ html {
 
 .export-btn {
   margin: auto;
+  height: 30px;
+  width: 150px;
+  border-radius: 20px;
 }
