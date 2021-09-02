@@ -1,15 +1,130 @@
+html {
+  background-color: rgba(33,37,41,1);
+}
+
 .workstation-ctr {
-  margin-left: 40%;
+  background: rgba(33,37,41,1);
+  background: linear-gradient(180deg, rgba(94,94,94,1) 0%, rgba(33,37,41,1) 100%);
+  color: #eeeeee;
+  display: flex;
+  flex-flow: column;
+}
+
+.recorder-ctr {
+  padding: 25px;
+  display: flex;
+  justify-content: center;
 }
 
 .recorder {
   margin-bottom: 2em;
 }
 
-.record-btn {
-  margin-right: 3em;
+.recorder-btn-viz {
+  display: flex;
 }
 
-.record-player {
-  margin-top: 2em;
+.record-btn-ctr {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  margin: auto;
+}
+
+.record-btn {
+  width: 64px;
+  height: 64px;
+  border: 12px solid #000;
+  border-radius: 32px;
+  background-color: #c90000;
+  margin: auto;
+}
+
+.record-label {
+  text-align: center;
+  font-size: 24px;
+}
+
+.audio-player {
+  width: 33%;
+}
+
+.import-ctr {
+  display: flex;
+  justify-content: center;
+  padding: 25px;
+}
+
+#fileItem {
+  margin: auto;
+}
+
+.master-player-ctr {
+  background-color: #4d6e83;
+  border: 3px solid #000000;
+  border-radius: 15px;
+  padding: 15px;
+  width: 40%;
+  height: 20%;
+  margin: 25px auto;
+}
+
+.master-player-controls {
+  display: flex;
+  justify-content: center;
+}
+
+.master-play-icon {
+  width: 32px;
+  height: 48px;
+  border-top: 24px solid transparent;
+  border-left: 36px solid #000;
+  border-bottom: 24px solid transparent;
+  margin: 8px 24px;
+}
+
+.master-pause-icon {
+  width: 36px;
+  height: 48px;
+  border-right: 12px solid #000;
+  border-left: 12px solid #000;
+  margin: 8px 24px;
+}
+
+.no-audio-msg {
+  display: flex;
+  justify-content: center;
+  height: 30px;
+}
+
+.seekTime-ctr {
+  display: flex;
+  justify-content: center;
+}
+
+.seekTime-box {
+  background-color: #000;
+  width: 200px;
+  padding: 0px 40px;
+}
+
+.seekTime {
+  font-size: 32px;
+  color: #afd2e0;
+  transform: translate(-30px, 0px);
+}
+
+.combine-btn {
+  margin: auto;
+}
+
+.export {
+  margin: auto;
+  display: flex;
+  flex-flow: column;
+  padding: 25px;
+}
+
+.export-btn {
+  margin: auto;
 }
