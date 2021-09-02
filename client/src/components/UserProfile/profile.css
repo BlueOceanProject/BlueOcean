@@ -4,8 +4,8 @@
 }
 
 img.profileImg {
-  height: 50%;
-  width: 50%;
+  height: 500px;
+  width: 500px;
   border-radius: 50%;
 }
 .profile {
@@ -17,29 +17,35 @@ img.profileImg {
   max-width: 50%;
   padding-left: 130px;
 }
-
+.songContainer {
+max-height: 30%;
+border-radius: 5px solid var(--clr-border);
+}
 .songItem {
   display: flex;
   flex-direction: column;
-  max-height:30%;
   justify-content: center;
   align-items: center;
   padding-right: 500px;
-
 }
 .song-title-controls {
   display: flex;
   justify-content: space-around;
   align-items: center;
-
 }
 .eachSong {
   width: 80%;
   border: 5px transparent;
   padding: 50px;
   margin: 20px;
+  background-color: var(--clr-three);
+  border-radius: 20px;
 }
 .username {
   font-weight: bolder;
   font-size: large;
+}
+.button-profile {
+  border-color: var(--clr-primary);
+  margin-left: 20px;
 }

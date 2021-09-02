@@ -49,11 +49,11 @@ const SongListItem = ({ myProfile, song, userImg, signedOut, userId, userName}) 
               <code>audio</code> element.
             </audio>
             <div>
-            {myProfile && !song.published ? <Button variant="dark" onClick={handleAddToFeed}>Publish</Button> : null}
+            {myProfile && !song.published ? <Button variant="outline-light" onClick={handleAddToFeed}>Publish</Button> : null}
             </div>
             <Link to={{ pathname: '/create', state: { url: `${song.url}` } }}>
             { signedOut ? null :
-            <Button variant="dark">Import</Button> }
+            <Button className="button-profile" variant="outline-light">Import</Button> }
         </Link>
 
         </div>

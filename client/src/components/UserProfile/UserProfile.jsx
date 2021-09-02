@@ -60,7 +60,7 @@ const UserProfile  = (props) => {
         <div>
       <div className="profile">
         <h2>{myProfile ? 'My Profile' : `${userInfo.userName}'s Profile`}</h2>
-        <img className="profileImg" src={userInfo.profileImg} />
+        <img className="profileImg" src={userInfo.profileImg ? userInfo.profileImg : "default.png"} />
         </div>
         <div className="profileTxt">
           <span className="username">{userInfo.userName}</span>
@@ -69,6 +69,7 @@ const UserProfile  = (props) => {
 C/O https://placeholder.com/text/lorem-ipsum/#Copy_and_Paste_Lorem_Ipsum </span>
         </div>
         </div>
+        <div className="songContainer">
         <div className="songItem">
         {userSongs.map((song) => {
           return <SongListItem
@@ -81,6 +82,7 @@ C/O https://placeholder.com/text/lorem-ipsum/#Copy_and_Paste_Lorem_Ipsum </span>
           userName={userInfo.userName}
           />
         })}
+        </div>
         </div>
       </div>
     )
