@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useReducer } from 'react';
+import axios from 'axios';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { AuthProvider } from './Authentication/AuthContext.js';
 import SignUp from './Authentication/SignUp.jsx';

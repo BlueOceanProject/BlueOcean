@@ -38,6 +38,7 @@
     "font-awesome": "^4.7.0",
     "howler": "^2.2.3",
     "jquery": "^3.1.1",
+    "mdbreact": "^5.1.0",
     "mongoose": "^6.0.0",
     "multer": "^1.4.3",
     "multer-s3": "^2.9.0",

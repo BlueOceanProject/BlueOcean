@@ -22,5 +22,6 @@
 
 .social-media-share {
   display: flex;
-  justify-content: center
+  justify-content: center;
+  padding-top: 10px;
 }

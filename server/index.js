@@ -73,7 +73,6 @@ app.get('/feeds', (req, res) => {
 
 
 app.post('/feeds', (req, res) => {
-  console.log('got to server index', req.body)
   addToFeed(req.body, (err, docs) => {
     if (err) {
       res.sendStatus(404);
@@ -97,7 +96,6 @@ app.get('/user', (req, res) => {
 
 
 app.put('/users', (req, res) => {
-//console.log('index req.body', req.body);
   makePublished(req.body, (err, docs) => {
     if(err) {
       res.sendStatus(404);
@@ -107,10 +105,22 @@ app.put('/users', (req, res) => {
   })
 })
 
+const { getUsernameById } = require('../database/controllers/users');
+
 app.post('/users', (req, res) => {
   postSignUpUser(req.body)
     .then(() => {
       res.sendStatus(201);
+    })
+    .catch((err) => {
+      res.status(400).send(err);
+    });
+});
+
+app.get('/username/:userId', (req, res) => {
+  getUsernameById(req.params.userId)
+    .then((result) => {
+      res.status(200).send(result.userName);
     })
     .catch((err) => {
       res.status(400).send(err);

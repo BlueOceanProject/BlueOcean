@@ -1,4 +1,4 @@
-import React, { useRef, useState, useContext } from 'react';
+import React, { useRef, useState, useContext, useEffect } from 'react';
 import axios from 'axios';
 import { Card, Form, Button, Container, Row, Col, Alert } from 'react-bootstrap';
 import { Link, useHistory } from 'react-router-dom';
@@ -40,7 +40,7 @@ const SignUp = () => {
           email: emailRef.current.value,
           phoneNumber: phoneNumberRef.current.value
         };
-        return axios.post('http://localhost:3000/users', data)
+        return axios.post('/users', data);
       })
       .then(() => {
         history.push('/');
@@ -52,6 +52,13 @@ const SignUp = () => {
         setLoading(false);
       });
   };
+
+  useEffect(() => {
+    let isSubscribed = true;
+    return () => {
+      isSubscribed = false;
+    };
+  }, []);
 
   return (
     <Container className="d-flex justify-content-center align-items-center" style={{ minHeight: "100vh" }}>
@@ -81,7 +88,7 @@ const SignUp = () => {
               </Row>
               <Form.Group className="mb-2" controlId="phoneNumber">
                 <Form.Label>Phone number</Form.Label>
-                <Form.Control type="text" placeholder="Enter phone number" ref={phoneNumberRef} />
+                <Form.Control type="text" placeholder="(123)-456-7890" ref={phoneNumberRef} />
               </Form.Group>
               <Form.Group className="mb-2" controlId="email">
                 <Form.Label>Email address <strong style={{ color: "red" }}>*</strong></Form.Label>
