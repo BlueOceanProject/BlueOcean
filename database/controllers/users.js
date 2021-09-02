@@ -2,7 +2,6 @@ const Users = require('../models/users');
 
 module.exports = {
   getUserByUserId: (username, cb) => {
-    //console.log('at controller', username._id)
     Users.find({ _id: username._id }).exec((err, docs) => {
       if (err) {
         cb(err);
@@ -13,7 +12,6 @@ module.exports = {
   },
 
   makePublished: (song, cb) => {
-    console.log('in user put controller', song);
     Users.findOneAndUpdate({
       userName: song.userName,
       "songs._id": song._id
@@ -32,7 +30,6 @@ module.exports = {
   },
 
   insertSongForUser: (id, url, songName) => {
-    // console.log('insertSongForUser');
     const now = new Date()
     const song = {
       userId: id,
