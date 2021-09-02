@@ -27,10 +27,10 @@ const Feed = () => {
 
   useEffect(() => {
     setPageNum(1);
-  },[query]);
+  }, [query]);
 
   return (
-    <>
+    <div className="feeds-overlay">
 
       {feeds.map((feed, i) => {
         if (feeds.length === i + 1) {
@@ -49,7 +49,7 @@ const Feed = () => {
       )}
       <div>{isLoading && "Loading..."}</div>
       <div>{error && "Error..."}</div>
-    </>
+    </div>
   );
 }
 

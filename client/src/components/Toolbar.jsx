@@ -13,8 +13,7 @@ import { useAuth } from './Authentication/AuthContext';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
-//green: #d4fce4
-//navy: #2a2b5c
+
 
 const styles ={
   row: {
@@ -88,18 +87,18 @@ const Toolbar = (props) => {
         </Navbar.Brand>
 
         <LinkContainer to="/">
-            <Nav.Link> <i class="fa fa-home"></i> Feed </Nav.Link>
+            <Nav.Link> <i className="fa fa-home"></i> Feed </Nav.Link>
           </LinkContainer>
 
           {userId !== ''
           ?
           <>
             <LinkContainer to="/user">
-              <Nav.Link> <i class="fa fa-user"></i> Profiles  </Nav.Link>
+              <Nav.Link> <i className="fa fa-user"></i> Profiles  </Nav.Link>
             </LinkContainer>
 
             <LinkContainer to="/create" >
-              <Nav.Link className="nav-link" > <i class="fa fa-music"></i> Workstation  </Nav.Link>
+              <Nav.Link className="nav-link" > <i className="fa fa-music"></i> Workstation  </Nav.Link>
             </LinkContainer>
           </>
           : ''
@@ -107,7 +106,7 @@ const Toolbar = (props) => {
 
 
           <div className="ms-auto">
-            <i class="fa fa-search" style={{color: '#FFFFFF'}}></i>
+            <i className="fa fa-search" style={{color: '#FFFFFF'}}></i>
             {' '}
             <input type="text" placeholder="Search users..." onChange={handleSearchChange} value={query} />
           </div>
@@ -120,24 +119,23 @@ const Toolbar = (props) => {
           ?
           <>
             <LinkContainer to="/signin">
-                <Nav.Link> <i class="fa fa-sign-in"></i> Log in  </Nav.Link>
+                <Nav.Link> <i className="fa fa-sign-in"></i> Log in  </Nav.Link>
             </LinkContainer>
 
             <LinkContainer to="/signup">
-              <Nav.Link> <i class="fa fa-user-plus"></i> Sign up  </Nav.Link>
+              <Nav.Link> <i className="fa fa-user-plus"></i> Sign up  </Nav.Link>
             </LinkContainer>
           </>
           :
           <>
             <LinkContainer to="/user">
-              <Nav.Link> <i class="fa fa-user"></i> { username }  </Nav.Link>
+              <Nav.Link> <i className="fa fa-user"></i> { username }  </Nav.Link>
             </LinkContainer>
 
 
-              <Nav.Link onClick={logoutHandler}> <i class="fa fa-sign-out"></i> Log Out </Nav.Link>
+              <Nav.Link onClick={logoutHandler}> <i className="fa fa-sign-out"></i> Log Out </Nav.Link>
 
 
-            {/* <Button variant="link" >  <i class="fa fa-sign-out"></i> Log out</Button> */}
           </>
           }
 

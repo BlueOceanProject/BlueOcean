@@ -28,6 +28,7 @@ img.profileImg {
 }
 .eachSong {
   display: flex;
+  justify-content: space-around;
 }
 .username {
   font-weight: bolder;
