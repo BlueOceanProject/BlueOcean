@@ -25,10 +25,19 @@ img.profileImg {
   justify-content: center;
   align-items: center;
   padding-right: 500px;
+
 }
-.eachSong {
+.song-title-controls {
   display: flex;
   justify-content: space-around;
+  align-items: center;
+
+}
+.eachSong {
+  width: 80%;
+  border: 5px transparent;
+  padding: 50px;
+  margin: 20px;
 }
 .username {
   font-weight: bolder;

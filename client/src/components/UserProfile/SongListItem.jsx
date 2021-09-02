@@ -37,8 +37,8 @@ const SongListItem = ({ myProfile, song, userImg, signedOut, userId, userName}) 
     })
   }
   return (
-        <div>
         <div className="eachSong">
+        <div className="song-title-controls">
           <span>{song.songName}</span>
           <audio
               controls
@@ -49,11 +49,11 @@ const SongListItem = ({ myProfile, song, userImg, signedOut, userId, userName}) 
               <code>audio</code> element.
             </audio>
             <div>
-            {myProfile && !song.published ? <Button variant="outline-dark" onClick={handleAddToFeed}>Publish</Button> : null}
+            {myProfile && !song.published ? <Button variant="dark" onClick={handleAddToFeed}>Publish</Button> : null}
             </div>
             <Link to={{ pathname: '/create', state: { url: `${song.url}` } }}>
             { signedOut ? null :
-            <Button variant="outline-dark">Import</Button> }
+            <Button variant="dark">Import</Button> }
         </Link>
 
         </div>
