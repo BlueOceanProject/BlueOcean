@@ -52,6 +52,23 @@ app.post('/upload', upload.any(), function (req, res, next) {
   res.send("Uploaded!");
 });
 
+var uploadImage = multer({
+  storage: multerS3({
+      s3: s3,
+      bucket: 'profileimage07',
+      key: function (req, file, cb) {
+        // console.log(file)
+        const split = file.originalname.split('.');
+        cb(null, `${req.body.name}.${split[split.length - 1]}`);
+      }
+  }),
+  limits: { fieldSize: 2 * 1024 * 1024 }
+});
+
+app.post('/uploadImg', uploadImage.any(), function (req, res, next) {
+  // console.log(req.files[0].location);
+  res.send("Uploaded!");
+});
 
 let port = 3000;
 

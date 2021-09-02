@@ -16,8 +16,14 @@ const SignUp = () => {
 
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [selectedFile, setSelectedFile] = useState(null);
 
   const { signUp } = useAuth();
+
+  const imageUploadHandler = (event) => {
+    setSelectedFile(event.target.files[0]);
+    console.log(event.target.files);
+  };
 
   const signUpHandler = (event) => {
     event.preventDefault();
@@ -30,6 +36,28 @@ const SignUp = () => {
 
     setLoading(true);
 
+    // signUp(emailRef.current.value, passwordRef.current.value)
+    //   .then((userObj) => {
+    //     const data = {
+    //       _id: userObj.user.uid,
+    //       userName: usernameRef.current.value,
+    //       firstName: firstNameRef.current.value,
+    //       lastName: lastNameRef.current.value,
+    //       email: emailRef.current.value,
+    //       phoneNumber: phoneNumberRef.current.value
+    //     };
+    //     return axios.post('/users', data);
+    //   })
+    //   .then(() => {
+    //     history.push('/');
+    //   })
+    //   .catch((error) => {
+    //     setErrorMessage(error.message);
+    //   })
+    //   .finally(() => {
+    //     setLoading(false);
+    //   });
+
     signUp(emailRef.current.value, passwordRef.current.value)
       .then((userObj) => {
         const data = {
@@ -41,6 +69,12 @@ const SignUp = () => {
           phoneNumber: phoneNumberRef.current.value
         };
         return axios.post('/users', data);
+      })
+      .then(() => {
+        const formData = new FormData();
+        formData.append("name", Date.now());
+        formData.append("file", selectedFile);
+        axios.post('/uploadImg', formData);
       })
       .then(() => {
         history.push('/');
@@ -86,6 +120,10 @@ const SignUp = () => {
                   </Form.Group>
                 </Col>
               </Row>
+              <Form.Group controlId="formFile" className="mb-3">
+                <Form.Label>Profile image <strong style={{ color: "red" }}>*</strong></Form.Label>
+                <Form.Control type="file" onChange={imageUploadHandler} />
+              </Form.Group>
               <Form.Group className="mb-2" controlId="phoneNumber">
                 <Form.Label>Phone number</Form.Label>
                 <Form.Control type="text" placeholder="(123)-456-7890" ref={phoneNumberRef} />
