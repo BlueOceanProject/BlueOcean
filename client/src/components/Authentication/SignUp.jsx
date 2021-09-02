@@ -84,7 +84,7 @@ const SignUp = () => {
 
   return (
     <Container className="d-flex justify-content-center align-items-center" style={{ minHeight: "100vh" }}>
-      <div className="w-100" style={{ maxWidth:"600px" }}>
+      <div className="w-100" style={{ maxWidth:"600px", color: "black" }}>
         <Card>
           <Card.Body>
             <h2 className="text-center mb-3">Sign Up</h2>
@@ -135,7 +135,7 @@ const SignUp = () => {
             </Form>
           </Card.Body>
         </Card>
-        <div className="w-100 text-center mt-2"> Have an account? <Link to="/signin">Sign in</Link></div>
+        <div className="w-100 text-center mt-2" style={{ color: "white" }}> Have an account? <Link to="/signin">Sign in</Link></div>
       </div>
     </Container>
   );

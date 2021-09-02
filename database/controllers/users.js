@@ -34,9 +34,9 @@ module.exports = {
   },
 
   insertSongForUser: (id, url, songName) => {
+    console.log(id);
     const now = new Date()
     const song = {
-      userId: id,
       songName: songName,
       url: url,
       published: false,
@@ -44,7 +44,7 @@ module.exports = {
     }
 
     Users.update(
-      { userId: id }, { $push: { songs: song } }, (error, success) => {
+      { _id: id }, { $push: { songs: song } }, (error, success) => {
         if (error) {
           console.log(error);
         } else {

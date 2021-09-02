@@ -37,13 +37,14 @@ const FeedListItem = ({ feed }) => {
           controls
           controlsList={userId ? "" : "nodownload"}
           src={feed.url}
+          className="audio-player"
         >
           Your browser does not support the
           <code>audio</code> element.
         </audio>
         {
           userId && <Link to={{ pathname: '/create', state: { url: `${feed.url}` } }}>
-            <Button variant="outline-dark">Import</Button>
+            <Button variant="outline-light" className="button-profile">Import</Button>
           </Link>
         }
 

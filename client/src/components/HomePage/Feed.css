@@ -6,14 +6,16 @@
 
 .feed-list {
   width: 80%;
-  border: 5px solid papayawhip;
+  border-radius: 20px;
   padding: 50px;
   margin: 20px;
+  background-color: var(--clr-three);
+  align-items: center;
 }
 
 .feed-list-item-wrapper {
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
 }
 
 .user-image {
@@ -22,8 +24,19 @@
   height: 64px;
 }
 
-.search-bar {
-  border-radius: 30%;
+.feed-username {
+  display: flex;
+  width: 10%;
+}
+
+.feed-songname {
+  display: flex;
+  width: 20%;
+}
+
+.audio-player {
+  display: flex;
+  width: 30%;
 }
 
 .social-media-share {
