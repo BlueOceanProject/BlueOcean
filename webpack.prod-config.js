@@ -32,8 +32,4 @@ module.exports = {
       },
     ],
   },
-  devServer: {
-    historyApiFallback: true,
-  },
-  plugins: [new WebpackBundleAnalyzer()]
 };
