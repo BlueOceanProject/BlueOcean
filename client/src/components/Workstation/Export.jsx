@@ -4,6 +4,7 @@ import { GlobalContext } from '../App.jsx';
 
 const Export = (props) => {
   // console.log(props.uploadAudio && props.uploadAudio.src);
+  // console.log(props.uploadAudio);
   const [songName, setSongName] = useState('');
   const userContext = useContext(GlobalContext);
   const id = userContext.state.userId;
