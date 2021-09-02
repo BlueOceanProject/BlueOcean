@@ -48,9 +48,12 @@ const SongListItem = ({ myProfile, song, userImg, signedOut, userId, userName}) 
               Your browser does not support the
               <code>audio</code> element.
             </audio>
+            <div>
             {myProfile && !song.published ? <Button variant="outline-dark" onClick={handleAddToFeed}>Publish</Button> : null}
+            </div>
             <Link to={{ pathname: '/create', state: { url: `${song.url}` } }}>
-          <Button variant="outline-dark">Import</Button>
+            { signedOut ? null :
+            <Button variant="outline-dark">Import</Button> }
         </Link>
 
         </div>
