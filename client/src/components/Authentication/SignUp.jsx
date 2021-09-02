@@ -16,8 +16,13 @@ const SignUp = () => {
 
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [selectedFile, setSelectedFile] = useState(null);
 
   const { signUp } = useAuth();
+
+  const imageUploadHandler = (event) => {
+    setSelectedFile(event.target.files[0]);
+  };
 
   const signUpHandler = (event) => {
     event.preventDefault();
@@ -42,6 +47,22 @@ const SignUp = () => {
         };
         return axios.post('/users', data);
       })
+      .then((result) => {
+        const formData = new FormData();
+        formData.append("name", Date.now());
+        formData.append("file", selectedFile);
+        axios.post('/uploadImg', formData)
+          .then((res) => {
+            return res.data;
+          })
+          .then((resUrl) => {
+            const data = {
+              userid: result.data['_id'],
+              url: resUrl
+            };
+            return axios.put('/updateProfileImage', data);
+          })
+      })
       .then(() => {
         history.push('/');
       })
@@ -56,6 +77,7 @@ const SignUp = () => {
   useEffect(() => {
     let isSubscribed = true;
     return () => {
+      setSelectedFile(null);
       isSubscribed = false;
     };
   }, []);
@@ -86,6 +108,10 @@ const SignUp = () => {
                   </Form.Group>
                 </Col>
               </Row>
+              <Form.Group controlId="formFile" className="mb-3">
+                <Form.Label>Profile image <strong style={{ color: "red" }}>*</strong></Form.Label>
+                <Form.Control type="file" onChange={imageUploadHandler} />
+              </Form.Group>
               <Form.Group className="mb-2" controlId="phoneNumber">
                 <Form.Label>Phone number</Form.Label>
                 <Form.Control type="text" placeholder="(123)-456-7890" ref={phoneNumberRef} />
