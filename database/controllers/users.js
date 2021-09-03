@@ -15,7 +15,7 @@ module.exports = {
     Users.findOneAndUpdate({
       userName: song.userName,
       "songs._id": song._id
-  }, {$set: {"songs.$.published": true}}, null, (err, docs) => {
+    }, { $set: { "songs.$.published": true } }, null, (err, docs) => {
       if (err) {
         cb(err);
       } else {
@@ -30,11 +30,11 @@ module.exports = {
   },
 
   getUsernameById: (userId) => {
-    return Users.findOne({ '_id': userId});
+    return Users.findOne({ '_id': userId });
   },
 
   insertSongForUser: (id, url, songName) => {
-    console.log(id);
+    // console.log(id);
     const now = new Date()
     const song = {
       songName: songName,
@@ -43,7 +43,7 @@ module.exports = {
       createdAt: now
     }
 
-    Users.update(
+    Users.updateOne(
       { _id: id }, { $push: { songs: song } }, (error, success) => {
         if (error) {
           console.log(error);
@@ -54,6 +54,6 @@ module.exports = {
   },
 
   updateProfileImage: (url, userid) => {
-    return Users.findOneAndUpdate({"_id": userid}, {$set: {"profileImg": url}});
+    return Users.findOneAndUpdate({ "_id": userid }, { $set: { "profileImg": url } });
   }
 };

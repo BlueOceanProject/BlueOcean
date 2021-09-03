@@ -29,7 +29,7 @@ const SignUp = () => {
 
     setErrorMessage('');
 
-    if(passwordRef.current.value !== passwordConfirmRef.current.value) {
+    if (passwordRef.current.value !== passwordConfirmRef.current.value) {
       return setErrorMessage('passwords do not match!');
     }
 
@@ -84,7 +84,7 @@ const SignUp = () => {
 
   return (
     <Container className="d-flex justify-content-center align-items-center" style={{ minHeight: "100vh" }}>
-      <div className="w-100" style={{ maxWidth:"600px", color: "black" }}>
+      <div className="w-100" style={{ maxWidth: "600px", color: "black" }}>
         <Card>
           <Card.Body>
             <h2 className="text-center mb-3">Sign Up</h2>
@@ -92,7 +92,7 @@ const SignUp = () => {
             <Form>
               <Form.Group className="mb-2" controlId="username">
                 <Form.Label>Username <strong style={{ color: "red" }}>*</strong></Form.Label>
-                <Form.Control type="text" placeholder="Enter username" ref={usernameRef} required/>
+                <Form.Control type="text" placeholder="Enter username" ref={usernameRef} required />
               </Form.Group>
               <Row>
                 <Col xs={6}>
@@ -118,18 +118,18 @@ const SignUp = () => {
               </Form.Group>
               <Form.Group className="mb-2" controlId="email">
                 <Form.Label>Email address <strong style={{ color: "red" }}>*</strong></Form.Label>
-                <Form.Control type="email" placeholder="name@example.com" ref={emailRef} required/>
+                <Form.Control type="email" placeholder="name@example.com" ref={emailRef} required />
                 <Form.Text className="text-muted">
                   We'll never share your email with anyone else.
                 </Form.Text>
               </Form.Group>
               <Form.Group className="mb-2" controlId="password">
                 <Form.Label>Password <strong style={{ color: "red" }}>*</strong></Form.Label>
-                <Form.Control type="password" placeholder="Enter password" ref={passwordRef} required/>
+                <Form.Control type="password" placeholder="Enter password" ref={passwordRef} required />
               </Form.Group>
               <Form.Group className="mb-3" controlId="password-confirm">
                 <Form.Label>Confirm password <strong style={{ color: "red" }}>*</strong></Form.Label>
-                <Form.Control type="password" placeholder="Enter password again" ref={passwordConfirmRef} required/>
+                <Form.Control type="password" placeholder="Enter password again" ref={passwordConfirmRef} required />
               </Form.Group>
               <Button variant="primary" className="w-100" onClick={signUpHandler} disabled={loading}>Sign Up</Button>
             </Form>
