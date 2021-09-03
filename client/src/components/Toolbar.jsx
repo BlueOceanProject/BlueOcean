@@ -84,7 +84,7 @@ const Toolbar = (props) => {
 
   return (
     <div>
-      <Navbar style={styles.background} >
+      <Navbar style={styles.background} fixed="top" >
         <Navbar.Brand style={styles.logo}>
           <img src={"https://i.imgur.com/B5cQ49u.png"} style={styles.image}  />{' '}
             Harmony
@@ -108,7 +108,7 @@ const Toolbar = (props) => {
           : ''
           }
 
-          <div className="ms-auto">
+          <div className="ms-auto no-wrap">
             <i className="fa fa-search" style={{color: '#FFFFFF'}}></i>
             {' '}
             <input type="text" placeholder="Search users..." onChange={handleSearchChange} value={query} />

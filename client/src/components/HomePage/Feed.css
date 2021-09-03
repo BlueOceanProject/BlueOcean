@@ -2,6 +2,7 @@
   height: 100vh;
   overflow: hidden;
   overflow-y: scroll;
+  padding-top:73px;
 }
 
 /* .feed-list {

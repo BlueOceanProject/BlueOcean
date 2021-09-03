@@ -3,6 +3,7 @@
   overflow: hidden;
   overflow-y: scroll;
   height: 100vh;
+  padding-top: 73px;
 }
 
 img.profileImg {
