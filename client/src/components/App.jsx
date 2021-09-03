@@ -9,6 +9,7 @@ import './global.css';
 const initialState = {
   userId: '',
   query: '',
+  theme: true,
 };
 
 const reducer = (state, action) => {
@@ -17,6 +18,8 @@ const reducer = (state, action) => {
       return { ...state, userId: action.data}
     case 'updateQuery':
       return { ...state, query: action.data}
+    case 'updateTheme':
+      return { ...state, theme: action.data}
     default:
       return state;
   }
@@ -28,7 +31,7 @@ const App = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
-    <div className="global">
+    <div className={state.theme ? 'global' : 'light'}>
       <GlobalContext.Provider value={{ state, dispatch }}>
         <AuthProvider>
           <Router>

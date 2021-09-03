@@ -25,3 +25,9 @@
 .navbar-brand>img {
   padding: 7px 14px;
 }
+
+.button {
+  height: 50%;
+  margin-top: 10px;
+  margin-right: 3px;
+}
