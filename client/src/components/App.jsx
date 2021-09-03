@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer, useContext } from 'react';
+import React, { useState, useEffect, useReducer } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { AuthProvider } from './Authentication/AuthContext.js';
 import SignUp from './Authentication/SignUp.jsx';
@@ -29,8 +29,6 @@ export const GlobalContext = React.createContext();
 
 const App = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  // const globalData = useContext(GlobalContext);
-  // const { theme } = globalData.state;
 
   return (
     <div className={state.theme ? 'global' : 'light'}>
