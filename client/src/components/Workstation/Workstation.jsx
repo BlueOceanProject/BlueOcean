@@ -67,7 +67,7 @@ const Workstation = (props) => {
       setAudioFile(props.location.state.url);
       setUploadAudio(new Audio(props.location.state.url));
     }
-    crunker = new Crunker({sampleRate: 48000});
+    crunker = new Crunker({ sampleRate: 48000 });
   }, [])
 
   useEffect(() => {
@@ -203,27 +203,35 @@ const Workstation = (props) => {
   return (
     <div className="workstation-ctr">
       <div className="recorder-ctr">
-        <div className="record-btn-ctr">
-          <button className="record-btn" onClick={toggle}></button>
-          <div className="record-label">Record</div>
+        <div className="workstation-col-1-3">
+          <div className="record-btn-ctr">
+            <button className="record-btn" onClick={toggle}></button>
+            <div className="record-label">Record</div>
+          </div>
         </div>
-        <AudioReactRecorder className="recorder" state={recordState} onStop={onStop} />
-        <audio className="audio-player record-player" controls src={recordData} onPause={onRecordingPause} onPlay={onRecordingPlay} onEnded={onRecordingEnd} />
+        <div className="workstation-col-2-3">
+          <AudioReactRecorder className="recorder workstation-col-2-3" state={recordState} onStop={onStop} />
+        </div>
+        <div className="record-player workstation-col-3-3">
+          <div className="audio-player-label">Recording: </div>
+          <audio className="audio-player-work record-player" controls src={recordData} onPause={onRecordingPause} onPlay={onRecordingPlay} onEnded={onRecordingEnd} />
+        </div>
       </div>
-      <Import setUploadAudio={setUploadAudio}  setAudioFile={setAudioFile} audioFile={audioFile} />
+      <Import setUploadAudio={setUploadAudio} setAudioFile={setAudioFile} audioFile={audioFile} />
       <div className="master-player-ctr">
+
         <div className="master-player-controls">
           <button className="master-rewind-btn" onClick={rewindClick}>
             <div className="master-rewind-icon"></div>
             <div className="master-rewind-icon"></div>
           </button>
           {isMasterPlaying ?
-          <button className="master-pause-btn" onClick={masterPlayClick}>
-            <div className="master-pause-icon"></div>
-          </button>
-          : <button className="master-play-btn" onClick={masterPlayClick}>
-            <div className="master-play-icon"></div>
-          </button>
+            <button className="master-pause-btn" onClick={masterPlayClick}>
+              <div className="master-pause-icon"></div>
+            </button>
+            : <button className="master-play-btn" onClick={masterPlayClick}>
+              <div className="master-play-icon"></div>
+            </button>
           }
           <button className="master-ff-btn" onClick={ffClick}>
             <div className="master-ff-icon"></div>
@@ -231,17 +239,21 @@ const Workstation = (props) => {
           </button>
         </div>
         {!audioFile && !recordAudio ?
-        <div className="no-audio-msg">No audio available. Import a file or make a recording.</div>
-        : <div className="no-audio-msg"></div>}
+          <div className="no-audio-msg">No audio available. Import a file or make a recording.</div>
+          : <div className="no-audio-msg"></div>}
         <div className="seekTime-ctr">
           <div className="seekTime-box">
             <div className="seekTime">{secondsToTimeCode(seekTime)}</div>
           </div>
         </div>
       </div>
+      <div className="export-song-title-message">
+        <span className="export-song-title">Export Song</span>
+        <p className="export-song-message" >Once you've finished recording, click the combine button below, and give your new song a name. Then you can export your song to your profile!</p>
+      </div>
       <button className="combine-btn" type="submit" onClick={onSave}>Combine</button>
       <Export uploadAudio={combinedAudio || (uploadAudio && uploadAudio.src) || null} />
-    </div>
+    </div >
   )
 }
 

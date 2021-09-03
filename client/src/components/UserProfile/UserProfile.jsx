@@ -5,7 +5,7 @@ import SongListItem from './SongListItem.jsx';
 import { GlobalContext } from '../App.jsx';
 import { Link } from 'react-router-dom';
 
-const UserProfile  = (props) => {
+const UserProfile = (props) => {
   const [myProfile, setMyProfile] = useState(false);
   const [currentUser, setCurrentUser] = useState('');
   const [userInfo, setUserInfo] = useState('');
@@ -17,15 +17,15 @@ const UserProfile  = (props) => {
 
   const getUser = (id) => {
     axios.get(`/user?_id=${id}`)
-    .then((res) => {
-      setCurrentUser(res.data._id);
-      setUserInfo(res.data[0]);
-      setUserSongs(res.data[0].songs);
-      showSignInMessage(false);
-    })
-    .catch((err) => {
-      console.error(err.stack)
-    })
+      .then((res) => {
+        setCurrentUser(res.data._id);
+        setUserInfo(res.data[0]);
+        setUserSongs(res.data[0].songs);
+        showSignInMessage(false);
+      })
+      .catch((err) => {
+        console.error(err.stack)
+      })
   }
 
   useEffect(() => {
@@ -49,40 +49,38 @@ const UserProfile  = (props) => {
   if (signInMessage) {
     return (
       <>
-      <div className="w-100 text-center mt-5"> Need an account? <Link to="/signup">Sign up</Link></div>
-      <div className="w-100 text-center mt-5">or</div>
-      <div className="w-100 text-center mt-5"> Have an account? <Link to="/signin">Sign in</Link></div>
+        <div className="w-100 text-center mt-5"> Need an account? <Link to="/signup">Sign up</Link></div>
+        <div className="w-100 text-center mt-5">or</div>
+        <div className="w-100 text-center mt-5"> Have an account? <Link to="/signin">Sign in</Link></div>
       </>
     )
   } else {
     return (
       <div className="profile-songs">
         <div>
-      <div className="profile">
-        <span className="username">{userInfo.userName}</span>
-        <img className="profileImg" src={userInfo.profileImg ? userInfo.profileImg : "default.png"} />
-        </div>
-        <div className="profileTxt">
-          {/* <span className="username">{userInfo.userName}</span> */}
-          <span>Welcome to the profile page. Bio editing coming soon.</span>
-        </div>
+          <div className="profile">
+            <span className="username">{userInfo.userName}</span>
+            <img className="profileImg" src={userInfo.profileImg ? userInfo.profileImg : "default.png"} />
+            <div className="profileTxt">
+              {/* <span className="username">{userInfo.userName}</span> */}
+              <span>Welcome to the profile page. Bio editing coming soon.</span>
+            </div>
+          </div>
         </div>
         <div className="songContainer">
-        <div className="songItem">
-        {userSongs.map((song) => {
-          return <SongListItem
-          key={song.songName}
-          myProfile={myProfile}
-          song={song}
-          userImg={userInfo.profileImg}
-          signedOut={signedOut}
-          userId={userInfo._id}
-          userName={userInfo.userName}
-          />
-        })}
+          {userSongs.map((song) => {
+            return <SongListItem
+              key={song.songName}
+              myProfile={myProfile}
+              song={song}
+              userImg={userInfo.profileImg}
+              signedOut={signedOut}
+              userId={userInfo._id}
+              userName={userInfo.userName}
+            />
+          })}
         </div>
-        </div>
-      </div>
+      </div >
     )
   }
 }
