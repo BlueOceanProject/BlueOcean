@@ -1,22 +1,25 @@
 .profile-songs {
   display: flex;
   justify-content: space-between;
-
 }
 
 img.profileImg {
-  height: 500px;
-  width: 500px;
+  height: 400px;
+  width: 400px;
   border-radius: 50%;
 }
 .profile {
   padding-left: 130px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .profileTxt {
   display: flex;
   flex-direction: column;
-  max-width: 40%;
-  padding-left: 130px;
+  max-width: 60%;
+margin-left: 140px;
+margin-top: 20px;
 }
 .songContainer {
 max-height: 30%;
@@ -46,6 +49,8 @@ border-radius: 5px solid var(--clr-border);
 .username {
   font-weight: bolder;
   font-size: xx-large;
+  padding-left: 30%;
+  margin-bottom: 20px;
 }
 .button-profile {
   border-radius: 10px;
