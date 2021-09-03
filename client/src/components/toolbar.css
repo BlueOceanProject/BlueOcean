@@ -1,6 +1,11 @@
 .nav-link{
   font-family: 'Roboto', sans-serif;
   color: white !important;
+  white-space: nowrap;
+}
+
+.no-wrap {
+  white-space: nowrap;
 }
 
 .nav-link:hover {
