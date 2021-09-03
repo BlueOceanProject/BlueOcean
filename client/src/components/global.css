@@ -8,3 +8,14 @@
   color: #ffffff;
   background-color: #2a2b5c;
 }
+
+.light {
+  --color-primary: rgb(237, 153, 27);
+  --color-secondary: rgb(207, 216, 220);
+  --color-three: rgb(236, 239, 241);
+  --color-four: rgb(144, 164, 174);
+  --color-border: rgb(96, 125, 139);
+  font-family: 'Roboto', sans-serif;
+  color: rgb(38, 50, 56);
+  background-color: rgb(236, 239, 241);
+}

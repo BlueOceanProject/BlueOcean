@@ -1,7 +1,17 @@
 .nav-link{
   font-family: 'Roboto', sans-serif;
   color: white !important;
+  white-space: nowrap;
 }
+
+.no-wrap {
+  white-space: nowrap;
+}
+
+/* .sticky-nav {
+  position: sticky;
+  top: 0;
+} */
 
 .nav-link:hover {
   filter: brightness(80%);
@@ -19,4 +29,8 @@
 
 .navbar-brand>img {
   padding: 7px 14px;
+}
+
+.test-pad {
+  padding-top: 73px;
 }
