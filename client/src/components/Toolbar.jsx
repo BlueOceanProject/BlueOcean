@@ -44,11 +44,13 @@ const styles ={
 const Toolbar = (props) => {
 
   const globalData = useContext(GlobalContext);
-  const { query } = globalData.state;
-  const { userId } = globalData.state;
+  const { query, userId, theme } = globalData.state;
   const [username, setUsername] = useState('');
   const { signout } = useAuth();
   const history = useHistory();
+
+
+
 
 
   const handleSearchChange = (e) => {
@@ -106,15 +108,11 @@ const Toolbar = (props) => {
           : ''
           }
 
-
           <div className="ms-auto">
             <i className="fa fa-search" style={{color: '#FFFFFF'}}></i>
             {' '}
             <input type="text" placeholder="Search users..." onChange={handleSearchChange} value={query} />
           </div>
-
-
-
 
         <Nav className="ms-auto">
           {userId === ''
@@ -134,12 +132,21 @@ const Toolbar = (props) => {
               <Nav.Link> <i className="fa fa-user"></i> { username }  </Nav.Link>
             </LinkContainer>
 
-
               <Nav.Link onClick={logoutHandler}> <i className="fa fa-sign-out"></i> Log Out </Nav.Link>
-
-
           </>
           }
+
+
+
+        <button
+          type="button"
+          className="btn btn-outline-light button"
+          onClick={() => {
+          globalData.dispatch({type: 'updateTheme', data: (!theme)});
+          }}
+        >
+          {theme ? 'Light' : 'Dark'}
+        </button>
 
 
 

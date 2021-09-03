@@ -8,3 +8,14 @@
   color: #ffffff;
   background-color: #2a2b5c;
 }
+
+.light {
+  --clr-primary: #6FB559;
+  --clr-secondary: #D4FCE4;
+  --clr-three:  #4547b8;
+  --clr-four: rgb(144, 164, 174);
+  --clr-border: #0C646C;
+  font-family: 'Roboto', sans-serif;
+  color: #FFF;
+  background-color: #FFF;
+}

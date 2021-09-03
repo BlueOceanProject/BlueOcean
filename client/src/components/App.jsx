@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer } from 'react';
+import React, { useState, useEffect, useReducer, useContext } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { AuthProvider } from './Authentication/AuthContext.js';
 import SignUp from './Authentication/SignUp.jsx';
@@ -9,6 +9,7 @@ import './global.css';
 const initialState = {
   userId: '',
   query: '',
+  theme: true,
 };
 
 const reducer = (state, action) => {
@@ -17,6 +18,8 @@ const reducer = (state, action) => {
       return { ...state, userId: action.data}
     case 'updateQuery':
       return { ...state, query: action.data}
+    case 'updateTheme':
+      return { ...state, theme: action.data}
     default:
       return state;
   }
@@ -26,9 +29,11 @@ export const GlobalContext = React.createContext();
 
 const App = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
+  // const globalData = useContext(GlobalContext);
+  // const { theme } = globalData.state;
 
   return (
-    <div className="global">
+    <div className={state.theme ? 'global' : 'light'}>
       <GlobalContext.Provider value={{ state, dispatch }}>
         <AuthProvider>
           <Router>
