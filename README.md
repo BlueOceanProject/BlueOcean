@@ -31,7 +31,9 @@ Share songs to social media or download them if logged in
 Mix audio files with recordings by importing or uploading your own track
 
 ## User Profiles
--
+View, playback, download, and import songs created by the user into the workstation
+Choose to publish songs to the home feed if the user is on their own profile
+Navigate to other user profiles via the home feed by clicking on the username links
 
 ## Tech Stack
 
