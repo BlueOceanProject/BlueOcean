@@ -25,13 +25,13 @@ var s3 = new AWS.S3();
 
 var upload = multer({
   storage: multerS3({
-      s3: s3,
-      bucket: 'harmony7',
-      key: function (req, file, cb) {
-        // console.log(file)
-        const split = file.originalname.split('.');
-        cb(null, `${req.body.name}.${split[split.length - 1]}`);
-      }
+    s3: s3,
+    bucket: 'harmony7',
+    key: function (req, file, cb) {
+      // console.log(file)
+      const split = file.originalname.split('.');
+      cb(null, `${req.body.name}.${split[split.length - 1]}`);
+    }
   }),
   limits: { fieldSize: 2 * 1024 * 1024 }
 
@@ -48,20 +48,20 @@ var upload = multer({
 
 app.post('/upload', upload.any(), function (req, res, next) {
   // console.log(req.files[0].location);
-  console.log(req);
+  // console.log(req);
   insertSongForUser(req.body.id, req.files[0].location, req.body.name);
   res.send("Uploaded!");
 });
 
 var uploadImage = multer({
   storage: multerS3({
-      s3: s3,
-      bucket: 'profileimage07',
-      key: function (req, file, cb) {
-        // console.log(file)
-        const split = file.originalname.split('.');
-        cb(null, `${req.body.name}.${split[split.length - 1]}`);
-      }
+    s3: s3,
+    bucket: 'profileimage07',
+    key: function (req, file, cb) {
+      // console.log(file)
+      const split = file.originalname.split('.');
+      cb(null, `${req.body.name}.${split[split.length - 1]}`);
+    }
   }),
   limits: { fieldSize: 2 * 1024 * 1024 }
 });
@@ -75,7 +75,7 @@ let port = 3000;
 
 require('../database/index');
 const { getLatestFeedsByUser, addToFeed } = require('../database/controllers/feeds');
-const { postSignUpUser, getUserByUserId , makePublished, getUsernameById, updateProfileImage } = require('../database/controllers/users');
+const { postSignUpUser, getUserByUserId, makePublished, getUsernameById, updateProfileImage } = require('../database/controllers/users');
 
 app.get('/feeds', (req, res) => {
   getLatestFeedsByUser(req.query, (err, docs) => {
@@ -102,7 +102,7 @@ app.post('/feeds', (req, res) => {
 
 app.get('/user', (req, res) => {
   getUserByUserId(req.query, (err, docs) => {
-    if(err) {
+    if (err) {
       res.sendStatus(404);
     } else {
       res.status(200).send(docs);
@@ -113,7 +113,7 @@ app.get('/user', (req, res) => {
 
 app.put('/users', (req, res) => {
   makePublished(req.body, (err, docs) => {
-    if(err) {
+    if (err) {
       res.sendStatus(404);
     } else {
       res.status(200).send('updated');
@@ -151,8 +151,8 @@ app.put('/updateProfileImage', (req, res) => {
     });
 });
 
-app.get('/*', function(req, res) {
-  res.sendFile(path.join(__dirname, '/../client/dist/index.html'), function(err) {
+app.get('/*', function (req, res) {
+  res.sendFile(path.join(__dirname, '/../client/dist/index.html'), function (err) {
     if (err) {
       res.status(500).send(err)
     }
