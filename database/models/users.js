@@ -17,7 +17,7 @@ const userSchema = mongoose.Schema({
     published: Boolean,
     publishedDate: Date,
     createdAt: Date,
-  }]
+  }],
 });
 
 const Users = mongoose.model('Users', userSchema);

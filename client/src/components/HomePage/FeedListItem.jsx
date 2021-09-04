@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { GlobalContext } from '../App.jsx';
 import Button from 'react-bootstrap/Button';
 import {
   FacebookIcon,
@@ -10,8 +9,9 @@ import {
   RedditIcon,
   RedditShareButton,
   TumblrShareButton,
-  TumblrIcon
-} from "react-share";
+  TumblrIcon,
+} from 'react-share';
+import { GlobalContext } from '../App.jsx';
 
 import './Feed.css';
 
@@ -24,7 +24,7 @@ const FeedListItem = ({ feed }) => {
   return (
     <div className="feed-list-item">
       <div className="feed-list-item-wrapper">
-        <img className="user-image" src={feed.profileImg ? feed.profileImg : "default.png"} alt="Avatar"></img>
+        <img className="user-image" src={feed.profileImg ? feed.profileImg : 'default.png'} alt="Avatar" />
         <span className="feed-username">
           <Link to={{ pathname: '/user', state: { userId: `${feed.userId}` } }} className="username-link">
             {feed.userName}
@@ -35,17 +35,21 @@ const FeedListItem = ({ feed }) => {
         </span>
         <audio
           controls
-          controlsList={userId ? "" : "nodownload"}
+          controlsList={userId ? '' : 'nodownload'}
           src={feed.url}
           className="audio-player"
         >
           Your browser does not support the
-          <code>audio</code> element.
+          <code>audio</code>
+          {' '}
+          element.
         </audio>
         {
-          userId && <Link to={{ pathname: '/create', state: { url: `${feed.url}` } }}>
-            <Button variant="outline-light" className="button-profile">Import</Button>
-          </Link>
+          userId && (
+            <Link to={{ pathname: '/create', state: { url: `${feed.url}` } }}>
+              <Button variant="outline-light" className="button-profile">Import</Button>
+            </Link>
+          )
         }
 
       </div>
@@ -53,14 +57,16 @@ const FeedListItem = ({ feed }) => {
         <FacebookShareButton
           url={url}
           quote={feed.url}
-          hashtag="#Harmony">
+          hashtag="#Harmony"
+        >
           <FacebookIcon size={36} round />
         </FacebookShareButton>
         <TwitterShareButton
           url={url}
           quote={feed.url}
           title={feed.songName}
-          hashtag="#Harmony">
+          hashtag="#Harmony"
+        >
           <TwitterIcon size={36} round />
         </TwitterShareButton>
         <RedditShareButton
@@ -74,13 +80,13 @@ const FeedListItem = ({ feed }) => {
           title={feed.songName}
           url={url}
           caption={feed.url}
-          tags={["#Harmony"]}
+          tags={['#Harmony']}
         >
           <TumblrIcon size={36} round />
         </TumblrShareButton>
       </div>
 
-    </div >
+    </div>
   );
 };
 

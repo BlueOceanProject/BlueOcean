@@ -3,79 +3,66 @@ const multer = require('multer');
 const multerS3 = require('multer-s3');
 const AWS = require('aws-sdk');
 const bodyParser = require('body-parser');
-const { ACCESS_KEY, SECRET_KEY } = require('../key.js')
-const { insertSongForUser } = require('../database/controllers/users.js')
 const path = require('path');
+const { ACCESS_KEY, SECRET_KEY } = require('../key');
+const { insertSongForUser } = require('../database/controllers/users');
 
-let app = express();
+const app = express();
 
-app.use(express.static(__dirname + '/../client/dist'));
+app.use(express.static(`${__dirname}/../client/dist`));
 app.use(express.json());
 app.use(bodyParser.json());
 
-var accessKeyId = process.env.AWS_ACCESS_KEY || ACCESS_KEY;
-var secretAccessKey = process.env.AWS_SECRET_KEY || SECRET_KEY;
+const accessKeyId = process.env.AWS_ACCESS_KEY || ACCESS_KEY;
+const secretAccessKey = process.env.AWS_SECRET_KEY || SECRET_KEY;
 AWS.config.update({
-  accessKeyId: accessKeyId,
-  secretAccessKey: secretAccessKey,
-  region: 'us-west-2'
+  accessKeyId,
+  secretAccessKey,
+  region: 'us-west-2',
 });
 
-var s3 = new AWS.S3();
+const s3 = new AWS.S3();
 
-var upload = multer({
+const upload = multer({
   storage: multerS3({
-    s3: s3,
+    s3,
     bucket: 'harmony7',
-    key: function (req, file, cb) {
-      // console.log(file)
+    key(req, file, cb) {
       const split = file.originalname.split('.');
       cb(null, `${req.body.name}.${split[split.length - 1]}`);
-    }
+    },
   }),
-  limits: { fieldSize: 2 * 1024 * 1024 }
-
-  // storage: multer.diskStorage({
-  //   destination: (req, file, cb) => {
-  //       cb(null, 'uploads');
-  //   },
-  //   filename: (req, file, cb) => {
-  //     const split = file.originalname.split('.')
-  //     cb(null, `${req.body.name}.${split[split.length - 1]}`);
-  //   }
-  // })
+  limits: { fieldSize: 2 * 1024 * 1024 },
 });
 
-app.post('/upload', upload.any(), function (req, res, next) {
-  // console.log(req.files[0].location);
-  // console.log(req);
+app.post('/upload', upload.any(), (req, res) => {
   insertSongForUser(req.body.id, req.files[0].location, req.body.name);
-  res.send("Uploaded!");
+  res.send('Uploaded!');
 });
 
-var uploadImage = multer({
+const uploadImage = multer({
   storage: multerS3({
-    s3: s3,
+    s3,
     bucket: 'profileimage07',
-    key: function (req, file, cb) {
-      // console.log(file)
+    key(req, file, cb) {
       const split = file.originalname.split('.');
       cb(null, `${req.body.name}.${split[split.length - 1]}`);
-    }
+    },
   }),
-  limits: { fieldSize: 2 * 1024 * 1024 }
+  limits: { fieldSize: 2 * 1024 * 1024 },
 });
 
-app.post('/uploadImg', uploadImage.any(), function (req, res, next) {
-  // console.log(req.files[0].location);
+app.post('/uploadImg', uploadImage.any(), (req, res) => {
   res.send(req.files[0].location);
 });
 
-let port = 3000;
+const port = 3000;
 
 require('../database/index');
 const { getLatestFeedsByUser, addToFeed } = require('../database/controllers/feeds');
-const { postSignUpUser, getUserByUserId, makePublished, getUsernameById, updateProfileImage } = require('../database/controllers/users');
+const {
+  postSignUpUser, getUserByUserId, makePublished, getUsernameById, updateProfileImage,
+} = require('../database/controllers/users');
 
 app.get('/feeds', (req, res) => {
   getLatestFeedsByUser(req.query, (err, docs) => {
@@ -87,9 +74,8 @@ app.get('/feeds', (req, res) => {
   });
 });
 
-
 app.post('/feeds', (req, res) => {
-  addToFeed(req.body, (err, docs) => {
+  addToFeed(req.body, (err) => {
     if (err) {
       res.sendStatus(404);
     } else {
@@ -97,8 +83,6 @@ app.post('/feeds', (req, res) => {
     }
   });
 });
-
-
 
 app.get('/user', (req, res) => {
   getUserByUserId(req.query, (err, docs) => {
@@ -110,16 +94,15 @@ app.get('/user', (req, res) => {
   });
 });
 
-
 app.put('/users', (req, res) => {
-  makePublished(req.body, (err, docs) => {
+  makePublished(req.body, (err) => {
     if (err) {
       res.sendStatus(404);
     } else {
       res.status(200).send('updated');
     }
-  })
-})
+  });
+});
 
 app.post('/users', (req, res) => {
   postSignUpUser(req.body)
@@ -151,15 +134,14 @@ app.put('/updateProfileImage', (req, res) => {
     });
 });
 
-app.get('/*', function (req, res) {
-  res.sendFile(path.join(__dirname, '/../client/dist/index.html'), function (err) {
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, '/../client/dist/index.html'), (err) => {
     if (err) {
-      res.status(500).send(err)
+      res.status(500).send(err);
     }
-  })
-})
-
-app.listen(port, function () {
-  console.log(`listening on port ${port}`);
+  });
 });
 
+app.listen(port, () => {
+  console.log(`listening on port ${port}`);
+});

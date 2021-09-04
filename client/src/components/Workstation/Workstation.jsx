@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import AudioReactRecorder, { RecordState } from 'audio-react-recorder';
-import { Howl, Howler } from 'howler';
+import { Howl } from 'howler';
 import Crunker from 'crunker';
 import Import from './Import.jsx';
 import Export from './Export.jsx';
 import './workstation.css';
 
-var crunker;
+let crunker;
 
 const Workstation = (props) => {
   const [recordState, setRecordState] = useState(null);
@@ -19,8 +19,6 @@ const Workstation = (props) => {
   const [seekTime, setSeekTime] = useState(0);
   const [seekTimer, setSeekTimer] = useState('');
   const [isThereAudio, setIsThereAudio] = useState(false);
-  const [importTrackDuration, setImportTrackDuration] = useState(0);
-  const [recordingDuration, setRecordingDuration] = useState(0);
   const [maxDuration, setMaxDuration] = useState(0);
   const [combinedAudio, setCombinedAudio] = useState(null);
 
@@ -41,26 +39,26 @@ const Workstation = (props) => {
       clearInterval(seekTimer);
       setSeekTime(0);
     }
-  }
+  };
 
   const onStop = (audioData) => {
     setRecordData(audioData.url);
-    let recording = new Howl({
+    const recording = new Howl({
       src: [audioData.url],
-      format: ['wav']
+      format: ['wav'],
     });
     setMaster({ ...master, recording });
     setRecordAudio(new Audio(audioData.url));
-  }
+  };
 
   const setTimer = () => {
-    let start = Date.now()
+    const start = Date.now();
     setSeekTimer(setInterval(() => {
-      let difference = Date.now() - start;
-      let newSeekTime = seekTime
+      const difference = Date.now() - start;
+      let newSeekTime = seekTime;
       setSeekTime(newSeekTime += (Math.round(difference)) / 1000);
     }, 10));
-  }
+  };
 
   useEffect(() => {
     if (props.location.state) {
@@ -68,18 +66,18 @@ const Workstation = (props) => {
       setUploadAudio(new Audio(props.location.state.url));
     }
     crunker = new Crunker({ sampleRate: 48000 });
-  }, [])
+  }, []);
 
   useEffect(() => {
     if (audioFile) {
-      let importTrack = new Howl({
+      const importTrack = new Howl({
         src: [audioFile],
-        format: ['mp3']
+        format: ['mp3'],
       });
       setMaster({ ...master, importTrack });
       setIsThereAudio(true);
     }
-  }, [audioFile])
+  }, [audioFile]);
 
   useEffect(() => {
     if (isMasterPlaying) {
@@ -97,21 +95,19 @@ const Workstation = (props) => {
         setSeekTime(maxDuration);
       }
     }
-  }, [seekTime])
+  }, [seekTime]);
 
-  const secondsToTimeCode = (seconds) => {
-    return `${new Date(seconds * 1000).toISOString().substr(11, 8)}.${Math.round((seekTime % 1) * 100)}`
-  }
+  const secondsToTimeCode = (seconds) => `${new Date(seconds * 1000).toISOString().substr(11, 8)}.${Math.round((seekTime % 1) * 100)}`;
 
   const setDurations = () => {
-    let importTrackTime = master.importTrack ? master.importTrack.duration() : 0;
-    let recordingTime = master.recording ? master.recording.duration() : 0;
-    let maxTime = Math.max(importTrackTime, recordingTime);
+    const importTrackTime = master.importTrack ? master.importTrack.duration() : 0;
+    const recordingTime = master.recording ? master.recording.duration() : 0;
+    const maxTime = Math.max(importTrackTime, recordingTime);
     setMaxDuration(maxTime);
     setImportTrackDuration(importTrackTime);
     setRecordingDuration(recordingTime);
     return maxTime;
-  }
+  };
 
   const masterPlay = () => {
     if (audioFile) {
@@ -121,7 +117,7 @@ const Workstation = (props) => {
       master.recording.play();
     }
     setDurations();
-  }
+  };
 
   const masterPause = () => {
     if (audioFile) {
@@ -130,7 +126,7 @@ const Workstation = (props) => {
     if (recordAudio) {
       master.recording.pause();
     }
-  }
+  };
 
   const masterPlayClick = (event) => {
     if (!isMasterPlaying) {
@@ -140,11 +136,11 @@ const Workstation = (props) => {
       }
     } else {
       setMasterPlaying(false);
-      if (audioFile) { master.importTrack.seek(seekTime) }
-      if (recordData) { master.recording.seek(seekTime) }
+      if (audioFile) { master.importTrack.seek(seekTime); }
+      if (recordData) { master.recording.seek(seekTime); }
       masterPause();
     }
-  }
+  };
 
   const rewindClick = (event) => {
     if (audioFile) {
@@ -158,37 +154,36 @@ const Workstation = (props) => {
     setSeekTime(0);
     clearInterval(seekTimer);
     setMasterPlaying(false);
-  }
+  };
 
   const ffClick = (event) => {
     setSeekTime(setDurations());
-  }
+  };
 
   const onRecordingPause = (event) => {
     uploadAudio.pause();
-  }
+  };
 
   const onRecordingPlay = (event) => {
     uploadAudio.play();
-  }
+  };
 
   const onRecordingEnd = (event) => {
     uploadAudio.load();
-  }
+  };
 
   const onSave = (event) => {
     event.preventDefault();
     if (recordData === null && audioFile === '') {
       alert('must select file or record audio');
-    }
-    else if (recordData === null) {
+    } else if (recordData === null) {
       setCombinedAudio(audioFile);
     } else if (audioFile === '') {
       setCombinedAudio(recordData);
     } else {
       crunker.fetchAudio(recordData, audioFile)
-        .then(buffers => crunker.mergeAudio(buffers))
-        .then(merged => crunker.export(merged, 'audio/mp3'))
+        .then((buffers) => crunker.mergeAudio(buffers))
+        .then((merged) => crunker.export(merged, 'audio/mp3'))
         .then((res) => {
           alert('successfully combined audio!');
           // console.log(res);
@@ -198,14 +193,14 @@ const Workstation = (props) => {
           alert('error in combining audio');
         });
     }
-  }
+  };
 
   return (
     <div className="workstation-ctr">
       <div className="recorder-ctr">
         <div className="workstation-col-1-3">
           <div className="record-btn-ctr">
-            <button className="record-btn" onClick={toggle}></button>
+            <button className="record-btn" onClick={toggle} />
             <div className="record-label">Record</div>
           </div>
         </div>
@@ -222,25 +217,28 @@ const Workstation = (props) => {
 
         <div className="master-player-controls">
           <button className="master-rewind-btn" onClick={rewindClick}>
-            <div className="master-rewind-icon"></div>
-            <div className="master-rewind-icon"></div>
+            <div className="master-rewind-icon" />
+            <div className="master-rewind-icon" />
           </button>
-          {isMasterPlaying ?
-            <button className="master-pause-btn" onClick={masterPlayClick}>
-              <div className="master-pause-icon"></div>
-            </button>
-            : <button className="master-play-btn" onClick={masterPlayClick}>
-              <div className="master-play-icon"></div>
-            </button>
-          }
+          {isMasterPlaying
+            ? (
+              <button className="master-pause-btn" onClick={masterPlayClick}>
+                <div className="master-pause-icon" />
+              </button>
+            )
+            : (
+              <button className="master-play-btn" onClick={masterPlayClick}>
+                <div className="master-play-icon" />
+              </button>
+            )}
           <button className="master-ff-btn" onClick={ffClick}>
-            <div className="master-ff-icon"></div>
-            <div className="master-ff-icon"></div>
+            <div className="master-ff-icon" />
+            <div className="master-ff-icon" />
           </button>
         </div>
-        {!audioFile && !recordAudio ?
-          <div className="no-audio-msg">No audio available. Import a file or make a recording.</div>
-          : <div className="no-audio-msg"></div>}
+        {!audioFile && !recordAudio
+          ? <div className="no-audio-msg">No audio available. Import a file or make a recording.</div>
+          : <div className="no-audio-msg" />}
         <div className="seekTime-ctr">
           <div className="seekTime-box">
             <div className="seekTime">{secondsToTimeCode(seekTime)}</div>
@@ -249,12 +247,12 @@ const Workstation = (props) => {
       </div>
       <div className="export-song-title-message">
         <span className="export-song-title">Export Song</span>
-        <p className="export-song-message" >Once you've finished recording, click the combine button below, and give your new song a name. Then you can export your song to your profile!</p>
+        <p className="export-song-message">Once you've finished recording, click the combine button below, and give your new song a name. Then you can export your song to your profile!</p>
       </div>
       <button className="combine-btn" type="submit" onClick={onSave}>Combine</button>
       <Export uploadAudio={combinedAudio || (uploadAudio && uploadAudio.src) || null} />
-    </div >
-  )
-}
+    </div>
+  );
+};
 
 export default Workstation;
