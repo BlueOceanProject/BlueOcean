@@ -44,12 +44,7 @@ A web application to serve as one part music sharing network, and one part audio
 - Rewind and fast forward on the master track
 - Combine songs to a single audio file and export song to their user profile
 
-
-
 https://user-images.githubusercontent.com/12962378/132110393-129decd8-7208-4307-861d-d13e745037c1.mov
-
-
-Uploading DemoWorkstation.mov…
 
 
 ## User Profiles
