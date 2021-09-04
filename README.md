@@ -35,16 +35,16 @@ Mix audio files with recordings by importing or uploading your own track
 
 ## Tech Stack
 
-[React (Hooks)](https://reactjs.org/)  
-[React Router](https://reactrouter.com/)
-[Node.js](https://nodejs.org/en/)
-[Express](https://expressjs.com/)
-[React Bootstrap](https://react-bootstrap.github.io/)
-[Axios](https://www.npmjs.com/package/axios)
-[Amazon S3](https://aws.amazon.com/s3/)
-[Firebase Authentication](https://firebase.google.com)
-[MongoDB](https://www.mongodb.com/)
-[Mongoose](https://mongoosejs.com/)
+[React (Hooks)](https://reactjs.org/)<br/> 
+[React Router](https://reactrouter.com/)<br/> 
+[Node.js](https://nodejs.org/en/)<br/> 
+[Express](https://expressjs.com/)<br/> 
+[React Bootstrap](https://react-bootstrap.github.io/)<br/> 
+[Axios](https://www.npmjs.com/package/axios)<br/> 
+[Amazon S3](https://aws.amazon.com/s3/)<br/> 
+[Firebase Authentication](https://firebase.google.com)<br/> 
+[MongoDB](https://www.mongodb.com/)<br/> 
+[Mongoose](https://mongoosejs.com/)<br/> 
 [Howler.js](https://howlerjs.com/)
 
 
