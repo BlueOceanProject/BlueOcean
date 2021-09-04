@@ -28,9 +28,12 @@ A web application to serve as one part music sharing network, and one part audio
 - Share songs to social media or download them if logged in
 
 ## Workstation
-- Mix audio files with recordings by importing or uploading your own track
-- Import audio files from computer or another user
-- Make a recording
+- Upload file and hear a playback of it
+- Import file from the feed or profile page and hear a playback of it
+- Record from computer microphone
+- Record over imported or uploaded file from computer microphone
+- Combine imported or uploaded file with recorded audio into a single file
+- Name and export combined file to user profile page
 - Listen to the mixed audio and recording tracks in the master track player console
 - Rewind and fast forward on the master track
 - Combine songs to a single audio file and export song to their user profile
