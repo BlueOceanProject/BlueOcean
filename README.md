@@ -30,6 +30,12 @@ A web application to serve as one part music sharing network, and one part audio
 ## Workstation
 - Mix audio files with recordings by importing or uploading your own track
 
+- Import audio files from computer or another user
+- Make a recording
+- Listen to the mixed audio and recording tracks in the master track player console
+- Rewind and fast forward on the master track
+- Combine songs to a single audio file and export song to their user profile
+
 ## User Profiles
 - View, playback, download, and import songs created by the user into the workstation
 - Choose to publish songs to the home feed if the user is on their own profile
@@ -38,16 +44,16 @@ A web application to serve as one part music sharing network, and one part audio
 
 ## Tech Stack
 
-[React (Hooks)](https://reactjs.org/)<br/> 
-[React Router](https://reactrouter.com/)<br/> 
-[Node.js](https://nodejs.org/en/)<br/> 
-[Express](https://expressjs.com/)<br/> 
-[React Bootstrap](https://react-bootstrap.github.io/)<br/> 
-[Axios](https://www.npmjs.com/package/axios)<br/> 
-[Amazon S3](https://aws.amazon.com/s3/)<br/> 
-[Firebase Authentication](https://firebase.google.com)<br/> 
-[MongoDB](https://www.mongodb.com/)<br/> 
-[Mongoose](https://mongoosejs.com/)<br/> 
+[React (Hooks)](https://reactjs.org/)<br/>
+[React Router](https://reactrouter.com/)<br/>
+[Node.js](https://nodejs.org/en/)<br/>
+[Express](https://expressjs.com/)<br/>
+[React Bootstrap](https://react-bootstrap.github.io/)<br/>
+[Axios](https://www.npmjs.com/package/axios)<br/>
+[Amazon S3](https://aws.amazon.com/s3/)<br/>
+[Firebase Authentication](https://firebase.google.com)<br/>
+[MongoDB](https://www.mongodb.com/)<br/>
+[Mongoose](https://mongoosejs.com/)<br/>
 [Howler.js](https://howlerjs.com/)
 
 
