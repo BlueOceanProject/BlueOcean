@@ -17,6 +17,8 @@ A web application to serve as one part music sharing network, and one part audio
 - Browse the app when not logged in to just see the music feed
 - Create an account or login to unlock workstation and sharing features!
 
+![screenshot of SignUp](/screenshots/signin.gif?raw=true)
+
 ## Navigation
 
 - Navigate to workstation, profiles, home feed if logged in
