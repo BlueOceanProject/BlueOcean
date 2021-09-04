@@ -26,6 +26,7 @@ A web application to serve as one part music sharing network, and one part audio
 - Search for users in the feed
 - Playback songs, import them to your workstation
 - Share songs to social media or download them if logged in
+- Go the user's profile by clicking the username
 
 ## Workstation
 - Upload file and hear a playback of it
