@@ -14,26 +14,26 @@ A web application to serve as one part music sharing network, and one part audio
 ## Authentication
 
 Login / Sign up
-Browse the app to just see the music feed
-Create and account or login to unlock workstation and sharing features!
+- Browse the app to just see the music feed
+- Create an account or login to unlock workstation and sharing features!
 
 ## Navigation
 
-Navigate to workstation, profiles, home feed if logged in
-Switch to light or dark mode
+- Navigate to workstation, profiles, home feed if logged in
+- Switch to light or dark mode
 
 ## Home Feed
-Search for users in the feed
-Playback songs, import them to your workstation
-Share songs to social media or download them if logged in
+- Search for users in the feed
+- Playback songs, import them to your workstation
+- Share songs to social media or download them if logged in
 
 ## Workstation
-Mix audio files with recordings by importing or uploading your own track
+- Mix audio files with recordings by importing or uploading your own track
 
 ## User Profiles
-View, playback, download, and import songs created by the user into the workstation
-Choose to publish songs to the home feed if the user is on their own profile
-Navigate to other user profiles via the home feed by clicking on the username links
+- View, playback, download, and import songs created by the user into the workstation
+- Choose to publish songs to the home feed if the user is on their own profile
+- Navigate to other user profiles via the home feed by clicking on the username links
 
 ## Tech Stack
 
