@@ -75,7 +75,7 @@ const Toolbar = () => {
     <div>
       <Navbar style={styles.background} fixed="top">
         <Navbar.Brand style={styles.logo}>
-          <img src="https://i.imgur.com/B5cQ49u.png" style={styles.image} />
+          <img src="https://i.imgur.com/B5cQ49u.png" alt="" style={styles.image} />
           {' '}
           Harmony
         </Navbar.Brand>
