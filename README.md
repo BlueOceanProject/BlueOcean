@@ -3,18 +3,18 @@ A web application to serve as one part music sharing network, and one part audio
 ---
 
 ## Table of Contents
-  - [User Authentication](#Authentication)
-  - [Navigation](#Navigation)
-  - [Feed](#feed)
+  - [User Authentication](#user-authentication)
+  - [Navigation](#navigation)
+  - [Home Feed](#home-feed)
   - [Workstation](#workstation)
   - [User Profiles](#user-profiles)
   - [Contributors](#contributors)
   - [Tech Stack](#tech-stack)
 
-## Authentication
+## User Authentication
 
-Login / Sign up
-- Browse the app to just see the music feed
+### Login / Sign up
+- Browse the app when not logged in to just see the music feed
 - Create an account or login to unlock workstation and sharing features!
 
 ## Navigation
