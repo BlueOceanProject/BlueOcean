@@ -1,3 +1,6 @@
+
+
+
  # Harmony
 A web application to serve as one part music sharing network, and one part audio mixing workstation.
 ---
@@ -40,6 +43,10 @@ A web application to serve as one part music sharing network, and one part audio
 - Listen to the mixed audio and recording tracks in the master track player console
 - Rewind and fast forward on the master track
 - Combine songs to a single audio file and export song to their user profile
+
+
+https://user-images.githubusercontent.com/59271770/132105590-49e3b57d-d2cd-4139-b7e5-55459e35e385.mp4
+
 
 ## User Profiles
 - View, playback, download, and import songs created by the user into the workstation
