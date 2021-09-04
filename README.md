@@ -34,6 +34,7 @@ A web application to serve as one part music sharing network, and one part audio
 - View, playback, download, and import songs created by the user into the workstation
 - Choose to publish songs to the home feed if the user is on their own profile
 - Navigate to other user profiles via the home feed by clicking on the username links
+- Download and import functionalities are hidden if the user is not logged in
 
 ## Tech Stack
 
