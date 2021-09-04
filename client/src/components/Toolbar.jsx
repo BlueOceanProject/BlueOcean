@@ -4,7 +4,6 @@ import { useHistory } from 'react-router-dom';
 import { Nav, Navbar } from 'react-bootstrap';
 import axios from 'axios';
 import { LinkContainer } from 'react-router-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import 'font-awesome/css/font-awesome.min.css';
 import '@fontsource/staatliches/index.css';
 import { GlobalContext } from './App.jsx';
