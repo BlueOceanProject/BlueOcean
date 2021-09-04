@@ -3,6 +3,7 @@
   --clr-secondary: #7ed858;
   --clr-three: #6a7892;
   --clr-four: #5e8479;
+  --clr-five: #fff;
   --clr-border: #d4fce4;
   font-family: 'Roboto', sans-serif;
   color: #ffffff;
@@ -14,6 +15,7 @@
   --clr-secondary: #D4FCE4;
   --clr-three:  #4547b8;
   --clr-four: rgb(144, 164, 174);
+  --clr-five: #000;
   --clr-border: #0C646C;
   font-family: 'Roboto', sans-serif;
   color: #FFF;

@@ -61,7 +61,7 @@ html {
 }
 
 .master-player-ctr {
-  background-color: var(--clr-three);
+  background-color: #6a7892;
   border-radius: 20px;
   padding: 15px;
   width: 40%;
@@ -78,40 +78,40 @@ html {
 }
 
 .master-play-btn {
-  border: 2px solid var(--clr-primary);
-  background-color: var(--clr-border);
+  border: 2px solid #2a2b5c;
+  background-color: #d4fce4;
   border-radius: 50px;
 }
 
 .master-play-btn:hover {
-  background-color: var(--clr-secondary);
+  background-color: #7ed858;
 }
 
 .master-play-icon {
   width: 32px;
   height: 48px;
   border-top: 24px solid transparent;
-  border-left: 36px solid var(--clr-primary);
+  border-left: 36px solid #2a2b5c;
   border-bottom: 24px solid transparent;
   margin: 24px;
   transform: translate(4px, 0px);
 }
 
 .master-pause-btn {
-  border: 2px solid var(--clr-primary);
-  background-color: var(--clr-border);
+  border: 2px solid #2a2b5c;
+  background-color: #d4fce4;
   border-radius: 50px;
 }
 
 .master-pause-btn:hover {
-  background-color: var(--clr-secondary);
+  background-color: #7ed858;
 }
 
 .master-pause-icon {
   width: 36px;
   height: 48px;
-  border-right: 12px solid var(--clr-primary);
-  border-left: 12px solid var(--clr-primary);
+  border-right: 12px solid #2a2b5c;
+  border-left: 12px solid #2a2b5c;
   margin: 24px;
 }
 
@@ -120,14 +120,14 @@ html {
   justify-content: center;
   margin: auto 0px;
   padding: 8px 24px;
-  border-color: var(--clr-primary);
+  border-color: var#2a2b5c;
 }
 
 .master-rewind-icon {
   width: 18px;
   height: 24px;
   border-top: 12px solid transparent;
-  border-right: 18px solid var(--clr-primary);
+  border-right: 18px solid #2a2b5c;
   ;
   border-bottom: 12px solid transparent;
 }
@@ -137,14 +137,14 @@ html {
   justify-content: center;
   margin: auto 0px;
   padding: 8px 24px;
-  border-color: var(--clr-primary);
+  border-color: #2a2b5c;
 }
 
 .master-ff-icon {
   width: 18px;
   height: 24px;
   border-top: 12px solid transparent;
-  border-left: 18px solid var(--clr-primary);
+  border-left: 18px solid #2a2b5c;
   border-bottom: 12px solid transparent;
 }
 
@@ -167,7 +167,7 @@ html {
 
 .seekTime {
   font-size: 32px;
-  color: var(--clr-border);
+  color: #d4fce4;
   transform: translate(-20px, 0px);
   font-family: monospace;
 }
