@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 function useSearchFeeds(query, pageNum) {
   const [isLoading, setIsLoading] = useState(true);
@@ -11,7 +11,7 @@ function useSearchFeeds(query, pageNum) {
   }, [query]);
 
   useEffect(() => {
-    const CancelToken = axios.CancelToken;
+    const { CancelToken } = axios;
     let cancel;
 
     setIsLoading(true);
@@ -19,12 +19,10 @@ function useSearchFeeds(query, pageNum) {
 
     axios
       .get(`/feeds?userName=${query}&pageNum=${pageNum}`, {
-        cancelToken: new CancelToken((c) => (cancel = c))
+        cancelToken: new CancelToken((c) => (cancel = c)),
       })
       .then((res) => {
-        setFeeds((prev) => {
-          return [...new Set([...prev, ...res.data])];
-        });
+        setFeeds((prev) => [...new Set([...prev, ...res.data])]);
         setHasMore(res.data.length > 0);
         setIsLoading(false);
       })
@@ -36,7 +34,9 @@ function useSearchFeeds(query, pageNum) {
     return () => cancel();
   }, [query, pageNum]);
 
-  return { isLoading, error, feeds, hasMore };
+  return {
+    isLoading, error, feeds, hasMore,
+  };
 }
 
 export default useSearchFeeds;

@@ -1,6 +1,6 @@
 import * as firebase from 'firebase/app';
 
-const keys = require('../../../../authKey.js');
+const keys = require('../../../../authKey');
 
 const app = firebase.initializeApp({
   apiKey: keys.REACT_APP_FIREBASE_API_KEY,
@@ -8,7 +8,7 @@ const app = firebase.initializeApp({
   projectId: keys.REACT_APP_FIREBASE_PROJECT_ID,
   storageBucket: keys.REACT_APP_FIREBASE_STORAGE_BUCKET,
   messagingSenderId: keys.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
-  appId: keys.REACT_APP_FIREBASE_APP_ID
+  appId: keys.REACT_APP_FIREBASE_APP_ID,
 });
 
 export default app;

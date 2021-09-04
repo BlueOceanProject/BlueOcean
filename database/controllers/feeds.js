@@ -6,27 +6,28 @@ const getLatestFeedsByUser = (params, callback) => {
   const offset = (pageNum - 1) * perPage;
   const re = userName ? new RegExp(userName, 'i') : /.*.*/;
   Feeds.find({
-    "userName": re
+    userName: re,
   })
-    .skip(offset).limit(perPage).sort({ publishedDate: -1 }).exec((err, docs) => {
+    .skip(offset).limit(perPage).sort({ publishedDate: -1 })
+    .exec((err, docs) => {
       if (err) {
         callback(err);
       } else {
         callback(null, docs);
       }
-    })
+    });
 };
 
 const addToFeed = (params, cb) => {
-  var date = new Date();
-  let publish = new Feeds({
+  const date = new Date();
+  const publish = new Feeds({
     userId: params.userId,
     userName: params.userName,
     songName: params.songName,
     url: params.url,
     publishedDate: date,
     createdAt: params.createdAt,
-    profileImg: params.profileImg
+    profileImg: params.profileImg,
   });
   publish.save((err, published) => {
     if (err) {

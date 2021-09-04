@@ -9,7 +9,7 @@ const feedSchema = mongoose.Schema({
   url: String,
   publishedDate: Date,
   createdAt: Date,
-  profileImg: String
+  profileImg: String,
 });
 
 const Feeds = mongoose.model('Feeds', feedSchema);

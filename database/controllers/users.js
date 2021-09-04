@@ -8,20 +8,20 @@ module.exports = {
       } else {
         cb(null, docs);
       }
-    })
+    });
   },
 
   makePublished: (song, cb) => {
     Users.findOneAndUpdate({
       userName: song.userName,
-      "songs._id": song._id
-    }, { $set: { "songs.$.published": true } }, null, (err, docs) => {
+      'songs._id': song._id,
+    }, { $set: { 'songs.$.published': true } }, null, (err, docs) => {
       if (err) {
         cb(err);
       } else {
         cb(null, docs);
       }
-    })
+    });
   },
 
   postSignUpUser: (userInfo) => {
@@ -29,31 +29,27 @@ module.exports = {
     return user.save();
   },
 
-  getUsernameById: (userId) => {
-    return Users.findOne({ '_id': userId });
-  },
+  getUsernameById: (userId) => Users.findOne({ _id: userId }),
 
   insertSongForUser: (id, url, songName) => {
     // console.log(id);
-    const now = new Date()
+    const now = new Date();
     const song = {
-      songName: songName,
-      url: url,
+      songName,
+      url,
       published: false,
-      createdAt: now
-    }
+      createdAt: now,
+    };
 
     Users.updateOne(
       { _id: id }, { $push: { songs: song } }, (error, success) => {
         if (error) {
           console.log(error);
-        } else {
-          // console.log(success);
         }
-      });
+      },
+    );
   },
 
-  updateProfileImage: (url, userid) => {
-    return Users.findOneAndUpdate({ "_id": userid }, { $set: { "profileImg": url } });
-  }
+  updateProfileImage:
+    (url, userid) => Users.findOneAndUpdate({ _id: userid }, { $set: { profileImg: url } }),
 };

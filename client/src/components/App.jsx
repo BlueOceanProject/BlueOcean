@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer } from 'react';
+import React, { useReducer } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { AuthProvider } from './Authentication/AuthContext.js';
 import SignUp from './Authentication/SignUp.jsx';
@@ -15,11 +15,11 @@ const initialState = {
 const reducer = (state, action) => {
   switch (action.type) {
     case 'updateUserId':
-      return { ...state, userId: action.data}
+      return { ...state, userId: action.data };
     case 'updateQuery':
-      return { ...state, query: action.data}
+      return { ...state, query: action.data };
     case 'updateTheme':
-      return { ...state, theme: action.data}
+      return { ...state, theme: action.data };
     default:
       return state;
   }
@@ -45,6 +45,6 @@ const App = () => {
       </GlobalContext.Provider>
     </div>
   );
-}
+};
 
 export default App;
