@@ -26,7 +26,6 @@ const styles = {
   background: {
     backgroundColor: '#2a2b5c',
     borderBottom: '2px solid var(--clr-border)',
-
   },
   image: {
     height: '80px',
@@ -92,15 +91,6 @@ const Toolbar = () => {
         {userId !== ''
           ? (
             <>
-              <LinkContainer to="/user">
-                <Nav.Link>
-                  {' '}
-                  <i className="fa fa-user" />
-                  {' '}
-                  Profiles
-                </Nav.Link>
-              </LinkContainer>
-
               <LinkContainer to="/create">
                 <Nav.Link className="nav-link">
                   {' '}
@@ -116,7 +106,13 @@ const Toolbar = () => {
         <div className="ms-auto no-wrap">
           <i className="fa fa-search" style={{ color: '#FFFFFF' }} />
           {' '}
-          <input type="text" placeholder="Search users..." onChange={handleSearchChange} value={query} />
+          <input
+            className="search"
+            type="text"
+            placeholder=" Search users..."
+            onChange={handleSearchChange}
+            value={query}
+          />
         </div>
 
         <Nav className="ms-auto">
@@ -170,7 +166,12 @@ const Toolbar = () => {
               globalData.dispatch({ type: 'updateTheme', data: (!theme) });
             }}
           >
-            {theme ? 'Light' : 'Dark'}
+            {theme ? <i className="fa fa-sun-o" /> : <i className="fa fa-moon-o" />}
+
+            {theme ? ' Light' : ' Dark'}
+            {/* <i className="fa fa-moon"></i>}
+          {/* {theme ? 'Light' : 'Dark'} */}
+
           </button>
 
         </Nav>

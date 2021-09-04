@@ -27,6 +27,7 @@ img.profileImg {
   max-width: 60%;
   margin-left: 10%;
   margin-top: 10%;
+  color: var(--clr-five);
 }
 
 .songContainer {

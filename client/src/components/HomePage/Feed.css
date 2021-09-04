@@ -16,6 +16,7 @@
   padding: 40px;
   margin: 20px auto 20px auto;
   background-color: var(--clr-three);
+  box-shadow: 0 -2px 10px var(--clr-three);
 }
 
 .feed-list-item-wrapper {
