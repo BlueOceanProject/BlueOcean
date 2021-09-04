@@ -91,6 +91,15 @@ const Toolbar = () => {
         {userId !== ''
           ? (
             <>
+              <LinkContainer to="/user">
+                <Nav.Link>
+                  {' '}
+                  <i className="fa fa-user" />
+                  {' '}
+                  Profiles
+                </Nav.Link>
+              </LinkContainer>
+
               <LinkContainer to="/create">
                 <Nav.Link className="nav-link">
                   {' '}
@@ -169,8 +178,6 @@ const Toolbar = () => {
             {theme ? <i className="fa fa-sun-o" /> : <i className="fa fa-moon-o" />}
 
             {theme ? ' Light' : ' Dark'}
-            {/* <i className="fa fa-moon"></i>}
-          {/* {theme ? 'Light' : 'Dark'} */}
 
           </button>
 
