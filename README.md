@@ -29,7 +29,6 @@ A web application to serve as one part music sharing network, and one part audio
 
 ## Workstation
 - Mix audio files with recordings by importing or uploading your own track
-
 - Import audio files from computer or another user
 - Make a recording
 - Listen to the mixed audio and recording tracks in the master track player console
