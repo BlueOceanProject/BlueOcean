@@ -21,6 +21,8 @@ const Workstation = (props) => {
   const [isThereAudio, setIsThereAudio] = useState(false);
   const [maxDuration, setMaxDuration] = useState(0);
   const [combinedAudio, setCombinedAudio] = useState(null);
+  const [importTrackDuration, setImportTrackDuration] = useState(0);
+  const [recordingDuration, setRecordingDuration] = useState(0);
 
   const toggle = () => {
     if (recordState === null || recordState === RecordState.STOP) {
