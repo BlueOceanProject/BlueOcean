@@ -53,6 +53,12 @@ https://user-images.githubusercontent.com/12962378/132110393-129decd8-7208-4307-
 - Navigate to other user profiles via the home feed by clicking on the username links
 - Download and import functionalities are hidden if the user is not logged in
 
+
+
+https://user-images.githubusercontent.com/12962378/132111147-0ab9b473-72b6-44ef-8c0c-b8100a6cc07e.mov
+
+
+
 ## Tech Stack
 
 [React (Hooks)](https://reactjs.org/)<br/>
