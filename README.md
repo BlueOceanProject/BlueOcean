@@ -27,11 +27,14 @@ A web application to serve as one part music sharing network, and one part audio
 - Navigate to workstation, profiles, home feed if logged in
 - Switch to light or dark mode
 
+
 ## Home Feed
 - Search for users in the feed
 - Playback songs, import them to your workstation
 - Share songs to social media or download them if logged in
 - Go the user's profile by clicking the username
+
+![screenshot of Feed](/screenshots/Feed.gif?raw=true)
 
 ## Workstation
 - Upload file and hear a playback of it
@@ -44,7 +47,13 @@ A web application to serve as one part music sharing network, and one part audio
 - Rewind and fast forward on the master track
 - Combine songs to a single audio file and export song to their user profile
 
+Editing with local files
+
 https://user-images.githubusercontent.com/12962378/132110393-129decd8-7208-4307-861d-d13e745037c1.mov
+
+Importing from other users, and publishing
+
+https://user-images.githubusercontent.com/12962378/132111147-0ab9b473-72b6-44ef-8c0c-b8100a6cc07e.mov
 
 
 ## User Profiles
@@ -53,9 +62,6 @@ https://user-images.githubusercontent.com/12962378/132110393-129decd8-7208-4307-
 - Navigate to other user profiles via the home feed by clicking on the username links
 - Download and import functionalities are hidden if the user is not logged in
 
-
-
-https://user-images.githubusercontent.com/12962378/132111147-0ab9b473-72b6-44ef-8c0c-b8100a6cc07e.mov
 
 
 
