@@ -34,7 +34,7 @@ A web application to serve as one part music sharing network, and one part audio
 - Share songs to social media or download them if logged in
 - Go the user's profile by clicking the username
 
-![screenshot of Feed](/screenshots/Feed.gif?raw=true)
+![screenshot of Feed](/screenshots/lightDarkMovie.gif?raw=true)
 
 ## Workstation
 - Upload file and hear a playback of it
